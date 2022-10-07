@@ -1,6 +1,4 @@
-#This code produces an error, but otherwise works as designed. Currently debugging.
-
-#This code reads in two documents as arrays and creates a third file that combines them.
+#This code reads in two documents as arrays and creates a third file to combine them.
 
 
 #designate the array for the HTML code.
@@ -8,6 +6,8 @@ templateHeader = ['<HTML>', 'line1', 'line2', '<p>', 'stop', '</p>', '<!--end-->
 #with open('Template.txt') as templateFile:
 #    templateHeader = templateFile.readlines()
 
+
+resultFile = open("Result.html", "a")
 
 #Define the key word to look for within the HTML file.
 keyWord = 'stop'
@@ -18,52 +18,77 @@ resultContent = []
 i = 0
 templateLength = len(templateHeader)
 
-#Print all the elements of the array until the keyword is reached.
-#Add those elements to the results array.
+#Print all the elements of the Template array until the keyword is reached.
+#Add those elements to the Results array.
 while i < templateLength and keyWord !=templateHeader[i]:
-    resultContent.append(i)
+    resultContent.append(templateHeader[i])
     print(templateHeader[i])
-    #print('Count is', i)
+    resultFile.write(templateHeader[i])
+    resultFile.write('\n')
     i += 1
 
 print('    ')
 #print('		After loop, count is', i)
     
+#Add Content elements to the results array.    
 contentByTheGlass = ['FOOD', 'Almonds', 'Pickles', 'Cheese']
 #with open('Content.txt') as contentFile:
 #    contentByTheGlass = contentFile.readlines()    
 
 #not yet using contentKeyWord
 contentKeyWord = 'FOOD'
+
+
 j = 0
 contentLength = len(contentByTheGlass)
 
+#Print all the elements of the Content file
+#Amend those elements to the Results file.
 while j < contentLength:
 
     print(contentByTheGlass[j])
-    resultContent.append(i+j)
+    resultContent.append(contentByTheGlass[j])
+    resultFile.write(contentByTheGlass[j])
+    resultFile.write('\n')
     j += 1
     
     
+
+    
 print('    ')
     
-#print('			J count is', j)  
-i += 1
-#print('		Count is', i)
 
-
+#Print all the elements of the Template array.
+#Amend those elements to the Results array.
 while i < templateLength: # and keyWord !=templateHeader[i]:
     #matched_indexes.append(i)
     print(templateHeader[i])
-    #print('		Count is', i)
+    resultContent.append(templateHeader[i])
+    resultFile.write(templateHeader[i])
+    resultFile.write('\n')
     i += 1    
 
 
 print('    ')
 print('I count is', i)    
     
-    
-print(f'{keyWord} is not present in {templateHeader} at indexes {resultContent}')
+
+
+print(f'TemplateHeader {templateHeader}')
+
+print(f'Content {resultContent}')
+
+
+
+#Close the Result File
+resultFile.close()
+
+
+
+#Open and read the file after the appending:
+resultFile = open("Result.html", "r")
+print(resultFile.read())
+
 
 
   
