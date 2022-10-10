@@ -90,5 +90,16 @@ resultFile = open("Result.html", "r")
 print(resultFile.read())
 
 
+menuItem = "Domaine de Victor - a really nice red wine"
+
+parsedMenuItem = menuItem.split('-')
+
+wineName = parsedMenuItem[0]
+
+wineDescription = parsedMenuItem[1]
+
+print(wineName)
+
+print(wineDescription)
 
   
