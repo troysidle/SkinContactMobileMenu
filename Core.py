@@ -1,5 +1,7 @@
 #This code reads in two documents as arrays and creates a third file to combine them.
 
+#This code now also parses a string into two strings to designate an item (wine name) and its description (the wine description).
+
 #Core.txt
 
 #designate the array for the HTML code.
@@ -10,7 +12,7 @@ with open('Template.txt') as templateFile:
 resultFile = open("Result.html", "a")
 
 #Define the key word to look for within the HTML file.
-keyWord = 'stop\n'
+keyWord = 'BY THE GLASS HEADER\n'
 
 #define an array to show (print) what is happening at the end.
 resultContent = [] 
@@ -40,6 +42,25 @@ print('    ')
 #print('		After loop, count is', i)
 
 
+i += 1
+
+#parse the template string here first.
+
+CodeKeyWord = templateCode[i].rfind(' By The Glass Header ')
+
+
+if CodeKeyWord != -1:
+        
+    
+        parsedTemplateCode = templateCode[i].split(' By The Glass Header ') #consider coverting this to a variable
+
+        HTMLStart = parsedTemplateCode[0]
+        HTMLEnd = parsedTemplateCode[1]
+
+        print(HTMLStart)
+
+        print(HTMLEnd)
+        
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -57,7 +78,7 @@ with open('Content.txt') as contentFile:
     contentByTheGlass = contentFile.readlines()    
 
 #not yet using contentKeyWord
-contentKeyWord = 'FOOD'
+contentKeyWord = 'FOOD\n'
 
 
 j = 0
@@ -65,14 +86,37 @@ contentLength = len(contentByTheGlass)
 
 #Print all the elements of the Content file
 #Amend those elements to the Results file.
-while j < contentLength:
+while j < contentLength: 
 
-    x = contentByTheGlass[j].rfind("-")
+   
+    
+    if contentKeyWord == contentByTheGlass[j]:
+        
+        print('Looking for FOOD right here:')
+        print(contentByTheGlass[j])
+        
+
+        resultFile.write(HTMLStart)
+
+
+        #resultFile.write(templateCode[i])
+        print(contentByTheGlass[j])
+        resultFile.write(contentByTheGlass[j])
+        resultFile.write('\n')
+        #resultFile.write(templateCode[i])
+
+        resultFile.write(HTMLEnd)
+        
+        #advance the respective indexes
+        j += 1
+        i += 1
+    
+    x = contentByTheGlass[j].rfind(" - ")
     
     if x != -1:
         print(x)
     
-        parsedMenuItem = contentByTheGlass[j].split('-')
+        parsedMenuItem = contentByTheGlass[j].split(' - ')
 
         wineName = parsedMenuItem[0]
         wineDescription = parsedMenuItem[1]
@@ -108,7 +152,8 @@ print('    ')
 #
 #---------------------------------------------------------------------------------------------------------
 
-
+#Don't include the Key Word
+i = i+1
 
 #Print all the elements of the Template array.
 #Amend those elements to the Results array.
