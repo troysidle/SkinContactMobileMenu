@@ -88,11 +88,18 @@ contentLength = len(contentByTheGlass)
 #Amend those elements to the Results file.
 while j < contentLength: 
 
-   
+    if contentByTheGlass[j].isupper():
+        
+        print('The upper case has been found')
+        resultFile.write('The upper case has been found')
+        
+    #---------------    
+    # Header    
+    #---------------   
     
     if contentKeyWord == contentByTheGlass[j]:
         
-        print('Looking for FOOD right here:')
+        print('Looking for the key word right here:')
         print(contentByTheGlass[j])
         
 
@@ -110,6 +117,21 @@ while j < contentLength:
         #advance the respective indexes
         j += 1
         i += 1
+    
+    #---------------    
+    # Product    
+    #---------------   
+    
+    #Write content until a blank line is reached
+    while contentByTheGlass[j] != '\n':
+        
+        #remove leading white space
+        startContent = contentByTheGlass[j].lstrip()
+        print(startContent)
+        parsedByTheGlassContent = contentByTheGlass[j].split(' ')#pick up here
+        
+        j += 1
+    
     
     x = contentByTheGlass[j].rfind(" - ")
     
