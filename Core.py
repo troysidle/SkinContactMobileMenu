@@ -231,9 +231,38 @@ print(resultFile.read())
     
     
     
-    
-    
-    
+#working concept for separating an item and its price
+#    
+#    
+#txt = "carrots      56"
+#
+#
+#
+#i = 0
+#stringLength = len(txt)
+#
+#find the first space in the string
+#while i < stringLength and : 
+#
+#	print (
+#
+##replace the first space with a signifier
+#replace
+
+##split at the signifier
+#parsedMenuItem = txt.split(" ")
+##parsedMenuItem = contentByTheGlass[j].split(' ')
+#
+##take out the white space
+#lstrip
+#
+#wineName = parsedMenuItem[0]
+#wineDescription = parsedMenuItem[1]
+#
+##print(x)
+#print('Wine:', wineName)
+#print(wineDescription)
+#print('end')
     
     
     
