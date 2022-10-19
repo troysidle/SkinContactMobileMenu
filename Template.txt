@@ -3,7 +3,7 @@
 BY THE GLASS HEADER
 <h1> By The Glass Header </h1>
 
-
+BY THE GLASS PRODUCT
 <p><b> By The Glass Product </b></p>
 <h5> By The Glass Price </h5>
 
@@ -14,9 +14,10 @@ BY THE GLASS HEADER
 BY THE BOTTLE HEADER
 <h1> Bottle Header </h1>
 
+BY THE BOTTLE PRODUCT
 <p><b> Bottle Product </b></p>
-<p> By The Glass Description </p>
-<h5> By The Glass Price </h5>
+<p> Bottle Description </p>
+<h5> Bottle Price </h5>
 
 <br>
 

@@ -2,7 +2,7 @@
 
 #This code now also parses a string into two strings to designate an item (wine name) and its description (the wine description).
 
-#Core.txt
+#CoreContent3.txt
 
 #designate the array for the HTML code.
 with open('Template.txt') as templateFile:
@@ -13,6 +13,8 @@ resultFile = open("Result.html", "a")
 
 #Define the key word to look for within the HTML file.
 keyWord = 'BY THE GLASS HEADER\n'
+
+keyWord2 = 'BY THE GLASS PRODUCT\n'
 
 #define an array to show (print) what is happening at the end.
 resultContent = [] 
@@ -33,16 +35,15 @@ templateLength = len(templateCode)
 i = 0
 while i < templateLength and keyWord !=templateCode[i]:
     resultContent.append(templateCode[i])
-    print(templateCode[i])
+    #print(templateCode[i])
     resultFile.write(templateCode[i])
     resultFile.write('\n')
     i += 1
 
-print('    ')
-#print('		After loop, count is', i)
-
-
 i += 1
+
+
+
 
 #parse the template string here first.
 
@@ -56,11 +57,26 @@ if CodeKeyWord != -1:
 
         HTMLStart = parsedTemplateCode[0]
         HTMLEnd = parsedTemplateCode[1]
-
-        print(HTMLStart)
-
-        print(HTMLEnd)
         
+
+while i < templateLength and keyWord2 !=templateCode[i]:
+    resultContent.append(templateCode[i])
+    #print(templateCode[i])
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
+    i += 1    
+
+    
+#CodeKeyWord = templateCode[i].rfind(' By The Glass Product ')
+
+if CodeKeyWord != -1:
+        parsedTemplateCode = templateCode[i].split(' By The Glass Product ') #consider coverting this to a variable
+
+        HTMLStart2 = 'HTML START CODE\n'
+        HTMLEnd2 = 'HTML END CODE\n'
+    
+
+
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -90,78 +106,109 @@ while j < contentLength:
 
     if contentByTheGlass[j].isupper():
         
-        print('The upper case has been found')
-        resultFile.write('The upper case has been found')
+        resultFile.write('The upper case has been found\n')
+        
         
     #---------------    
     # Header    
     #---------------   
     
-    if contentKeyWord == contentByTheGlass[j]:
-        
-        print('Looking for the key word right here:')
-        print(contentByTheGlass[j])
-        
+    if contentKeyWord == contentByTheGlass[j]:  
 
+        
+        print("step A")
+        
         resultFile.write(HTMLStart)
-
-
-        #resultFile.write(templateCode[i])
-        print(contentByTheGlass[j])
         resultFile.write(contentByTheGlass[j])
-        resultFile.write('\n')
-        #resultFile.write(templateCode[i])
-
         resultFile.write(HTMLEnd)
+       
+        
+        
+        
         
         #advance the respective indexes
         j += 1
-        i += 1
-    
-    #---------------    
-    # Product    
-    #---------------   
-    
-    #Write content until a blank line is reached
-    while contentByTheGlass[j] != '\n':
         
-        #remove leading white space
-        startContent = contentByTheGlass[j].lstrip()
-        print(startContent)
-        parsedByTheGlassContent = contentByTheGlass[j].split(' ')#pick up here
-        
-        j += 1
     
+        #---------------    
+        # Product    
+        #---------------   
+        
+        print("check A")
+        print(contentByTheGlass[j])
+        if contentByTheGlass[j] != '\n':
+            
+            
+            print("step B")
+            # Separate an item and its price
+            contentFood = contentByTheGlass[j].lstrip()
+        
+            print("contendFood variable is:", contentFood)
+            k = 0
+            componentLength = len(contentFood)
+
+
+            #split the string if more than two spaces
+            while k < componentLength: 
+                print("step E")
+            
+                if contentFood[k] == " ":
+    
+                    if contentFood[k+1] == " ":
+    
+                        Item = contentFood[:k]
+                        #print('Item:', Item)
+                        resultFile.write(HTMLStart2)
+                        resultFile.write('Item:')
+                        resultFile.write(Item)
+                        resultFile.write('\n')
+                        Price = contentFood[k+1:]
+                        Price = Price.lstrip()
+                        #print ('Price here:', Price)
+                        resultFile.write('Price:')
+                        resultFile.write(Price)
+                        resultFile.write(HTMLEnd2)
+                        resultFile.write('\n')
+            
+                        k = componentLength
+            
+                k += 1
+        
+    
+            print("check B")
+            print(contentByTheGlass[j])
     
     x = contentByTheGlass[j].rfind(" - ")
     
     if x != -1:
-        print(x)
-    
+        
+        print("step C")
         parsedMenuItem = contentByTheGlass[j].split(' - ')
 
         wineName = parsedMenuItem[0]
         wineDescription = parsedMenuItem[1]
 
-        print(wineName)
-
-        print(wineDescription)
+        
+        
         resultFile.write('\nWine Name Is:')
         resultFile.write(wineName)
+        resultFile.write('\n')
         resultFile.write('\nWine Description Is:')
         resultFile.write(wineDescription)
+        resultFile.write('\n')
+
     
-    
-    print(contentByTheGlass[j])
+    print("step D")
     resultContent.append(contentByTheGlass[j])
-    resultFile.write(contentByTheGlass[j])
-    resultFile.write('\n')
+    #resultFile.write(contentByTheGlass[j])
+    #resultFile.write('\n')
+    #print(j)
     j += 1
     
     
 
     
-print('    ')
+
 
 #---------------------------------------------------------------------------------------------------------
 # End Content Part 1
@@ -174,33 +221,13 @@ print('    ')
 #
 #---------------------------------------------------------------------------------------------------------
 
-#Don't include the Key Word
-i = i+1
 
-#Print all the elements of the Template array.
-#Amend those elements to the Results array.
-while i < templateLength: # and keyWord !=templateCode[i]:
-    #matched_indexes.append(i)
-    print(templateCode[i])
-    resultContent.append(templateCode[i])
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1    
 
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 2
 #---------------------------------------------------------------------------------------------------------
 
     
-    
-print('    ')
-print('I count is', i)    
-    
-
-
-print(f'templateCode {templateCode}')
-
-print(f'Content {resultContent}')
 
 
 
@@ -214,55 +241,7 @@ resultFile = open("Result.html", "r")
 print(resultFile.read())
 
 
-#menuItem = "Domaine de VictorSample - a really nice sample red wine"
 
-#parsedMenuItem = menuItem.split('-')
-
-#wineName = parsedMenuItem[0]
-
-#wineDescription = parsedMenuItem[1]
-
-#print(wineName)
-
-#print(wineDescription)
-
-  
-    
-    
-    
-    
-#working concept for separating an item and its price
-#    
-#    
-#txt = "carrots      56"
-#
-#
-#
-#i = 0
-#stringLength = len(txt)
-#
-#find the first space in the string
-#while i < stringLength and : 
-#
-#	print (
-#
-##replace the first space with a signifier
-#replace
-
-##split at the signifier
-#parsedMenuItem = txt.split(" ")
-##parsedMenuItem = contentByTheGlass[j].split(' ')
-#
-##take out the white space
-#lstrip
-#
-#wineName = parsedMenuItem[0]
-#wineDescription = parsedMenuItem[1]
-#
-##print(x)
-#print('Wine:', wineName)
-#print(wineDescription)
-#print('end')
     
     
     
@@ -272,60 +251,4 @@ print(resultFile.read())
     
     
     
-    
-    
-    
-    
-    
-#---------------------------------- This is working code that parses at the hypen. 10-10-22. Needs commenting and incorporating into code above.
-#Add Content elements to the results array.    
-#.#contentByTheGlass = ['FOO-D', 'Almonds', 'Pickles', 'Cheese', 'Domaine de RogerSample - a really nice sample rose wine']
-#with open('Content.txt') as contentFile:
-#    contentByTheGlass = contentFile.readlines()    
 
-#not yet using contentKeyWord
-#.#contentKeyWord = 'FOOD'
-
-
-#.#j = 0
-#.#contentLength = len(contentByTheGlass)
-
-#parsedMenuItem = ['hello-there', 'test']
-
-
-
-
-
-
-
-
-#Print all the elements of the Content file
-#Amend those elements to the Results file.
-#.#while j < contentLength:
-
-
-#.#    x = contentByTheGlass[j].rfind("-")
-
-#.#    if x != -1:
-#.#        print(x)
-    
-#.#        parsedMenuItem = contentByTheGlass[0].split('-')
-
-#.#        wineName = parsedMenuItem[0]
-#.#        wineDescription = parsedMenuItem[1]
-
-#.#        print(wineName)
-
-#.#        print(wineDescription)
-
-	
-
-#.#    print(wineName)
-#.#    print(wineDescription)
-#.#    print(contentByTheGlass[j])
-#.#    #resultContent.append(contentByTheGlass[j])
-#.#    #resultFile.write(contentByTheGlass[j])
-#.#    #resultFile.write('\n')
-#.#    j += 1
-#.#---------------------#
-    
