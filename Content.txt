@@ -4,10 +4,10 @@ FOOD
     Carrots     10
     Potatoes    12
     Pate        15
-    
+
 WHITE WINE
-    St-Coriander - a really interesting funky version of the original
-    Where Did I Put My Keys - single origin biodynamic producer
-    Bikes Are Better Before Dinner - a really nice way to travel, and a really nice Riesling
-    
+    St-Coriander - a really interesting funky version of the original                               36
+    Where Did I Put My Keys - single origin biodynamic producer                                     42
+    Bikes Are Better Before Dinner - a really nice way to travel, and a really nice Riesling        74
+
 This is the end of the test file.
