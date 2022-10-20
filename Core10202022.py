@@ -187,8 +187,8 @@ if CodeKeyWord != -1:
 while i < templateLength and keyWord2 !=templateCode[i]:
     resultContent.append(templateCode[i])
     #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
     i += 1    
 
 i += 1
@@ -218,8 +218,8 @@ if CodeKeyWord != -1:
 while i < templateLength and keyWord3 !=templateCode[i]:
     resultContent.append(templateCode[i])
     #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
     i += 1         
         
 # -------- 1 ----------- #
@@ -240,8 +240,8 @@ if CodeKeyWord != -1:
 while i < templateLength and keyWord4 !=templateCode[i]:
     resultContent.append(templateCode[i])
     #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
     i += 1   
 
 i += 1
