@@ -2,9 +2,12 @@
 
 #This code now also parses a string into two strings to designate an item (wine name) and its description (the wine description).
 
-#Core2.txt
+#Core.txt
 
 #designate the array for the HTML code.
+
+#Updated 10.20.22
+
 with open('Template.txt') as templateFile:
     templateCode = templateFile.readlines()
 
@@ -25,7 +28,7 @@ resultContent = []
 
 
 def firstFunction(fullLine):
-    print("Hello from a function")
+    #print("Hello from a function")
   
     fullLine = contentByTheGlass[j].lstrip()
 
@@ -279,7 +282,19 @@ if CodeKeyWord != -1:
         BottlePriceHTMLEnd = parsedTemplateCode[1]
         
 
+# Write each line of the Template to the Result file.
+     
+#This functionally goes at the end
+#while i < templateLength:
 
+    #collect info here, but don't write to file until the end.
+
+
+    #resultContent.append(templateCode[i])
+    #print(templateCode[i])
+    #resultFile.write(templateCode[i])
+    #resultFile.write('\n')
+#    i += 1    
 
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
@@ -394,13 +409,22 @@ while j < contentLength:
 #
 #---------------------------------------------------------------------------------------------------------
 
+#Don't include the Key Word
+i = i+1
 
+#Print all the elements of the Template array.
+#Amend those elements to the Results array.
+while i < templateLength: # and keyWord !=templateCode[i]:
+    #matched_indexes.append(i)
+    #print(templateCode[i])
+    resultContent.append(templateCode[i])
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
+    i += 1 
 
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 2
 #---------------------------------------------------------------------------------------------------------
-
-    
 
 
 
