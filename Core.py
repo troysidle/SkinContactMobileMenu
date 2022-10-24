@@ -8,12 +8,18 @@
 
 #Updated 10.20.22
 
+
+
+
+# Open the Template file
 with open('Template.txt') as templateFile:
     templateCode = templateFile.readlines()
 
+     
+# Create the Result HTML file   
 resultFile = open("Result.html", "a")
 
-#Define the key word to look for within the HTML file.
+#Define the key word to look for within the Template file.
 keyWord = 'BY THE GLASS HEADER\n'
 
 keyWord2 = 'BY THE GLASS PRODUCT\n'
@@ -22,22 +28,67 @@ keyWord3 = 'BY THE BOTTLE HEADER\n'
 
 keyWord4 = 'BY THE BOTTLE PRODUCT\n'
 
-#define an array to show (print) what is happening at the end.
-resultContent = [] 
+ 
+
+#______
+#initialzing a variable
+Item = 'initializing Item'
+Price = 'initializing Item'
+#_________
+
+#working... needs to retun -1 if no blanks
+def splitBlank(checkForBlanks):
+    
+    k = 0
+    componentLength = len(checkForBlanks)
 
 
+    #split the string where there are more than two spaces
+    while k < componentLength: 
+        
+            
+        if checkForBlanks[k] == " ":
+    
+            if checkForBlanks[k+1] == " ":
+    
+                beforeBlanks = checkForBlanks[:k]
+                
+                afterBlanks = checkForBlanks[k+1:]
+                afterBlanks = Price.lstrip()
+                
+                
+            
+                k = componentLength
+            
+                
+        k += 1
+    
+    
+    
+    print('blank function check')
+    
+    return hasBlanks
 
-def firstFunction(fullLine):
+
+def writeFromALine(fullLine):
     #print("Hello from a function")
   
-    fullLine = contentByTheGlass[j].lstrip()
+    pricedItem = 'initialized pricedItem2'
+    Item = 'initializing Item2'
+    Price = 'initializing Price2'
 
+    wineName = 'blank'
+    wineDescription = 'blank'
+    
+    fullLine = contentByTheGlass[j].lstrip()
+    
+
+    splitBlank(fullLine)
+    
     #print("contendFood variable is:", contentFood)
     k = 0
     componentLength = len(fullLine)
 
-    wineName = 'blank'
-    wineDescription = 'blank'
 
     #split the string where there are more than two spaces
     while k < componentLength: 
@@ -47,11 +98,8 @@ def firstFunction(fullLine):
     
             if fullLine[k+1] == " ":
     
-                Item = fullLine[:k]
+                pricedItem = fullLine[:k]
                 #print('Item:', Item)
-                
-                
-                            
                 
                 Price = fullLine[k+1:]
                 Price = Price.lstrip()
@@ -62,6 +110,8 @@ def firstFunction(fullLine):
             
         k += 1
         
+    #print(Item)    
+    #print(Price)
     x = Item.rfind(" - ")
                 
     if x != -1:
@@ -73,16 +123,18 @@ def firstFunction(fullLine):
                     
                     Item = wineName
 
+    else:
+                    Item = pricedItem
+
         
-        
                     
-                    
-                    
-    resultFile.write(GlassProductHTMLStart)
-    #resultFile.write('Item:')
-    resultFile.write(Item)
-    resultFile.write('\n')
-    resultFile.write(GlassProductHTMLEnd)        
+                
+    if fullLine != '\n':                
+        resultFile.write(GlassProductHTMLStart)
+        #resultFile.write('Item:')
+        resultFile.write(Item)
+        resultFile.write('\n')
+        resultFile.write(GlassProductHTMLEnd)        
                     
     #if wineName != 'blank':
     #    resultFile.write('Wine Name:')
@@ -96,57 +148,19 @@ def firstFunction(fullLine):
         resultFile.write(BottleDescriptionHTMLStart)
         resultFile.write(wineDescription)
         resultFile.write('\n')
-        resultFile.write(BottleDescriptionHTMLEnd)            
-                    
-    #resultFile.write('Price:')
-    resultFile.write(BottlePriceHTMLStart)
-    resultFile.write(Price)
-    resultFile.write(BottlePriceHTMLEnd)
-    resultFile.write('\n')                
-        #print("check B")
-        #print(contentByTheGlass[j])
-            
-#    x = contentByTheGlass[j].rfind(" - ")
-#    
-#    if x != -1:
-#        
-#        #print("step C")
-#        parsedMenuItem = contentByTheGlass[j].split(' - ')
-#
-#        wineName = parsedMenuItem[0]
-#        wineDescription = parsedMenuItem[1]
-#
-#        
-#        
-#        
-#        resultFile.write(BottleProductHTMLStart)
-#        resultFile.write(wineName)
-#        resultFile.write('\n')
-#        resultFile.write(BottleProductHTMLEnd)
-#        
-#        resultFile.write(BottleDescriptionHTMLStart)
-#        
-#        resultFile.write(wineDescription)
-#        resultFile.write('\n')
-#        resultFile.write(BottleDescriptionHTMLEnd)
-#
-#    
-#        #print("step D")
-#        #resultContent.append(contentByTheGlass[j])
-#        #resultFile.write(contentByTheGlass[j])
-#        #resultFile.write('\n')
-#        #print(j)
+        resultFile.write(BottleDescriptionHTMLEnd) 
+                
+    if fullLine != '\n':
+        #resultFile.write('Price:')
+        resultFile.write(BottlePriceHTMLStart)
+        resultFile.write(Price)
+        resultFile.write(BottlePriceHTMLEnd)
+        resultFile.write('\n')              
+    
 
+        
 
-
-
-
-
-
-
-
-
-
+        
 
 
 #---------------------------------------------------------------------------------------------------------
@@ -163,7 +177,7 @@ def firstFunction(fullLine):
 templateLength = len(templateCode)
 i = 0
 while i < templateLength and keyWord !=templateCode[i]:
-    resultContent.append(templateCode[i])
+    
     #print(templateCode[i])
     resultFile.write(templateCode[i])
     resultFile.write('\n')
@@ -185,13 +199,10 @@ if CodeKeyWord != -1:
         GlassHeaderHTMLEnd = parsedTemplateCode[1]
         
 
-# Write each line of the Template to the Result file.
+# Advance to the next Key Word.
         
 while i < templateLength and keyWord2 !=templateCode[i]:
-    resultContent.append(templateCode[i])
-    #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    
     i += 1    
 
 i += 1
@@ -203,6 +214,23 @@ if CodeKeyWord != -1:
 
         GlassProductHTMLStart = parsedTemplateCode[0]
         GlassProductHTMLEnd = parsedTemplateCode[1]
+
+        
+        
+#By the glass description
+        
+i += 1
+
+CodeKeyWord = templateCode[i].rfind(' By The Glass Description ')
+
+if CodeKeyWord != -1:
+        parsedTemplateCode = templateCode[i].split(' By The Glass Description ') #consider coverting this to a variable
+
+        GlassDescriptionHTMLStart = parsedTemplateCode[0]
+        GlassDescriptionHTMLEnd = parsedTemplateCode[1]          
+        
+        
+        
         
 i += 1
 
@@ -214,15 +242,20 @@ if CodeKeyWord != -1:
         GlassPriceHTMLStart = parsedTemplateCode[0]
         GlassPriceHTMLEnd = parsedTemplateCode[1]
 
+        
+      
+        
+        
+        
+        
+        
 
 # Write each line of the Template to the Result file.
 # --------------- BOTTLES --------------- #
         
 while i < templateLength and keyWord3 !=templateCode[i]:
-    resultContent.append(templateCode[i])
-    #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    
+   
     i += 1         
         
 # -------- 1 ----------- #
@@ -241,10 +274,8 @@ if CodeKeyWord != -1:
 
 
 while i < templateLength and keyWord4 !=templateCode[i]:
-    resultContent.append(templateCode[i])
-    #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    
+
     i += 1   
 
 i += 1
@@ -282,20 +313,6 @@ if CodeKeyWord != -1:
         BottlePriceHTMLEnd = parsedTemplateCode[1]
         
 
-# Write each line of the Template to the Result file.
-     
-#This functionally goes at the end
-#while i < templateLength:
-
-    #collect info here, but don't write to file until the end.
-
-
-    #resultContent.append(templateCode[i])
-    #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
-#    i += 1    
-
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -309,14 +326,14 @@ if CodeKeyWord != -1:
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('Content.txt') as contentFile:
+with open('SCtestShort.txt') as contentFile:
     #rename contentByTheGlass to something like contentLine
     contentByTheGlass = contentFile.readlines()    
 
 
 FoodKeyWord = 'FOOD\n'
 
-BottleKeyWord = 'WHITE WINE\n'
+BottleKeyWord = 'SPARKLING WINE\n'
 
 
 j = 0
@@ -334,14 +351,10 @@ while j < contentLength:
     
     #if the title is FOOD
     if FoodKeyWord == contentByTheGlass[j]:  
-
-        
-        #print("step A")
         
         resultFile.write(GlassHeaderHTMLStart)
         resultFile.write(contentByTheGlass[j])
         resultFile.write(GlassHeaderHTMLEnd)
-
         
         j += 1 
         
@@ -351,47 +364,41 @@ while j < contentLength:
         # Product    
         #---------------  
         
+        #Until the end next key word...
+        # as long not at the end of the file...
+        while j < contentLength:
         
+            if contentByTheGlass[j] != BottleKeyWord and contentByTheGlass[j] != '\n':
         
-        
-        #Until the end next blank line...
-        while contentByTheGlass[j] != '\n':
-            #print("check A")
-            #print(contentByTheGlass[j])
-            
-            #if it's not a blank line...
-            #if contentByTheGlass[j] != '\n':
             
             
-            #print("step B")
-            # Separate an item and its price
-            contentFood = contentByTheGlass[j].lstrip()
-        
+                #print('made the loop')
+                # Separate an item and its price
+                contentFood = contentByTheGlass[j].lstrip()
 
-            firstFunction(contentFood)
+                writeFromALine(contentFood)
             
-            
+            if BottleKeyWord == contentByTheGlass[j]:
+    
+                resultFile.write(BottleHeaderHTMLStart)
+                resultFile.write(contentByTheGlass[j])
+                resultFile.write(BottleHeaderHTMLEnd)
                 
-                
-            j += 1         
-            
-    
-    
-    
-    if BottleKeyWord == contentByTheGlass[j]:
-    
-        resultFile.write(BottleHeaderHTMLStart)
-        resultFile.write(contentByTheGlass[j])
-        resultFile.write(BottleHeaderHTMLEnd)
-                
-        j += 1
-    
-        #Until the end next blank line...
-        while contentByTheGlass[j] != '\n':
-                
-                firstFunction(contentByTheGlass[j])
-        
                 j += 1
+    
+                #Until the end next blank line...
+                while contentByTheGlass[j] != '\n':
+                
+                    writeFromALine(contentByTheGlass[j])
+        
+                    j += 1
+                
+            j += 1
+            
+    
+    
+    
+    
                 
 
 
@@ -417,7 +424,6 @@ i = i+1
 while i < templateLength: # and keyWord !=templateCode[i]:
     #matched_indexes.append(i)
     #print(templateCode[i])
-    resultContent.append(templateCode[i])
     resultFile.write(templateCode[i])
     resultFile.write('\n')
     i += 1 
@@ -436,6 +442,7 @@ resultFile.close()
 #Open and read the file after the appending:
 resultFile = open("Result.html", "r")
 print(resultFile.read())
+print(GlassDescriptionHTMLStart)
 
 
 
