@@ -36,6 +36,10 @@ Item = 'initializing Item'
 Price = 'initializing Item'
 #_________
 
+
+
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 #working... needs to retun -1 if no blanks
 def splitBlank(checkForBlanks):
     
@@ -65,32 +69,40 @@ def splitBlank(checkForBlanks):
     
     
     
-    print('blank function check')
+    #print('blank function check')
     
-    return hasBlanks
+    return checkForBlanks
 
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+
+
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 
 def writeFromALine(fullLine):
     #print("Hello from a function")
   
-    pricedItem = 'initialized pricedItem2'
-    Item = 'initializing Item2'
-    Price = 'initializing Price2'
+    pricedItem = 'blank'
+    Item = 'blank'
+    Price = 'blank'
+    glassDescription = 'blank'
 
     wineName = 'blank'
     wineDescription = 'blank'
     
+    
+    # Get rid of any blank space at the beginning of the line
     fullLine = contentByTheGlass[j].lstrip()
     
-
+    # not used yet
     splitBlank(fullLine)
     
-    #print("contendFood variable is:", contentFood)
+    
+    # Split the full line where there are more than two spaces
     k = 0
     componentLength = len(fullLine)
 
-
-    #split the string where there are more than two spaces
     while k < componentLength: 
         #print("step E")
             
@@ -99,19 +111,19 @@ def writeFromALine(fullLine):
             if fullLine[k+1] == " ":
     
                 pricedItem = fullLine[:k]
-                #print('Item:', Item)
+                
                 
                 Price = fullLine[k+1:]
                 Price = Price.lstrip()
-                #print ('Price here:', Price)
-                
+                 
             
                 k = componentLength
             
         k += 1
         
-    #print(Item)    
-    #print(Price)
+    
+    
+    # Look for a hyphen in the Item and split into wine name and wine description
     x = Item.rfind(" - ")
                 
     if x != -1:
@@ -127,11 +139,13 @@ def writeFromALine(fullLine):
                     Item = pricedItem
 
         
-                    
+    if Item == 'blank':
+        glassDescription = fullLine
+    
                 
-    if fullLine != '\n':                
+    if Item != 'blank':                
         resultFile.write(GlassProductHTMLStart)
-        #resultFile.write('Item:')
+        resultFile.write('Item:')
         resultFile.write(Item)
         resultFile.write('\n')
         resultFile.write(GlassProductHTMLEnd)        
@@ -150,7 +164,15 @@ def writeFromALine(fullLine):
         resultFile.write('\n')
         resultFile.write(BottleDescriptionHTMLEnd) 
                 
-    if fullLine != '\n':
+            
+    if glassDescription != 'blank':
+        resultFile.write(GlassDescriptionHTMLStart)
+        resultFile.write (glassDescription)
+        resultFile.write('\n')
+        resultFile.write(GlassDescriptionHTMLEnd) 
+    
+    
+    if Price != 'blank':
         #resultFile.write('Price:')
         resultFile.write(BottlePriceHTMLStart)
         resultFile.write(Price)
@@ -158,7 +180,8 @@ def writeFromALine(fullLine):
         resultFile.write('\n')              
     
 
-        
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 
         
 
@@ -169,7 +192,7 @@ def writeFromALine(fullLine):
 #
 #---------------------------------------------------------------------------------------------------------
 
-#Print all the elements of the Template array until the keyword is reached.
+#Print all the elements of the Template array until the first keyword is reached.
 #Add those elements to the Results array.
 
 #Write to the Result file all the elements of the Template array until the keyword is reached.
@@ -370,9 +393,6 @@ while j < contentLength:
         
             if contentByTheGlass[j] != BottleKeyWord and contentByTheGlass[j] != '\n':
         
-            
-            
-                #print('made the loop')
                 # Separate an item and its price
                 contentFood = contentByTheGlass[j].lstrip()
 
@@ -394,13 +414,6 @@ while j < contentLength:
                     j += 1
                 
             j += 1
-            
-    
-    
-    
-    
-                
-
 
     
     j += 1
