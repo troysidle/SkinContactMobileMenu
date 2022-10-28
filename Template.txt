@@ -5,8 +5,10 @@ BY THE GLASS HEADER
 
 BY THE GLASS PRODUCT
 <p><b> By The Glass Product </b></p>
+<h2> By The Glass Grapes </h2>
 <h4> By The Glass Description </h4>
 <h5> By The Glass Price </h5>
+<h5><b> By The Glass Origin </b></h5>
 
 <br>
 <br>
