@@ -1,4 +1,4 @@
-#This code reads in two documents as arrays and creates a third file to combine them.
+#This code reads in two documents and creates a third file to combine them.
 
 #This code now also parses a string into two strings to designate an item (wine name) and its description (the wine description).
 
@@ -6,7 +6,7 @@
 
 #designate the array for the HTML code.
 
-#Updated 10.20.22
+#Updated 10.31.22
 
 
 
@@ -31,8 +31,8 @@ keyWord4 = 'BY THE BOTTLE PRODUCT\n'
 
 #______
 #initialzing a variable
-Item = 'initializing Item'
-Price = 'initializing Item'
+item = 'initializing Item'
+price = 'initializing Item'
 #_________
 
 
@@ -84,34 +84,29 @@ def splitBlank(checkForBlanks):
 
 #--------------------------------------------------------------------------------------
 
-
-
 #--------------------------------------------------------------------------------------
-# This function takes in a string and checks for a hyphen.
+# This function takes in a string and checks for the word "chilled".
 #
-# Returns an array of two strings if there is a hyphen.
+# Returns an array of two strings - one being the price, the other being "chilled".
 #
-# Returns -1 if not.
+# Returns -1 if "chilled" is not present.
 #
 # White space and end of line characters are also removed.
 #--------------------------------------------------------------------------------------
 
 
-#still thinking this through
-def splitHyphen(checkForHyphen):
+def splitChilled(checkForChilled):
     
-    x = checkForHyphen.rfind(" - ")
+    x = checkForChilled.rfind("Chilled")
                 
     if x != -1:
-        splitLine = checkForHyphen.split(' - ')
-    
-        beforeHyphen = splitLine[0]
-                
-        afterHyphen = splitLine[1]
-        afterHyphen = afterHyphen.lstrip()
-        afterHyphen = afterHyphen.strip("\n")
-                    
-        splitLine = [beforeHyphen, afterHyphen]
+        extractedPrice = checkForChilled.strip('Chilled')
+
+        extractedPrice = extractedPrice.strip("\n")
+        
+        extractedPrice = extractedPrice.lstrip()
+        
+        splitLine = ["Chilled", extractedPrice]
     
         return splitLine
                     
@@ -120,37 +115,28 @@ def splitHyphen(checkForHyphen):
 
 #--------------------------------------------------------------------------------------
 
+
+
+
 #--------------------------------------------------------------------------------------
-# This function pertains to By The Glass
+# This function writes a by the glass wine item.
+#
+# Included are all associated attributes - description, origin, price, et.
 #--------------------------------------------------------------------------------------
 
-def writeByTheGlassLine(fullLine):
-  
-    pricedItem = 'blank'
-    item = 'blank'
-    price = 'blank'
-    description = 'blank'
+
+
+def writeGlassWineItem(lineReference):
+
     wineName = 'blank'
-    wineDescription = 'blank'
-    header = 'blank'
-    wineInfo = 'blank'
     wineGrapes = 'blank'
+    wineDescription = 'blank'
     wineOrigin = 'blank'
-    
-    
-    # Get rid of any blank space at the beginning of the line
-    fullLine = menuContent[j].lstrip()
-    
-    
-    
-    # If the line is all uppercase, assign header
-    x = fullLine.isupper()
-    print(x)
-    if x == True:
-        header = fullLine
+    chilled = 'blank'
+    price = 'blank'
     
     # If the line is separated by multiple blanks, assign wine info and price
-    split = splitBlank(fullLine)
+    split = splitBlank(lineReference)
     
     if split != -1:
         wineInfo = split[0]
@@ -158,6 +144,13 @@ def writeByTheGlassLine(fullLine):
     
         # Look for a hyphen in the wine info and split into wine name and grapes
         split = splitHyphen(wineInfo)
+    
+        c = splitChilled(price)
+    
+        if c != -1:
+            chilled = c[0]
+            price = c[1]
+            
     
         if split != -1:
             wineName = split[0]
@@ -167,15 +160,7 @@ def writeByTheGlassLine(fullLine):
         if menuContent[j+1] != 'blank':
             wineOrigin = menuContent[j+1]
         
-    
-    
-    # Write the header with correspondin HTML tags
-    if header != 'blank':
-        resultFile.write(GlassHeaderHTMLStart)
-        #resultFile.write('Header:')
-        resultFile.write(header)
-        resultFile.write(GlassHeaderHTMLEnd)
-        resultFile.write('\n')
+
             
                 
     if wineName != 'blank':                
@@ -206,68 +191,318 @@ def writeByTheGlassLine(fullLine):
         resultFile.write('\n')
         resultFile.write(GlassOriginHTMLEnd) 
     
+    if chilled != 'blank':
+        resultFile.write(GlassChilledHTMLStart)
+        #resultFile.write('Wine Price:')
+        resultFile.write(chilled)
+        resultFile.write(GlassChilledHTMLEnd)
+        resultFile.write('\n')
+    
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(BottlePriceHTMLStart)
+        resultFile.write(GlassPriceHTMLStart)
         #resultFile.write('Wine Price:')
         resultFile.write(price)
-        resultFile.write(BottlePriceHTMLEnd)
+        resultFile.write(GlassPriceHTMLEnd)
+        resultFile.write('\n') 
+
+#--------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------
+# This function writes a by the glass non wine item, such as beer, vermouth, etc.
+#
+# Included are all associated attributes - description, origin, price, et.
+#--------------------------------------------------------------------------------------
+
+def  writeGlassNonWineItem(lineReference):
+
+    nonWineName = 'blank'
+    nonWineOrigin = 'blank'
+    nonWineDescription = 'blank'
+    price = 'blank'
+    
+    
+    # If the line is separated by multiple blanks, assign wine info and price
+    split = splitBlank(lineReference)
+    
+    
+    if split != -1:
+        nonWineInfo = split[0]
+        price = split[1]
+    
+        # Look for a hyphen in the wine info and split into wine name and grapes
+        split = splitHyphen(nonWineInfo)
+    
+        c = splitChilled(price)
+    
+        if c != -1:
+            nonWineDescription = c[0]
+            price = c[1]
+            
+    
+        if split != -1:
+            nonWineName = split[0]
+            nonWineOrigin = split[1]
+            
+
+    if nonWineName != 'blank':                
+        resultFile.write(GlassProductHTMLStart)
+        #resultFile.write('Non Wine Name:')
+        resultFile.write(nonWineName)
+        resultFile.write(GlassProductHTMLEnd)
+        resultFile.write('\n')
+                
+    #edit tags
+    if nonWineOrigin != 'blank':        
+        resultFile.write(GlassGrapesHTMLStart)
+        #resultFile.write('Grapes:')
+        resultFile.write(nonWineOrigin)
+        resultFile.write(GlassGrapesHTMLEnd)
+        resultFile.write('\n')    
+    
+    
+    #edit tags
+    if nonWineDescription != 'blank':
+        resultFile.write(GlassOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        resultFile.write(nonWineDescription)
+        resultFile.write('\n')
+        resultFile.write(GlassOriginHTMLEnd) 
+    
+    if price != 'blank':
+        #resultFile.write('Price:')
+        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write('Non Wine Price:')
+        resultFile.write(price)
+        resultFile.write(GlassPriceHTMLEnd)
+        resultFile.write('\n') 
+
+
+#--------------------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------------------
+# This function takes in a string and checks for a hyphen.
+#
+# Returns an array of two strings if there is a hyphen.
+#
+# Returns -1 if not.
+#
+# White space and end of line characters are also removed.
+#--------------------------------------------------------------------------------------
+
+
+
+def splitHyphen(checkForHyphen):
+    
+    x = checkForHyphen.rfind(" - ")
+                
+    if x != -1:
+        splitLine = checkForHyphen.split(' - ')
+    
+        beforeHyphen = splitLine[0]
+                
+        afterHyphen = splitLine[1]
+        afterHyphen = afterHyphen.lstrip()
+        afterHyphen = afterHyphen.strip("\n")
+                    
+        splitLine = [beforeHyphen, afterHyphen]
+    
+        return splitLine
+                    
+    else:
+        return -1
+
+#--------------------------------------------------------------------------------------
+
+
+#--------------------------------------------------------------------------------------
+# This function pertains to Beer, Cider, Vermouth, Non-Alcoholic
+#--------------------------------------------------------------------------------------
+
+#is lineReference used in multiple functions incorrectly?
+def writeOtherByTheGlass(lineReference):
+  
+    #all these variables can likely be deleted
+    pricedItem = 'blank'
+    item = 'blank'
+    price = 'blank'
+    description = 'blank'
+    wineName = 'blank'
+    wineDescription = 'blank'
+    header = 'blank'
+    wineInfo = 'blank'
+    wineGrapes = 'blank'
+    wineOrigin = 'blank'
+    chilled = 'blank'
+    
+
+    if beerFinder != -1 or ciderFinder != -1 or vermouthFinder != -1 or nonalcoholicFinder != -1:
+	       print('found a keyword')
+    
+    else:
+	       print('no keywords found')
+
+    #newnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnewnew            
+    
+    # If the line is separated by multiple blanks, assign wine info and price
+    split = splitBlank(lineReference)
+    
+    if split != -1:
+        wineInfo = split[0]
+        price = split[1]
+    
+        # Look for a hyphen in the wine info and split into wine name and grapes
+        split = splitHyphen(wineInfo)
+    
+        c = splitChilled(price)
+    
+        if c != -1:
+            chilled = c[0]
+            price = c[1]
+            
+    
+        if split != -1:
+            wineName = split[0]
+            wineGrapes = split[1]
+        
+        # Assessing the following line the by the glass origin
+        if menuContent[j+1] != 'blank':
+            wineOrigin = menuContent[j+1]
+        
+    
+    
+    # Write the header with correspondin HTML tags
+    if header != 'blank':
+        resultFile.write(GlassHeaderHTMLStart)
+        resultFile.write(header)
+        resultFile.write(GlassHeaderHTMLEnd)
+        resultFile.write('\n')
+            
+    if wineName != 'blank':                
+        resultFile.write(GlassProductHTMLStart)
+        resultFile.write(wineName)
+        resultFile.write(GlassProductHTMLEnd)
+        resultFile.write('\n')
+                
+    if wineGrapes != 'blank':        
+        resultFile.write(GlassGrapesHTMLStart)
+        resultFile.write(wineGrapes)
+        resultFile.write(GlassGrapesHTMLEnd)
+        resultFile.write('\n')    
+            
+    if wineDescription != 'blank':
+        resultFile.write(GlassDescriptionHTMLStart)
+        resultFile.write(wineDescription)
+        resultFile.write('\n')
+        resultFile.write(GlassDescriptionHTMLEnd) 
+    
+    if wineOrigin != 'blank':
+        resultFile.write(GlassOriginHTMLStart)
+        resultFile.write(wineOrigin)
+        resultFile.write('\n')
+        resultFile.write(GlassOriginHTMLEnd) 
+    
+    if chilled != 'blank':
+        resultFile.write(GlassChilledHTMLStart)
+        resultFile.write(chilled)
+        resultFile.write(GlassChilledHTMLEnd)
+        resultFile.write('\n')
+    
+    if price != 'blank':
+        resultFile.write(GlassPriceHTMLStart)
+        resultFile.write(price)
+        resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n')              
     
 
+#--------------------------------------------------------------------------------------
+
+
+#--------------------------------------------------------------------------------------
+# This function pertains to By The Glass
+#--------------------------------------------------------------------------------------
+
+def writeByTheGlassItem(lineReference):
+  
+    pricedItem = 'blank'
+    item = 'blank'
+    price = 'blank'
+    description = 'blank'
+    wineName = 'blank'
+    wineDescription = 'blank'
+    header = 'blank'
+    wineInfo = 'blank'
+    wineGrapes = 'blank'
+    wineOrigin = 'blank'
+    chilled = 'blank'
+    
+    
+    # Get rid of any blank space at the beginning of the line
+    lineReference = menuContent[j].lstrip()
+    
+    
+    # If the line is all uppercase, assign header
+    x = lineReference.isupper()
+    #print(x)
+    if x == True:
+        header = lineReference
+        
+        beerFinder = header.find("BEER")
+        ciderFinder = header.find("CIDER")
+        vermouthFinder = header.find("VERMOUTH")
+        nonalcoholicFinder = header.find("NON-ALCOHOLIC")
+        
+        # Write the header with correspondin HTML tags
+    
+        resultFile.write(GlassHeaderHTMLStart)
+        resultFile.write(header)
+        resultFile.write(GlassHeaderHTMLEnd)
+        resultFile.write('\n')
+        
+        # go to the next line
+        
+        lineReference = menuContent[j+1].lstrip()
+        
+        if beerFinder != -1 or ciderFinder != -1 or vermouthFinder != -1 or nonalcoholicFinder != -1:
+            
+
+            writeGlassWineItem(lineReference)
+            
+        else:
+    
+            writeGlassNonWineItem(lineReference)
+    
+    
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
 # This function...
 #--------------------------------------------------------------------------------------
 
-def writeFromALine(fullLine):
-    #print("Hello from a function")
+def writeAnItem(lineReference):
   
     pricedItem = 'blank'
     Item = 'blank'
     Price = 'blank'
     glassDescription = 'blank'
-
     wineName = 'blank'
     wineDescription = 'blank'
     
     
     # Get rid of any blank space at the beginning of the line
-    fullLine = menuContent[j].lstrip()
+    lineReference = menuContent[j].lstrip()
     
     # Split the full line where there are more than two spaces
-    split = splitBlank(fullLine)
+    split = splitBlank(lineReference)
     
     # Assign item and price if there is a line with blanks.
     if split != -1:
         pricedItem = split[0]
         Price = split[1]
     
-    """    
-    # Split the full line where there are more than two spaces
-    k = 0
-    componentLength = len(fullLine)
-
-    while k < componentLength: 
-        #print("step E")
-            
-        if fullLine[k] == " ":
     
-            if fullLine[k+1] == " ":
-    
-                pricedItem = fullLine[:k]
-                
-                
-                Price = fullLine[k+1:]
-                Price = Price.lstrip()
-                 
-            
-                k = componentLength
-            
-        k += 1
-    """
-
     
     # Look for a hyphen in the Item and split into wine name and wine description
     
@@ -279,59 +514,32 @@ def writeFromALine(fullLine):
         
     else:
         Item = pricedItem
-
-    '''        
-    # Look for a hyphen in the Item and split into wine name and wine description
-    x = Item.rfind(" - ")
-                
-    if x != -1:
-                    #print("step C")
-                    parsedMenuItem = Item.split(' - ')
-
-                    wineName = parsedMenuItem[0]
-                    wineDescription = parsedMenuItem[1]
-                    
-                    Item = wineName
-
-    else:
-                    Item = pricedItem
-    '''
-        
-    if Item == 'blank':
-        glassDescription = fullLine
     
-                
+    
+    if Item == 'blank':
+        glassDescription = lineReference
+    
+    
     if Item != 'blank':                
         resultFile.write(GlassProductHTMLStart)
         resultFile.write('Item:')
         resultFile.write(Item)
         resultFile.write('\n')
         resultFile.write(GlassProductHTMLEnd)        
-                    
-    #if wineName != 'blank':
-    #    resultFile.write('Wine Name:')
-    #    resultFile.write(BottleProductHTMLStart)
-    #    resultFile.write(wineName)
-    #    resultFile.write('\n')
-    #    resultFile.write(BottleProductHTMLEnd)
         
     if wineDescription != 'blank':
-        #resultFile.write('Description:')
         resultFile.write(BottleDescriptionHTMLStart)
         resultFile.write(wineDescription)
         resultFile.write('\n')
         resultFile.write(BottleDescriptionHTMLEnd) 
-                
-            
+                   
     if glassDescription != 'blank':
         resultFile.write(GlassDescriptionHTMLStart)
         resultFile.write (glassDescription)
         resultFile.write('\n')
         resultFile.write(GlassDescriptionHTMLEnd) 
     
-    
     if Price != 'blank':
-        #resultFile.write('Price:')
         resultFile.write(BottlePriceHTMLStart)
         resultFile.write(Price)
         resultFile.write(BottlePriceHTMLEnd)
@@ -339,10 +547,6 @@ def writeFromALine(fullLine):
     
 
 #--------------------------------------------------------------------------------------
-
-
-
-        
 
 
 #---------------------------------------------------------------------------------------------------------
@@ -426,6 +630,18 @@ if CodeKeyWord != -1:
         GlassDescriptionHTMLStart = parsedTemplateCode[0]
         GlassDescriptionHTMLEnd = parsedTemplateCode[1]          
         
+        
+#By the glass "Chilled"
+        
+i += 1
+
+CodeKeyWord = templateCode[i].rfind(' By The Glass Chilled ')
+
+if CodeKeyWord != -1:
+        parsedTemplateCode = templateCode[i].split(' By The Glass Chilled ') #consider coverting this to a variable
+
+        GlassChilledHTMLStart = parsedTemplateCode[0]
+        GlassChilledHTMLEnd = parsedTemplateCode[1]         
         
 #By the glass price        
         
@@ -531,7 +747,7 @@ if CodeKeyWord != -1:
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('SCtestShort.txt') as contentFile:
+with open('SCtestRed.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()    
 
@@ -558,10 +774,10 @@ while j < contentLength:
     if menuContent[j] != FoodKeyWord:
         
         # Separate an item and its price
-        #should this line be included in the writeFromALine function?
+        #should this line be included in the writeAnItem function?
         contentByTheGlass = menuContent[j].lstrip()
 
-        writeByTheGlassLine(contentByTheGlass)
+        writeByTheGlassItem(contentByTheGlass)
             
         
     
@@ -593,7 +809,7 @@ while j < contentLength:
                 # Separate an item and its price
                 contentFood = menuContent[j].lstrip()
 
-                writeFromALine(contentFood)
+                writeAnItem(contentFood)
             
             if BottleKeyWord == menuContent[j]:
     
@@ -606,7 +822,7 @@ while j < contentLength:
                 #Until the end next blank line...
                 while menuContent[j] != '\n':
                 
-                    writeFromALine(menuContent[j])
+                    writeAnItem(menuContent[j])
         
                     j += 1
                 
