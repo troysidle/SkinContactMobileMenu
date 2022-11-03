@@ -440,19 +440,22 @@ def writeByTheGlassItem(lineReference):
     
     
     # Get rid of any blank space at the beginning of the line
-    lineReference = menuContent[j].lstrip()
+    #lineReference = menuContent[j].lstrip()
     
+    beerFinder = lineReference.find("BEER")
+    ciderFinder = lineReference.find("CIDER")
+    vermouthFinder = lineReference.find("VERMOUTH")
+    nonalcoholicFinder = lineReference.find("NON-ALCOHOLIC")
+    
+    notBeerHeader = 'true'
+        
+    while notBeerHeader == 'true':
     
     # If the line is all uppercase, assign header
     x = lineReference.isupper()
     #print(x)
     if x == True:
         header = lineReference
-        
-        beerFinder = header.find("BEER")
-        ciderFinder = header.find("CIDER")
-        vermouthFinder = header.find("VERMOUTH")
-        nonalcoholicFinder = header.find("NON-ALCOHOLIC")
         
         # Write the header with correspondin HTML tags
     
@@ -462,16 +465,20 @@ def writeByTheGlassItem(lineReference):
         resultFile.write('\n')
         
         # go to the next line
+        j += 1
         
-        lineReference = menuContent[j+1].lstrip()
+        y = menuContent[j].isupper()
         
-        if beerFinder != -1 or ciderFinder != -1 or vermouthFinder != -1 or nonalcoholicFinder != -1:
-            
-
+        while y == False:     
+        lineReference = menuContent[j].lstrip()
+        
             writeGlassWineItem(lineReference)
+            
+            j+=1
             
         else:
     
+            notBeerHeader = 'false'
             writeGlassNonWineItem(lineReference)
     
     
@@ -754,7 +761,7 @@ with open('SCtestRed.txt') as contentFile:
 
 FoodKeyWord = 'FOOD\n'
 
-BottleKeyWord = 'SPARKLING WINE\n'
+BottleKeyWord = 'SPARKLING WHITE\n'
 
 
 j = 0
@@ -771,13 +778,15 @@ while j < contentLength:
         
     #Until the end first key word...
     # as long not at the end of the file...
-    if menuContent[j] != FoodKeyWord:
+    while menuContent[j] != FoodKeyWord:
         
         # Separate an item and its price
         #should this line be included in the writeAnItem function?
         contentByTheGlass = menuContent[j].lstrip()
 
         writeByTheGlassItem(contentByTheGlass)
+        
+        j += 1
             
         
     
