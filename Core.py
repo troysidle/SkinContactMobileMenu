@@ -97,7 +97,7 @@ def splitPrice(checkForDescription):
         splitLine = ["Chilled", extractedPrice]
     
         return splitLine
-                    
+    
     else:
         return -1
 
@@ -168,6 +168,8 @@ def splitHyphen(checkForHyphen):
         return -1
 
 #--------------------------------------------------------------------------------------
+
+
 #--------------------------------------------------------------------------------------
 # This function writes a by the glass non-wine item.
 #
@@ -195,18 +197,22 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         # Look for a hyphen in the wine info and split into wine name and grapes
         split = splitHyphen(nonWineInfo)
     
+        price = price.lstrip()
     
         #rename this function to splitPrice?
-        c = splitChilled(price)
+        descriptionCheck = splitBlank(price)
     
-        if c != -1:
-            nonWineDescription = c[0]
-            price = c[1]
+        if descriptionCheck != -1:
+            nonWineDescription = descriptionCheck[0]
+            price = descriptionCheck[1]
             
     
         if split != -1:
             nonWineName = split[0]
             nonWineOrigin = split[1]
+            
+        else:
+            nonWineName = nonWineInfo
             
 
     if nonWineName != 'blank':                
@@ -242,6 +248,7 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         resultFile.write('\n') 
 
 #--------------------------------------------------------------------------------------
+
 #--------------------------------------------------------------------------------------
 # This function writes a by the glass wine item.
 #
@@ -334,6 +341,140 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
+# This function writes a single bottle item.
+#
+# Included are all associated attributes - description, origin, price, etc.
+#--------------------------------------------------------------------------------------
+
+
+
+def writeSingleBottleInfo(firstLine, secondLine):
+
+    bottleName = 'blank'
+    bottleGrapes = 'blank'
+    bottleDescription = 'blank'
+    bottleOrigin = 'blank'
+    price = 'blank'
+    
+    # If the line is separated by multiple blanks, assign wine info and price
+    split = splitBlank(firstLine)
+    
+    if split != -1:
+        bottleInfo = split[0]
+        priceInfo = split[1]
+    
+        priceInfo = priceInfo.lstrip()
+        split = splitBlank(priceInfo)
+        
+        if split != -1:
+            bottleOrigin = split[0]
+            price = split[1]
+            
+        else:
+            price = priceInfo
+                    
+        # Assing the following line the by the glass origin
+        if secondLine != 'blank':
+            bottleGrapeAndDescription = secondLine
+        
+        # Look for a hyphen in the wine info and split into wine name and grapes
+        split = splitHyphen(bottleGrapeAndDescription)
+
+        if split != -1:
+            bottleGrapes = split[0]
+            bottleDescription = split[1]
+            
+                
+    if bottleName != 'blank':                
+        resultFile.write(BottleProductHTMLStart)
+        #resultFile.write('Bottle Name:')
+        resultFile.write(bottleName)
+        resultFile.write(BottleProductHTMLEnd)
+        resultFile.write('\n')
+                
+    if bottleGrapes != 'blank':        
+        resultFile.write(BottleGrapesHTMLStart)
+        #resultFile.write('Grapes:')
+        resultFile.write(bottleGrapes)
+        resultFile.write(BottleGrapesHTMLEnd)
+        resultFile.write('\n')    
+            
+    if bottleDescription != 'blank':
+        resultFile.write(BottleDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        resultFile.write(bottleDescription)
+        resultFile.write('\n')
+        resultFile.write(BottleDescriptionHTMLEnd) 
+    
+    if bottleOrigin != 'blank':
+        resultFile.write(BottleOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        resultFile.write(bottleOrigin)
+        resultFile.write('\n')
+        resultFile.write(BottleOriginHTMLEnd) 
+    
+
+    if price != 'blank':
+        #resultFile.write('Price:')
+        resultFile.write(BottlePriceHTMLStart)
+        #resultFile.write('Wine Price:')
+        resultFile.write(price)
+        resultFile.write(BottlePriceHTMLEnd)
+        resultFile.write('\n') 
+
+#--------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------
+# This function writes a by the glass wine item.
+#
+# Included are all associated attributes - description, origin, price, etc.
+#--------------------------------------------------------------------------------------
+
+
+
+def writeFoodInfo(firstLine, secondLine):
+
+    foodName = 'blank'
+    foodDescription = 'blank'
+    price = 'blank'
+    
+    # If the line is separated by multiple blanks, assign wine info and price
+    split = splitBlank(firstLine)
+    
+    if split != -1:
+        foodName = split[0]
+        price = split[1]
+    
+        # Assing the following line the by the glass origin
+        if secondLine != 'blank':
+            foodDescription = secondLine
+                
+    if foodName != 'blank':    
+        # Note this should possibly renamed in either the template or a food section should be added
+        resultFile.write(GlassProductHTMLStart)
+        #resultFile.write('Food Name:')
+        resultFile.write(foodName)
+        resultFile.write(GlassProductHTMLEnd)
+        resultFile.write('\n')
+                
+    if foodDescription != 'blank':
+        resultFile.write(GlassDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        resultFile.write(foodDescription)
+        resultFile.write('\n')
+        resultFile.write(GlassDescriptionHTMLEnd) 
+    
+    if price != 'blank':
+        #resultFile.write('Price:')
+        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write('Wine Price:')
+        resultFile.write(price)
+        resultFile.write(GlassPriceHTMLEnd)
+        resultFile.write('\n') 
+
+#--------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for wine by the glass.
 #
 # This is part A.1
@@ -352,7 +493,7 @@ def writeWineByTheGlass(wine):
     while (i+1) < wineLine:
 
         # Advance index if the line is blank
-        if wine[i] == '\n':
+        while wine[i] == '\n':
             i += 1
 
         # If the line is all uppercase, assign header
@@ -401,7 +542,7 @@ def writeNonWineByTheGlass(nonWine):
     while (i+1) < nonWineLine:
 
         # Advance index if the line is blank
-        if nonWine[i] == '\n':
+        while nonWine[i] == '\n':
             i += 1
 
         # If the line is all uppercase, assign header
@@ -438,7 +579,48 @@ def writeNonWineByTheGlass(nonWine):
 
 def writeFood(food):
     
-    print('test')
+    
+    # While not at the end
+
+    foodLine = len(food)
+
+    i = 0
+
+    # While there are at least two lines left
+    while (i+1) < foodLine:
+
+        # Advance index if the line is blank
+        while food[i] == '\n':
+            i += 1
+
+        # If the line is all uppercase, assign header
+        upperCase = food[i].isupper()
+    
+       
+        if upperCase == True:
+            
+            print(i)
+            # Write a header
+            header = food[i]
+        
+            # Write the header with correspondin HTML tags
+    
+            resultFile.write(GlassHeaderHTMLStart)
+            resultFile.write(header)
+            resultFile.write(GlassHeaderHTMLEnd)
+            resultFile.write('\n')
+        
+        # Else
+        else:
+     
+            # Write a wine
+            writeFoodInfo(food[i], food[i+1])
+            
+            # Advance to the next line to account for two lines of information
+            i += 1
+        
+        i += 1
+
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for bottles.
@@ -448,7 +630,45 @@ def writeFood(food):
 
 def writeBottles(bottle):
     
-    print('test')
+    # While not at the end
+
+    bottleLine = len(bottle)
+
+    i = 0
+
+    # While there are at least two lines left
+    while (i+1) < bottleLine:
+
+        # Advance index if the line is blank
+        while bottle[i] == '\n':
+            i += 1
+
+        # If the line is all uppercase, assign header
+        upperCase = bottle[i].isupper()
+    
+       
+        if upperCase == True:
+            
+            # Write a header
+            header = bottle[i]
+        
+            # Write the header with correspondin HTML tags
+    
+            resultFile.write(BottleHeaderHTMLStart)
+            resultFile.write(header)
+            resultFile.write(BottleHeaderHTMLEnd)
+            resultFile.write('\n')
+        
+        # Else
+        else:
+     
+            # Write a wine
+            writeSingleBottleInfo(bottle[i], bottle[i+1])
+            
+            # Advance to the next line to account for two lines of information
+            i += 1
+        
+        i += 1
 
 
 
@@ -639,6 +859,30 @@ if CodeKeyWord != -1:
         BottlePriceHTMLStart = parsedTemplateCode[0]
         BottlePriceHTMLEnd = parsedTemplateCode[1]
         
+# -------- 5 ----------- #
+
+i += 1
+
+CodeKeyWord = templateCode[i].rfind(' Bottle Grapes ')
+
+if CodeKeyWord != -1:
+        parsedTemplateCode = templateCode[i].split(' Bottle Grapes ') #consider coverting this to a variable
+
+        BottleGrapesHTMLStart = parsedTemplateCode[0]
+        BottleGrapesHTMLEnd = parsedTemplateCode[1]
+        
+# -------- 6 ----------- #
+
+i += 1
+
+CodeKeyWord = templateCode[i].rfind(' Bottle Origin ')
+
+if CodeKeyWord != -1:
+        parsedTemplateCode = templateCode[i].split(' Bottle Origin ') #consider coverting this to a variable
+
+        BottleOriginHTMLStart = parsedTemplateCode[0]
+        BottleOriginHTMLEnd = parsedTemplateCode[1]
+        
 
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
@@ -653,7 +897,7 @@ if CodeKeyWord != -1:
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('SCtestRed.txt') as contentFile:
+with open('SCTestShort.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
@@ -920,10 +1164,9 @@ resultFile.close()
 resultFile = open("Result.html", "r")
 print(resultFile.read())
 
-
+'''
 print('by the glass wine:')
 print(byTheGlassWineContent)
-'''
 print('by the glass non-wine:')
 print(byTheGlassNonWineContent)
 print('food:')

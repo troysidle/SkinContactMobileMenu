@@ -1,27 +1,26 @@
 <HTML>
 
 BY THE GLASS HEADER
-<h1> By The Glass Header </h1>
+<h3><u> By The Glass Header </u></h3>
 
 BY THE GLASS PRODUCT
-<p><b> By The Glass Product </b></p>
-<h2> By The Glass Grapes </h2>
-<h4> By The Glass Description </h4>
+<h4><b> By The Glass Product </b></h4>
+<p> By The Glass Grapes </p>
+<h5><i> By The Glass Description </i></h5>
 <em> By The Glass Chilled </em>
-<h5> By The Glass Price </h5>
-<h5><b> By The Glass Origin </b></h5>
-
-<br>
-<br>
-
+<h4> By The Glass Price </h4>
+<h4><i> By The Glass Origin </i></h4>
 
 BY THE BOTTLE HEADER
-<h1> Bottle Header </h1>
+<h3><u> Bottle Header </u></h3>
 
 BY THE BOTTLE PRODUCT
-<p><b> Bottle Product </b></p>
+<h5><b> Bottle Product </b></h5>
 <p> Bottle Description </p>
 <h5> Bottle Price </h5>
+<p> Bottle Grapes </p>
+<h5><i> Bottle Origin </i></h5>
+
 
 <br>
 
