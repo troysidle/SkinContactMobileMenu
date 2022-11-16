@@ -10,7 +10,7 @@
 
 
 # Open the Template file
-with open('indexOutline.html') as templateFile:
+with open('Template.txt') as templateFile:
     templateCode = templateFile.readlines()
 
 # Create the Result HTML file   
@@ -18,10 +18,6 @@ resultFile = open("Result.html", "a")
 
 #Define the key word to look for within the Template file.
 keyWord = 'BY THE GLASS HEADER\n'
-
-keyWordA = '<!--____________________ HTML HEADER START____________________-->\n'
-
-keyWordB = '<!--____________________ HTML HEADER END ____________________-->\n'
 
 keyWord2 = 'BY THE GLASS PRODUCT\n'
 
@@ -240,7 +236,7 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         resultFile.write(GlassOriginHTMLStart)
         #resultFile.write('Wine Origin:')
         resultFile.write(nonWineDescription)
-        #resultFile.write('\n')
+        resultFile.write('\n')
         resultFile.write(GlassOriginHTMLEnd) 
     
     if price != 'blank':
@@ -324,8 +320,8 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
         resultFile.write(GlassOriginHTMLStart)
         #resultFile.write('Wine Origin:')
         resultFile.write(wineOrigin)
-        resultFile.write(GlassOriginHTMLEnd)
         resultFile.write('\n')
+        resultFile.write(GlassOriginHTMLEnd) 
     
     if chilled != 'blank':
         resultFile.write(GlassChilledHTMLStart)
@@ -493,14 +489,11 @@ def writeWineByTheGlass(wine):
 
     i = 0
 
-    
     # While there are at least two lines left
     while (i+1) < wineLine:
 
-        
-        # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
-        while wine[i] == '':
+        while wine[i] == '\n':
             i += 1
 
         # If the line is all uppercase, assign header
@@ -509,6 +502,7 @@ def writeWineByTheGlass(wine):
        
         if upperCase == True:
             
+            print(i)
             # Write a header
             header = wine[i]
         
@@ -557,7 +551,7 @@ def writeNonWineByTheGlass(nonWine):
        
         if upperCase == True:
             
-            
+            print(i)
             # Write a header
             header = nonWine[i]
         
@@ -595,9 +589,8 @@ def writeFood(food):
     # While there are at least two lines left
     while (i+1) < foodLine:
 
-        # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
-        while food[i] == '':
+        while food[i] == '\n':
             i += 1
 
         # If the line is all uppercase, assign header
@@ -606,7 +599,7 @@ def writeFood(food):
        
         if upperCase == True:
             
-            
+            print(i)
             # Write a header
             header = food[i]
         
@@ -646,9 +639,8 @@ def writeBottles(bottle):
     # While there are at least two lines left
     while (i+1) < bottleLine:
 
-        # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
-        while bottle[i] == '':
+        while bottle[i] == '\n':
             i += 1
 
         # If the line is all uppercase, assign header
@@ -680,10 +672,9 @@ def writeBottles(bottle):
 
 
 
-        
 
-        
-        
+
+
 #---------------------------------------------------------------------------------------------------------
 #
 # Template Part 1
@@ -697,37 +688,19 @@ def writeBottles(bottle):
 
 templateLength = len(templateCode)
 i = 0
-while i < templateLength and keyWordA != templateCode[i]:
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-
-i += 1
-
-
-while i < templateLength and keyWordB != templateCode[i]:
-        
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-
-
-# Advance to the next Key Word.
-        
 while i < templateLength and keyWord !=templateCode[i]:
     
-    i += 1    
+    #print(templateCode[i])
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
+    i += 1
 
-    
-#By the glass product    
-    
 i += 1
 
+#parse the template string here first.
+
 CodeKeyWord = templateCode[i].rfind(' By The Glass Header ')
+
 
 if CodeKeyWord != -1:
         
@@ -739,9 +712,7 @@ if CodeKeyWord != -1:
         
 
 # Advance to the next Key Word.
-
-
-
+        
 while i < templateLength and keyWord2 !=templateCode[i]:
     
     i += 1    
@@ -758,7 +729,6 @@ if CodeKeyWord != -1:
 
         GlassProductHTMLStart = parsedTemplateCode[0]
         GlassProductHTMLEnd = parsedTemplateCode[1]
-
 
 #By the glass grapes   
     
@@ -935,8 +905,7 @@ with open('SCTestShort.txt') as contentFile:
 
 foodKeyWord = 'FOOD\n'
 bottleKeyWord = 'SPARKLING WHITE\n'
-# this variable does not include the end of line character, bacause it has already been removed.
-nonWineKeyWord = 'BEER, CIDER, VERMOUTH & NON-ALCOHOLIC'
+nonWineKeyWord = 'BEER, CIDER, VERMOUTH & NON-ALCOHOLIC\n'
 
 
 # Initiallize array to hold everything by the glass.
@@ -967,10 +936,8 @@ menuIndex = menuContent.index(foodKeyWord)
 byTheGlassIndex = 0
 while byTheGlassIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[byTheGlassIndex].strip("\n")
-    byTheGlassContent.append(contentWithoutEndOfLine)
-    byTheGlassIndex += 1
-    
+	byTheGlassContent.append(menuContent[byTheGlassIndex])
+	byTheGlassIndex += 1
     
 # ---------------------------------------------------------------------
 # Part A.1
@@ -1022,9 +989,8 @@ menuIndex = menuContent.index(bottleKeyWord)
 foodIndex = byTheGlassIndex
 while foodIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[foodIndex].strip("\n")
-    foodContent.append(contentWithoutEndOfLine)
-    foodIndex += 1
+	foodContent.append(menuContent[foodIndex])
+	foodIndex += 1
     
 writeFood(foodContent)
 
@@ -1042,13 +1008,123 @@ menuIndex = len(menuContent)
 bottleIndex = foodIndex
 while bottleIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[bottleIndex].strip("\n")
-    bottleContent.append(contentWithoutEndOfLine)
-    bottleIndex += 1
+	bottleContent.append(menuContent[bottleIndex])
+	bottleIndex += 1
     
 writeBottles(bottleContent)    
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+
+
+
+menuIndex = 0
+byTheGlassIndex = 0
+
+contentLength = len(menuContent)
+
+#Print all the elements of the Content file
+#Amend those elements to the Results file.
+if menuIndex < contentLength: 
+
+        
+    #---------------    
+    # Product - BY THE GLASS    
+    #---------------  
+        
+    #Until the end first key word...
+    while menuContent[menuIndex] != foodKeyWord:
+        
+        # Separate an item and its price
+        #should this line be included in the writeAnItem function?
+        byTheGlassContent[byTheGlassIndex] = menuContent[menuIndex].lstrip()
+        
+        menuIndex += 1
+        byTheGlassIndex += 1
+        
+    
+    
+    #menuIndex += 1
+    
+            
+        
+    
+    #---------------    
+    # Header - FOOD
+    #---------------   
+    
+    #if the title is FOOD
+    if FoodKeyWord == menuContent[j]:  
+        
+        resultFile.write(GlassHeaderHTMLStart)
+        resultFile.write(menuContent[j])
+        resultFile.write(GlassHeaderHTMLEnd)
+        
+        j += 1 
+        
+
+    
+        #---------------    
+        # Product - FOOD    
+        #---------------  
+        
+        #Until the end next key word...
+        # as long not at the end of the file...
+        while j < contentLength:
+        
+            if menuContent[j] != bottleKeyWord and menuContent[j] != '\n':
+        
+                # Separate an item and its price
+                contentFood = menuContent[j].lstrip()
+
+                writeAnItem(contentFood)
+            
+            if BottleKeyWord == menuContent[j]:
+    
+                resultFile.write(BottleHeaderHTMLStart)
+                resultFile.write(menuContent[j])
+                resultFile.write(BottleHeaderHTMLEnd)
+                
+                j += 1
+    
+                #Until the end next blank line...
+                while menuContent[j] != '\n':
+                
+                    writeAnItem(menuContent[j])
+        
+                    j += 1
+                
+            j += 1
+
+    
+    
+'''
 
 #---------------------------------------------------------------------------------------------------------
 # End Content Part 1
@@ -1087,6 +1163,18 @@ resultFile.close()
 #Open and read the file after the appending:
 resultFile = open("Result.html", "r")
 print(resultFile.read())
+
+'''
+print('by the glass wine:')
+print(byTheGlassWineContent)
+print('by the glass non-wine:')
+print(byTheGlassNonWineContent)
+print('food:')
+print(foodContent)
+print('by the bottle:')
+print(bottleContent)
+
+'''
 
 
     
