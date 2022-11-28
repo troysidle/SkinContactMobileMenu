@@ -13,137 +13,21 @@
 with open('indexOutline.html') as templateFile:
     templateCode = templateFile.readlines()
 
-import json
-            
-
-    
 # Create the Result HTML file   
-resultFile = open("Result.html", "a") 
-
-# Define Arrays (2D?) for Template
-template1A = []
+resultFile = open("Result.html", "a")
 
 #Define the key word to look for within the Template file.
 keyWord = 'BY THE GLASS HEADER\n'
 
+keyWordA = '<!--____________________ HTML HEADER START____________________-->\n'
 
-
-
-keyWord1A =      '<!--__________ HTML HEADER START __________-->\n'
-
-keyWord1B =      '<!--__________ HTML HEADER END __________-->\n'
-
-
-keyWord2_1A =    '<!--__________ BY THE GLASS SECTION HEADER START __________-->\n'
-
-keyWord2_1B =    '<!--__________ BY THE GLASS SECTION HEADER END __________-->\n'
-
-
-keyWord2_2A =    '<!--__________ BY THE GLASS TITLE HEADER START __________-->\n'
-
-keyWord2_2B =    '<!--__________ BY THE GLASS TITLE HEADER END __________-->\n'
-
-
-keyWord2_3A =    '<!--__________ BY THE GLASS TITLE FOOTER START __________-->\n'
-
-keyWord2_3B =    '<!--__________ BY THE GLASS TITLE FOOTER END __________-->\n'
-
-                
-keyWord2_4A =    '<!--__________ BY THE GLASS ITEM HEADER START __________-->\n'
-     
-keyWord2_4B =    '<!--__________ BY THE GLASS ITEM HEADER END __________-->\n'                           
-
-
-keyWord2_5A =    '<!--__________ BY THE GLASS NAME HEADER START __________-->\n'
-
-keyWord2_5B =    '<!--__________ BY THE GLASS NAME HEADER END __________-->\n'
-
-
-keyWord2_6A =    '<!--__________ BY THE GLASS NAME HEADER END __________-->\n'                     
-
-keyWord2_6B =    '<!--__________ BY THE GLASS NAME END __________-->\n'
-                    
-    
-keyWord2_7A =    '<!--__________ BY THE GLASS GRAPE HEADER START __________-->\n'                        
-
-keyWord2_7B =    '<!--__________ BY THE GLASS GRAPE HEADER END __________-->\n'
-
-
-keyWord2_8A =    '<!--__________ BY THE GLASS GRAPE FOOTER START __________-->\n'
-
-keyWord2_8B =    '<!--__________ BY THE GLASS GRAPE FOOTER END __________-->\n'
-            
-    
-keyWord2_9A =    '<!--__________ BY THE GLASS PRICE HEADER START __________-->\n'
-
-keyWord2_9B =    '<!--__________ BY THE GLASS PRICE HEADER END __________-->\n'               
-
-
-keyWord2_10A =    '<!--__________ BY THE GLASS FOOTER START __________-->\n'
-
-keyWord2_10B =    '<!--__________ BY THE GLASS PRICE FOOTER END __________-->\n'               
-
-
-keyWord2_11A =    '<!--__________ BY THE GLASS ORIGIN HEADER START __________-->\n'                
-
-keyWord2_11B =    '<!--__________ BY THE GLASS ORIGIN HEADER END __________-->\n'          
-
-
-keyWord2_12A =    '<!--__________ BY THE GLASS ORIGIN FOOTER START __________-->\n'          
-                                     
-keyWord2_12B =    '<!--__________ BY THE GLASS ORIGIN FOOTER END __________-->\n'      
-
-
-
-
-
-
-
-
-
-keyWord1A = '<!--__________ HTML HEADER START __________-->\n'
-
-keyWord1B = '<!--__________ HTML HEADER END __________-->\n'
-
-keyWord2A = '<!--__________ BY THE GLASS SECTION HEADER START __________-->\n'
-
-keyWord2B = '<!--__________ BY THE GLASS SECTION HEADER END __________-->\n'
-
-keyWord3A = '<!--__________ BY THE GLASS TITLE START __________-->\n'
-            
-keyWord3B = '<!--__________ BY THE GLASS TITLE END __________-->\n'
-
-keyWord = 'BY THE GLASS HEADER\n'
+keyWordB = '<!--____________________ HTML HEADER END ____________________-->\n'
 
 keyWord2 = 'BY THE GLASS PRODUCT\n'
 
 keyWord3 = 'BY THE BOTTLE HEADER\n'
 
 keyWord4 = 'BY THE BOTTLE PRODUCT\n'
-
-#--------------------------------------------------------------------------------------
-# This function takes in an array and prints it as lines.
-#--------------------------------------------------------------------------------------
-
-def writeLines (arrayOfLines):
-    
-    totalLines = len(arrayOfLines)
-
-    p = 0
-
-    print('array test start')
-    
-    # While there are at least two lines left
-    while p < totalLines:
-        
-        resultFile.write(arrayOfLines[p])
-        
-        print(arrayOfLines[p])
-        
-        p += 1
-
-    print('array test end')
-#--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
 # This function takes in a string and checks for multiple blanks.
@@ -154,6 +38,8 @@ def writeLines (arrayOfLines):
 #
 # Other white space and end of line characters are also removed.
 #--------------------------------------------------------------------------------------
+
+
 
 def splitBlank(checkForBlanks):
     
@@ -332,7 +218,6 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         else:
             nonWineName = nonWineInfo
             
-'''removed to test JSON writing (arrays)
 
     if nonWineName != 'blank':                
         resultFile.write(GlassProductHTMLStart)
@@ -366,7 +251,6 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
 
-'''
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -413,7 +297,7 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
             wineOrigin = secondLine
         
 
-'''removed to test JSON writing (arrays)
+            
                 
     if wineName != 'blank':                
         resultFile.write(GlassProductHTMLStart)
@@ -457,8 +341,6 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
         resultFile.write(price)
         resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
-        
-'''
 
 #--------------------------------------------------------------------------------------
 
@@ -506,7 +388,6 @@ def writeSingleBottleInfo(firstLine, secondLine):
             bottleGrapes = split[0]
             bottleDescription = split[1]
             
-'''removed to test JSON writing (arrays)
                 
     if bottleName != 'blank':                
         resultFile.write(BottleProductHTMLStart)
@@ -545,8 +426,6 @@ def writeSingleBottleInfo(firstLine, secondLine):
         resultFile.write(BottlePriceHTMLEnd)
         resultFile.write('\n') 
 
-'''
-
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -574,7 +453,6 @@ def writeFoodInfo(firstLine, secondLine):
         if secondLine != 'blank':
             foodDescription = secondLine
                 
-'''removed to test JSON writing (arrays)
     if foodName != 'blank':    
         # Note this should possibly renamed in either the template or a food section should be added
         resultFile.write(GlassProductHTMLStart)
@@ -597,8 +475,6 @@ def writeFoodInfo(firstLine, secondLine):
         resultFile.write(price)
         resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
-        
-'''
 
 #--------------------------------------------------------------------------------------
 
@@ -616,10 +492,6 @@ def writeWineByTheGlass(wine):
     wineLine = len(wine)
 
     i = 0
-    
-    print('648')
-    writeLines(template1A)
-    print('650')
 
     
     # While there are at least two lines left
@@ -634,6 +506,7 @@ def writeWineByTheGlass(wine):
         # If the line is all uppercase, assign header
         upperCase = wine[i].isupper()
     
+       
         if upperCase == True:
             
             # Write a header
@@ -641,18 +514,10 @@ def writeWineByTheGlass(wine):
         
             # Write the header with correspondin HTML tags
     
-            # resultFile.write(GlassHeaderHTMLStart)
-            # resultFile.write(template1A)
-            
-            # ^ the above is replaced by this JSON line
-            
-            resultFile.write('new code start')
-            #resultFile.writelines(template1A)
-            #resultFile.write(json.dumps(template1A))
-            resultFile.write('new code end')
-            #resultFile.write(header)
-            #resultFile.write(GlassHeaderHTMLEnd)
-            #resultFile.write('\n')
+            resultFile.write(GlassHeaderHTMLStart)
+            resultFile.write(header)
+            resultFile.write(GlassHeaderHTMLEnd)
+            resultFile.write('\n')
         
         # Else
         else:
@@ -664,8 +529,6 @@ def writeWineByTheGlass(wine):
             i += 1
         
         i += 1
-        
-
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for non-wine by the glass.
@@ -691,7 +554,6 @@ def writeNonWineByTheGlass(nonWine):
         # If the line is all uppercase, assign header
         upperCase = nonWine[i].isupper()
     
-
        
         if upperCase == True:
             
@@ -700,12 +562,11 @@ def writeNonWineByTheGlass(nonWine):
             header = nonWine[i]
         
             # Write the header with correspondin HTML tags
-            '''removed to test JSON writing (arrays)    
+    
             resultFile.write(GlassHeaderHTMLStart)
             resultFile.write(header)
             resultFile.write(GlassHeaderHTMLEnd)
             resultFile.write('\n')
-            '''            
         
         # Else
         else:
@@ -715,8 +576,6 @@ def writeNonWineByTheGlass(nonWine):
             writeSingleNonWineByTheGlassInfo(nonWine[i])
                     
         i += 1
-
-
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for food.
@@ -744,7 +603,6 @@ def writeFood(food):
         # If the line is all uppercase, assign header
         upperCase = food[i].isupper()
     
-        '''removed to test JSON writing (arrays)
        
         if upperCase == True:
             
@@ -767,10 +625,9 @@ def writeFood(food):
             
             # Advance to the next line to account for two lines of information
             i += 1
-        '''
+        
         i += 1
 
-        
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for bottles.
@@ -805,10 +662,10 @@ def writeBottles(bottle):
         
             # Write the header with correspondin HTML tags
     
-            #resultFile.write(BottleHeaderHTMLStart)
-            #resultFile.write(header)
-            #resultFile.write(BottleHeaderHTMLEnd)
-            #resultFile.write('\n')
+            resultFile.write(BottleHeaderHTMLStart)
+            resultFile.write(header)
+            resultFile.write(BottleHeaderHTMLEnd)
+            resultFile.write('\n')
         
         # Else
         else:
@@ -840,32 +697,7 @@ def writeBottles(bottle):
 
 templateLength = len(templateCode)
 i = 0
-
-
-j = 0
-    
-while i < templateLength and keyWord1A != templateCode[i]:
-    
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
-    i += 1
-    j += 1
-
-i += 1
-
-while i < templateLength and keyWord1B != templateCode[i]:
-        
-    
-    #print(keyWord1B)
-    #print(templateCode[i])
-    template1A.append(templateCode[i])    
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-while i < templateLength and keyWord2A != templateCode[i]:
+while i < templateLength and keyWordA != templateCode[i]:
     
     resultFile.write(templateCode[i])
     resultFile.write('\n')
@@ -874,7 +706,7 @@ while i < templateLength and keyWord2A != templateCode[i]:
 i += 1
 
 
-while i < templateLength and keyWord2B != templateCode[i]:
+while i < templateLength and keyWordB != templateCode[i]:
         
     resultFile.write(templateCode[i])
     resultFile.write('\n')
@@ -882,35 +714,8 @@ while i < templateLength and keyWord2B != templateCode[i]:
     
 i += 1
 
-while i < templateLength and keyWord3A != templateCode[i]:
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-
-i += 1
 
 
-while i < templateLength and keyWord3B != templateCode[i]:
-        
-        
-    CodeKeyWord = templateCode[i].rfind(' By The Glass Title ')
-
-    if CodeKeyWord != -1:
-        
-        parsedTemplateCode = templateCode[i].split(' By The Glass Title ') #consider coverting this to a variable
-
-        GlassHeaderHTMLStart = parsedTemplateCode[0]
-        GlassHeaderHTMLEnd = parsedTemplateCode[1]
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-
-'''
 # Advance to the next Key Word.
         
 while i < templateLength and keyWord !=templateCode[i]:
@@ -921,8 +726,6 @@ while i < templateLength and keyWord !=templateCode[i]:
 #By the glass product    
     
 i += 1
-
-
 
 CodeKeyWord = templateCode[i].rfind(' By The Glass Header ')
 
@@ -1110,7 +913,7 @@ if CodeKeyWord != -1:
         BottleOriginHTMLStart = parsedTemplateCode[0]
         BottleOriginHTMLEnd = parsedTemplateCode[1]
         
-'''
+
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -1266,8 +1069,8 @@ i = i+1
 while i < templateLength: # and keyWord !=templateCode[i]:
     #matched_indexes.append(i)
     #print(templateCode[i])
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
+    resultFile.write(templateCode[i])
+    resultFile.write('\n')
     i += 1 
 
 #---------------------------------------------------------------------------------------------------------
@@ -1283,7 +1086,7 @@ resultFile.close()
 
 #Open and read the file after the appending:
 resultFile = open("Result.html", "r")
-#print(resultFile.read())
+print(resultFile.read())
 
 
     
