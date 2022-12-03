@@ -66,6 +66,22 @@ templateC1dStart = []
 templateC1dEnd = []
 templateCEnd = []
 
+templateDStart = []
+templateD1Start = []
+templateD3Start = []
+templateD3End = []
+templateD3aStart = []
+templateD3aEnd = []
+templateD1bStart = []
+templateD1bEnd = []
+templateD1cStart = []
+templateD1cEnd = []
+templateD1dStart = []
+templateD1dEnd = []
+templateD1eStart = []
+templateD1eEnd = []
+templateDEnd = []
+
 
 
 
@@ -229,63 +245,132 @@ keyWord6_1A =    '<!--__________ FOOD SECTION HEADER START __________-->\n'
 keyWord6_1B =    '<!--__________ FOOD SECTION HEADER END __________-->\n'    
 
 
-keyWord6_2A =    '<!--__________ FOOD ITEM HEADER START __________-->\n'
+keyWord6_2A =    '<!--__________ FOOD TITLE HEADER START __________-->\n' 
 
-keyWord6_2B =    '<!--__________ FOOD ITEM HEADER END __________-->\n'
-
-
-keyWord6_3A =    '<!--__________ FOOD TITLE HEADER START __________-->\n' 
-
-keyWord6_3B =    '<!--__________ FOOD TITLE HEADER END __________-->\n'                                    
+keyWord6_2B =    '<!--__________ FOOD TITLE HEADER END __________-->\n'                                    
 
 
-keyWord6_4A =    '<!--__________ FOOD TITLE FOOTER START __________-->\n'                
+keyWord6_3A =    '<!--__________ FOOD TITLE FOOTER START __________-->\n'                
 
-keyWord6_4B =    '<!--__________ FOOD TITLE FOOTER END __________-->\n'                
+keyWord6_3B =    '<!--__________ FOOD TITLE FOOTER END __________-->\n'                
 
+keyWord6_4A =    '<!--__________ FOOD NAME HEADER START __________-->\n' 
 
-keyWord6_5A =    '<!--__________ FOOD ORIGIN HEADER START __________-->\n'                
-
-keyWord6_5B =    '<!--__________ FOOD ORIGIN HEADER END __________-->\n'                
-
-
-keyWord6_6A =    '<!--__________ FOOD ORIGIN FOOTER START __________-->\n'  
-
-keyWord6_6B =    '<!--__________ FOOD ORIGIN FOOTER END __________-->\n'                
+keyWord6_4B =    '<!--__________ FOOD NAME HEADER END __________-->\n'                                    
 
 
-keyWord6_7A =    '<!--__________ FOOD PRICE HEADER START __________-->\n'                
+keyWord6_5A =    '<!--__________ FOOD NAME FOOTER START __________-->\n'                
 
-keyWord6_7B =    '<!--__________ FOOD PRICE HEADER END __________-->\n'                
-
-
-keyWord6_8A =    '<!--__________ FOOD PRICE FOOTER START __________-->\n'  
-
-keyWord6_8B =    '<!--__________ FOOD PRICE FOOTER END __________-->\n'                
+keyWord6_5B =    '<!--__________ FOOD NAME FOOTER END __________-->\n'                
 
 
-keyWord6_9A =    '<!--__________ FOOD DESCRIPTION HEADER START __________-->\n'                
+keyWord6_6A =    '<!--__________ FOOD PRICE HEADER START __________-->\n'                
 
-keyWord6_9B =    '<!--__________ FOOD DESCRIPTION HEADER END __________-->\n'                
-
-
-keyWord6_10A =    '<!--__________ FOOD DESCRIPTION FOOTER START __________-->\n'  
-
-keyWord6_10B =    '<!--__________ FOOD DESCRIPTION FOOTER END __________-->\n'                
+keyWord6_6B =    '<!--__________ FOOD PRICE HEADER END __________-->\n'                
 
 
-keyWord6_11A =    '<!--__________ FOOD SECTION FOOTER START __________-->\n'  
+keyWord6_7A =    '<!--__________ FOOD PRICE FOOTER START __________-->\n'  
 
-keyWord6_11B =    '<!--__________ FOOD SECTION FOOTER END __________-->\n' 
+keyWord6_7B =    '<!--__________ FOOD PRICE FOOTER END __________-->\n'                
+
+
+keyWord6_8A =    '<!--__________ FOOD DESCRIPTION HEADER START __________-->\n'                
+
+keyWord6_8B =    '<!--__________ FOOD DESCRIPTION HEADER END __________-->\n'                
+
+
+keyWord6_9A =    '<!--__________ FOOD DESCRIPTION FOOTER START __________-->\n'  
+
+keyWord6_9B =    '<!--__________ FOOD DESCRIPTION FOOTER END __________-->\n'                
+
+
+keyWord6_12A =    '<!--__________ FOOD SECTION FOOTER START __________-->\n'  
+
+keyWord6_12B =    '<!--__________ FOOD SECTION FOOTER END __________-->\n' 
 
 
 
 
 
 
+keyWord8_1A =    '<!--__________ BOTTLE SECTION HEADER START __________-->\n'
+
+keyWord8_1B =    '<!--__________ BOTTLE SECTION HEADER END __________-->\n'    
 
 
+keyWord8_1x5xA =    '<!--__________ BOTTLE CATEGORY HEADER START __________-->\n'
 
+keyWord8_1x5xB =    '<!--__________ BOTTLE CATEGORY HEADER END __________-->\n'    
+
+
+keyWord8_2A =    '<!--__________ BOTTLE TITLE HEADER START __________-->\n' 
+
+keyWord8_2B =    '<!--__________ BOTTLE TITLE HEADER END __________-->\n'                                    
+
+
+keyWord8_3A =    '<!--__________ BOTTLE TITLE FOOTER START __________-->\n'                
+
+keyWord8_3B =    '<!--__________ BOTTLE TITLE FOOTER END __________-->\n'
+
+
+keyWord8_4A =    '<!--__________ BOTTLE NAME HEADER START __________-->\n' 
+
+keyWord8_4B =    '<!--__________ BOTTLE NAME HEADER END __________-->\n'                                    
+
+
+keyWord8_5A =    '<!--__________ BOTTLE NAME FOOTER START __________-->\n'                
+
+keyWord8_5B =    '<!--__________ BOTTLE NAME FOOTER END __________-->\n'                
+
+
+keyWord8_6A =    '<!--__________ BOTTLE PRICE HEADER START __________-->\n'                
+
+keyWord8_6B =    '<!--__________ BOTTLE PRICE HEADER END __________-->\n'                
+
+
+keyWord8_7A =    '<!--__________ BOTTLE PRICE FOOTER START __________-->\n'  
+
+keyWord8_7B =    '<!--__________ BOTTLE PRICE FOOTER END __________-->\n'                
+
+
+keyWord8_8A =    '<!--__________ BOTTLE ORIGIN HEADER START __________-->\n'                
+
+keyWord8_8B =    '<!--__________ BOTTLE ORIGIN HEADER END __________-->\n'                
+
+
+keyWord8_9A =    '<!--__________ BOTTLE ORIGIN FOOTER START __________-->\n'  
+
+keyWord8_9B =    '<!--__________ BOTTLE ORIGIN FOOTER END __________-->\n'                
+
+
+keyWord8_10A =    '<!--__________ BOTTLE GRAPE HEADER START __________-->\n'                
+
+keyWord8_10B =    '<!--__________ BOTTLE GRAPE HEADER END __________-->\n'                
+
+
+keyWord8_11A =    '<!--__________ BOTTLE GRAPE FOOTER START __________-->\n'  
+
+keyWord8_11B =    '<!--__________ BOTTLE GRAPE FOOTER END __________-->\n'                
+
+
+keyWord8_12A =    '<!--__________ BOTTLE DESCRIPTION HEADER START __________-->\n'                
+
+keyWord8_12B =    '<!--__________ BOTTLE DESCRIPTION HEADER END __________-->\n'                
+
+
+keyWord8_13A =    '<!--__________ BOTTLE DESCRIPTION FOOTER START __________-->\n'  
+
+keyWord8_13B =    '<!--__________ BOTTLE DESCRIPTION FOOTER END __________-->\n'                
+
+
+keyWord8_13x5xA =    '<!--__________ BOTTLE CATEGORY FOOTER START __________-->\n'
+
+keyWord8_13x5xB =    '<!--__________ BOTTLE CATEGORY FOOTER END __________-->\n'    
+
+
+keyWord8_14A =    '<!--__________ BOTTLE SECTION FOOTER START __________-->\n'  
+
+keyWord8_14B =    '<!--__________ BOTTLE SECTION FOOTER END __________-->\n'
 
 
 keyWord_ZA =   '<!--__________ HTML FOOTER START __________-->\n'
@@ -707,9 +792,12 @@ def writeSingleBottleInfo(firstLine, secondLine):
     split = splitBlank(firstLine)
     
     if split != -1:
+
         bottleInfo = split[0]
         priceInfo = split[1]
-    
+        #print('bottleInfo:')
+        #print(bottleInfo)
+        
         priceInfo = priceInfo.lstrip()
         split = splitBlank(priceInfo)
         
@@ -731,46 +819,58 @@ def writeSingleBottleInfo(firstLine, secondLine):
             bottleGrapes = split[0]
             bottleDescription = split[1]
             
-    '''removed to test JSON writing (arrays)
-                
-    if bottleName != 'blank':                
-        resultFile.write(BottleProductHTMLStart)
+    
+    #print('bottleName:')
+    #print(bottleInfo)
+    if bottleName == 'blank':                
+        #resultFile.write(BottleProductHTMLStart)
         #resultFile.write('Bottle Name:')
-        resultFile.write(bottleName)
-        resultFile.write(BottleProductHTMLEnd)
+        writeLines(templateD3aStart)
+        print('795')
+        resultFile.write(bottleInfo)
+        #resultFile.write(BottleProductHTMLEnd)
         resultFile.write('\n')
-                
-    if bottleGrapes != 'blank':        
-        resultFile.write(BottleGrapesHTMLStart)
-        #resultFile.write('Grapes:')
-        resultFile.write(bottleGrapes)
-        resultFile.write(BottleGrapesHTMLEnd)
-        resultFile.write('\n')    
-            
-    if bottleDescription != 'blank':
-        resultFile.write(BottleDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
-        resultFile.write(bottleDescription)
-        resultFile.write('\n')
-        resultFile.write(BottleDescriptionHTMLEnd) 
-    
-    if bottleOrigin != 'blank':
-        resultFile.write(BottleOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
-        resultFile.write(bottleOrigin)
-        resultFile.write('\n')
-        resultFile.write(BottleOriginHTMLEnd) 
-    
+        writeLines(templateD3aEnd)
 
+        
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(BottlePriceHTMLStart)
+        #resultFile.write(BottlePriceHTMLStart)
+        writeLines(templateD3bStart)
         #resultFile.write('Wine Price:')
         resultFile.write(price)
-        resultFile.write(BottlePriceHTMLEnd)
+        #resultFile.write(BottlePriceHTMLEnd)
+        writeLines(templateD3bEnd)
         resultFile.write('\n') 
+        
+    if bottleOrigin != 'blank':
+        #resultFile.write(BottleOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        writeLines(templateD3cStart)
+        resultFile.write(bottleOrigin)
+        resultFile.write('\n')
+        writeLines(templateD3cEnd)
+        #resultFile.write(BottleOriginHTMLEnd)
+    
 
-'''
+    if bottleGrapes != 'blank':        
+        #resultFile.write(BottleGrapesHTMLStart)
+        #resultFile.write('Grapes:')
+        writeLines(templateD3dStart)
+        resultFile.write(bottleGrapes)
+        #resultFile.write(BottleGrapesHTMLEnd)
+        resultFile.write('\n')    
+        writeLines(templateD3dEnd)
+
+    if bottleDescription != 'blank':
+        #resultFile.write(BottleDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        writeLines(templateD3eStart)
+        resultFile.write(bottleDescription)
+        resultFile.write('\n')
+        writeLines(templateD3eEnd)
+        #resultFile.write(BottleDescriptionHTMLEnd) 
+    
 
 #--------------------------------------------------------------------------------------
 
@@ -799,31 +899,36 @@ def writeFoodInfo(firstLine, secondLine):
         if secondLine != 'blank':
             foodDescription = secondLine
                 
-'''removed to test JSON writing (arrays)
+
+                
     if foodName != 'blank':    
         # Note this should possibly renamed in either the template or a food section should be added
-        resultFile.write(GlassProductHTMLStart)
-        #resultFile.write('Food Name:')
+        writeLines(templateC1bStart)
         resultFile.write(foodName)
-        resultFile.write(GlassProductHTMLEnd)
         resultFile.write('\n')
-                
-    if foodDescription != 'blank':
-        resultFile.write(GlassDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
-        resultFile.write(foodDescription)
-        resultFile.write('\n')
-        resultFile.write(GlassDescriptionHTMLEnd) 
-    
+        writeLines(templateC1bEnd)
+
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write(GlassPriceHTMLStart)
         #resultFile.write('Wine Price:')
+        writeLines(templateC1cStart)
         resultFile.write(price)
-        resultFile.write(GlassPriceHTMLEnd)
+        #resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
+        writeLines(templateC1cEnd)
+    
         
-'''
+    if foodDescription != 'blank':
+        #resultFile.write(GlassDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        writeLines(templateC1dStart)
+        resultFile.write(foodDescription)
+        resultFile.write('\n')
+        writeLines(templateC1dEnd)
+        #resultFile.write(GlassDescriptionHTMLEnd) 
+    
+        
 
 #--------------------------------------------------------------------------------------
 
@@ -935,6 +1040,7 @@ def writeNonWineByTheGlass(nonWine):
         if upperCase == True:
             
             
+            
             # Write a header
             header = nonWine[i]
         
@@ -983,7 +1089,6 @@ def writeFood(food):
         # If the line is all uppercase, assign header
         upperCase = food[i].isupper()
     
-        '''removed to test JSON writing (arrays)
        
         if upperCase == True:
             
@@ -993,9 +1098,11 @@ def writeFood(food):
         
             # Write the header with correspondin HTML tags
     
-            resultFile.write(GlassHeaderHTMLStart)
+            #resultFile.write(GlassHeaderHTMLStart)
+            writeLines(templateC1aStart)
             resultFile.write(header)
-            resultFile.write(GlassHeaderHTMLEnd)
+            writeLines(templateC1aEnd)
+            #resultFile.write(GlassHeaderHTMLEnd)
             resultFile.write('\n')
         
         # Else
@@ -1006,7 +1113,7 @@ def writeFood(food):
             
             # Advance to the next line to account for two lines of information
             i += 1
-        '''
+        
         i += 1
 
         
@@ -1026,8 +1133,13 @@ def writeBottles(bottle):
     i = 0
 
     # While there are at least two lines left
+    
+    secondLoop = 0
+    
     while (i+1) < bottleLine:
 
+        
+        
         # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
         while bottle[i] == '':
@@ -1042,16 +1154,27 @@ def writeBottles(bottle):
             # Write a header
             header = bottle[i]
         
+            print('secondLoop:')
+            print(secondLoop)
+            if secondLoop != 0:
+                writeLines(templateD2End)
+        
+            secondLoop = 1
             # Write the header with correspondin HTML tags
     
             #resultFile.write(BottleHeaderHTMLStart)
-            #resultFile.write(header)
-            #resultFile.write(BottleHeaderHTMLEnd)f
+            writeLines(templateD2Start)
+            writeLines(templateD3Start)
+            resultFile.write(header)
+            #resultFile.write(BottleHeaderHTMLEnd)
             #resultFile.write('\n')
+            writeLines(templateD3End)
         
         # Else
         else:
-     
+            print('1122')
+            print(bottle[i])
+            print(bottle[i+1])
             # Write a wine
             writeSingleBottleInfo(bottle[i], bottle[i+1])
             
@@ -1059,6 +1182,7 @@ def writeBottles(bottle):
             i += 1
         
         i += 1
+
 
 
 
@@ -1166,7 +1290,60 @@ templateB1dEnd = getTemplate(keyWord4_10A, keyWord4_10B, templateCode, i)
 
 templateBEnd = getTemplate(keyWord4_11A, keyWord4_11B, templateCode, i)
 
+
+
+
+templateCStart = getTemplate(keyWord6_1A, keyWord6_1B, templateCode, i)
+templateC1aStart = getTemplate(keyWord6_2A, keyWord6_2B, templateCode, i)
+templateC1aEnd = getTemplate(keyWord6_3A, keyWord6_3B, templateCode, i)
+templateC1bStart = getTemplate(keyWord6_4A, keyWord6_4B, templateCode, i)
+templateC1bEnd = getTemplate(keyWord6_5A, keyWord6_5B, templateCode, i)
+templateC1cStart = getTemplate(keyWord6_6A, keyWord6_6B, templateCode, i)
+templateC1cEnd = getTemplate(keyWord6_7A, keyWord6_7B, templateCode, i)
+templateC1dStart = getTemplate(keyWord6_8A, keyWord6_8B, templateCode, i)
+templateC1dEnd = getTemplate(keyWord6_9A, keyWord6_9B, templateCode, i)
+templateCEnd = getTemplate(keyWord6_12A, keyWord6_12B, templateCode, i)
+ 
+
+
+templateDStart = getTemplate(keyWord8_1A, keyWord8_1B, templateCode, i)
+templateD2Start = getTemplate(keyWord8_1x5xA, keyWord8_1x5xB, templateCode, i)
+
+
+templateD3Start = getTemplate(keyWord8_2A, keyWord8_2B, templateCode, i)
+templateD3End = getTemplate(keyWord8_3A, keyWord8_3B, templateCode, i)
+
+templateD3aStart = getTemplate(keyWord8_4A, keyWord8_4B, templateCode, i)
+templateD3aEnd = getTemplate(keyWord8_5A, keyWord8_5B, templateCode, i)
+templateD3bStart = getTemplate(keyWord8_6A, keyWord8_6B, templateCode, i)
+templateD3bEnd = getTemplate(keyWord8_7A, keyWord8_7B, templateCode, i)
+templateD3cStart = getTemplate(keyWord8_8A, keyWord8_8B, templateCode, i)
+templateD3cEnd = getTemplate(keyWord8_9A, keyWord8_9B, templateCode, i)
+templateD3dStart = getTemplate(keyWord8_10A, keyWord8_10B, templateCode, i)
+templateD3dEnd = getTemplate(keyWord8_11A, keyWord8_11B, templateCode, i)
+templateD3eStart = getTemplate(keyWord8_12A, keyWord8_12B, templateCode, i)
+templateD3eEnd = getTemplate(keyWord8_13A, keyWord8_13B, templateCode, i)
+templateD2End = getTemplate(keyWord8_13x5xA, keyWord8_13x5xB, templateCode, i)
+
+
+'''
+templateD1bStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1bEnd = getTemplate(keyword, keyword, templateCode, i)
+templateD1cStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1cEnd = getTemplate(keyword, keyword, templateCode, i)
+templateD1dStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1dEnd = getTemplate(keyword, keyword, templateCode, i)
+'''
+templateDEnd = getTemplate(keyWord8_14A, keyWord8_14B, templateCode, i)
+
+
 templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
+
+
+
+
+
+
 
 
 
@@ -1546,7 +1723,9 @@ while foodIndex < menuIndex:
     foodContent.append(contentWithoutEndOfLine)
     foodIndex += 1
     
+writeLines(templateCStart) 
 writeFood(foodContent)
+writeLines(templateCEnd)
 
 
 # ---------------------------------------------------------------------
@@ -1566,8 +1745,13 @@ while bottleIndex < menuIndex:
     bottleContent.append(contentWithoutEndOfLine)
     bottleIndex += 1
     
-writeBottles(bottleContent)    
-
+writeLines(templateDStart)
+writeBottles(bottleContent)
+#print(templateDEnd)
+#resultFile.write('1725A')
+writeLines(templateDEnd)
+#resultFile.write('1725B')
+#print(templateDEnd)
 writeLines(templateIEnd)
 
 
