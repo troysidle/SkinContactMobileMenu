@@ -16,12 +16,79 @@ with open('indexOutline.html') as templateFile:
 import json
             
 
+import os
+# Remove the old result file
+os.remove("Result2.html")
     
-# Create the Result HTML file   
-resultFile = open("Result.html", "a") 
+# Create the new Result HTML file   
+resultFile = open("Result2.html", "a") 
 
 # Define Arrays (2D?) for Template
 template1A = []
+template1B = []
+template1AAStart = []
+template1AAEnd = []
+template2A = []
+template2B = []
+template2C = []
+template2D = []
+template2E = []
+template2F = []
+template2G = []
+template2H = [] #price
+template2I = [] #price-end
+template2J = []
+template2K = []
+template3 =  []
+
+templateBStart = []
+templateB1Start = []
+templateB1aStart = []
+templateB1aEnd = []
+templateB1bStart = []
+templateB1bEnd = []
+templateB1cStart = []
+templateB1cEnd = []
+templateB1dStart = []
+templateB1dEnd = []
+templateBEnd = []
+
+
+templateCStart = []
+templateC1Start = []
+templateC1aStart = []
+templateC1aEnd = []
+templateC1bStart = []
+templateC1bEnd = []
+templateC1cStart = []
+templateC1cEnd = []
+templateC1dStart = []
+templateC1dEnd = []
+templateCEnd = []
+
+templateDStart = []
+templateD1Start = []
+templateD3Start = []
+templateD3End = []
+templateD3aStart = []
+templateD3aEnd = []
+templateD1bStart = []
+templateD1bEnd = []
+templateD1cStart = []
+templateD1cEnd = []
+templateD1dStart = []
+templateD1dEnd = []
+templateD1eStart = []
+templateD1eEnd = []
+templateDEnd = []
+
+
+
+
+
+templateIEnd = []
+
+singleProduct = []
 
 #Define the key word to look for within the Template file.
 keyWord = 'BY THE GLASS HEADER\n'
@@ -37,6 +104,11 @@ keyWord1B =      '<!--__________ HTML HEADER END __________-->\n'
 keyWord2_1A =    '<!--__________ BY THE GLASS SECTION HEADER START __________-->\n'
 
 keyWord2_1B =    '<!--__________ BY THE GLASS SECTION HEADER END __________-->\n'
+
+
+keyWord2_1Aa =    '<!--__________ BY THE GLASS CATEGORY HEADER START __________-->\n'
+
+keyWord2_1Bb =    '<!--__________ BY THE GLASS CATEGORY HEADER END __________-->\n'
 
 
 keyWord2_2A =    '<!--__________ BY THE GLASS TITLE HEADER START __________-->\n'
@@ -59,12 +131,12 @@ keyWord2_5A =    '<!--__________ BY THE GLASS NAME HEADER START __________-->\n'
 keyWord2_5B =    '<!--__________ BY THE GLASS NAME HEADER END __________-->\n'
 
 
-keyWord2_6A =    '<!--__________ BY THE GLASS NAME HEADER END __________-->\n'                     
+keyWord2_6A =    '<!--__________ BY THE GLASS NAME FOOTER START __________-->\n'                     
 
-keyWord2_6B =    '<!--__________ BY THE GLASS NAME END __________-->\n'
+keyWord2_6B =    '<!--__________ BY THE GLASS NAME FOOTER END __________-->\n'
                     
     
-keyWord2_7A =    '<!--__________ BY THE GLASS GRAPE HEADER START __________-->\n'                        
+keyWord2_7A =    '<!--__________ BY THE GLASS GRAPE HEADER START __________-->\n'
 
 keyWord2_7B =    '<!--__________ BY THE GLASS GRAPE HEADER END __________-->\n'
 
@@ -79,7 +151,7 @@ keyWord2_9A =    '<!--__________ BY THE GLASS PRICE HEADER START __________-->\n
 keyWord2_9B =    '<!--__________ BY THE GLASS PRICE HEADER END __________-->\n'               
 
 
-keyWord2_10A =    '<!--__________ BY THE GLASS FOOTER START __________-->\n'
+keyWord2_10A =    '<!--__________ BY THE GLASS PRICE FOOTER START __________-->\n'
 
 keyWord2_10B =    '<!--__________ BY THE GLASS PRICE FOOTER END __________-->\n'               
 
@@ -91,7 +163,73 @@ keyWord2_11B =    '<!--__________ BY THE GLASS ORIGIN HEADER END __________-->\n
 
 keyWord2_12A =    '<!--__________ BY THE GLASS ORIGIN FOOTER START __________-->\n'          
                                      
-keyWord2_12B =    '<!--__________ BY THE GLASS ORIGIN FOOTER END __________-->\n'      
+keyWord2_12B =    '<!--__________ BY THE GLASS ORIGIN FOOTER END __________-->\n'
+
+
+keyWord2_13A =    '<!--__________ BY THE GLASS CATEGORY FOOTER START __________-->\n'
+
+keyWord2_13B =    '<!--__________ BY THE GLASS CATEGORY FOOTER END __________-->\n'
+
+
+keyWord3_A =    '<!--__________ BY THE GLASS SECTION FOOTER START __________-->\n'
+
+keyWord3_B =    '<!--__________ BY THE GLASS SECTION FOOTER END __________-->\n'
+
+
+
+keyWord4_1A =    '<!--__________ BEER SECTION HEADER START __________-->\n'
+
+keyWord4_1B =    '<!--__________ BEER SECTION HEADER END __________-->\n'    
+
+
+keyWord4_2A =    '<!--__________ BEER ITEM HEADER START __________-->\n'
+
+keyWord4_2B =    '<!--__________ BEER ITEM HEADER END __________-->\n'
+
+
+keyWord4_3A =    '<!--__________ BEER TITLE HEADER START __________-->\n' 
+
+keyWord4_3B =    '<!--__________ BEER TITLE HEADER END __________-->\n'                                    
+
+
+keyWord4_4A =    '<!--__________ BEER TITLE FOOTER START __________-->\n'                
+
+keyWord4_4B =    '<!--__________ BEER TITLE FOOTER END __________-->\n'                
+
+
+keyWord4_5A =    '<!--__________ BEER ORIGIN HEADER START __________-->\n'                
+
+keyWord4_5B =    '<!--__________ BEER ORIGIN HEADER END __________-->\n'                
+
+
+keyWord4_6A =    '<!--__________ BEER ORIGIN FOOTER START __________-->\n'  
+
+keyWord4_6B =    '<!--__________ BEER ORIGIN FOOTER END __________-->\n'                
+
+
+keyWord4_7A =    '<!--__________ BEER PRICE HEADER START __________-->\n'                
+
+keyWord4_7B =    '<!--__________ BEER PRICE HEADER END __________-->\n'                
+
+
+keyWord4_8A =    '<!--__________ BEER PRICE FOOTER START __________-->\n'  
+
+keyWord4_8B =    '<!--__________ BEER PRICE FOOTER END __________-->\n'                
+
+
+keyWord4_9A =    '<!--__________ BEER DESCRIPTION HEADER START __________-->\n'                
+
+keyWord4_9B =    '<!--__________ BEER DESCRIPTION HEADER END __________-->\n'                
+
+
+keyWord4_10A =    '<!--__________ BEER DESCRIPTION FOOTER START __________-->\n'  
+
+keyWord4_10B =    '<!--__________ BEER DESCRIPTION FOOTER END __________-->\n'                
+
+
+keyWord4_11A =    '<!--__________ BEER SECTION FOOTER START __________-->\n'  
+
+keyWord4_11B =    '<!--__________ BEER SECTION FOOTER END __________-->\n' 
 
 
 
@@ -100,6 +238,147 @@ keyWord2_12B =    '<!--__________ BY THE GLASS ORIGIN FOOTER END __________-->\n
 
 
 
+
+
+keyWord6_1A =    '<!--__________ FOOD SECTION HEADER START __________-->\n'
+
+keyWord6_1B =    '<!--__________ FOOD SECTION HEADER END __________-->\n'    
+
+
+keyWord6_2A =    '<!--__________ FOOD TITLE HEADER START __________-->\n' 
+
+keyWord6_2B =    '<!--__________ FOOD TITLE HEADER END __________-->\n'                                    
+
+
+keyWord6_3A =    '<!--__________ FOOD TITLE FOOTER START __________-->\n'                
+
+keyWord6_3B =    '<!--__________ FOOD TITLE FOOTER END __________-->\n'                
+
+keyWord6_4A =    '<!--__________ FOOD NAME HEADER START __________-->\n' 
+
+keyWord6_4B =    '<!--__________ FOOD NAME HEADER END __________-->\n'                                    
+
+
+keyWord6_5A =    '<!--__________ FOOD NAME FOOTER START __________-->\n'                
+
+keyWord6_5B =    '<!--__________ FOOD NAME FOOTER END __________-->\n'                
+
+
+keyWord6_6A =    '<!--__________ FOOD PRICE HEADER START __________-->\n'                
+
+keyWord6_6B =    '<!--__________ FOOD PRICE HEADER END __________-->\n'                
+
+
+keyWord6_7A =    '<!--__________ FOOD PRICE FOOTER START __________-->\n'  
+
+keyWord6_7B =    '<!--__________ FOOD PRICE FOOTER END __________-->\n'                
+
+
+keyWord6_8A =    '<!--__________ FOOD DESCRIPTION HEADER START __________-->\n'                
+
+keyWord6_8B =    '<!--__________ FOOD DESCRIPTION HEADER END __________-->\n'                
+
+
+keyWord6_9A =    '<!--__________ FOOD DESCRIPTION FOOTER START __________-->\n'  
+
+keyWord6_9B =    '<!--__________ FOOD DESCRIPTION FOOTER END __________-->\n'                
+
+
+keyWord6_12A =    '<!--__________ FOOD SECTION FOOTER START __________-->\n'  
+
+keyWord6_12B =    '<!--__________ FOOD SECTION FOOTER END __________-->\n' 
+
+
+
+
+
+
+keyWord8_1A =    '<!--__________ BOTTLE SECTION HEADER START __________-->\n'
+
+keyWord8_1B =    '<!--__________ BOTTLE SECTION HEADER END __________-->\n'    
+
+
+keyWord8_1x5xA =    '<!--__________ BOTTLE CATEGORY HEADER START __________-->\n'
+
+keyWord8_1x5xB =    '<!--__________ BOTTLE CATEGORY HEADER END __________-->\n'    
+
+
+keyWord8_2A =    '<!--__________ BOTTLE TITLE HEADER START __________-->\n' 
+
+keyWord8_2B =    '<!--__________ BOTTLE TITLE HEADER END __________-->\n'                                    
+
+
+keyWord8_3A =    '<!--__________ BOTTLE TITLE FOOTER START __________-->\n'                
+
+keyWord8_3B =    '<!--__________ BOTTLE TITLE FOOTER END __________-->\n'
+
+
+keyWord8_4A =    '<!--__________ BOTTLE NAME HEADER START __________-->\n' 
+
+keyWord8_4B =    '<!--__________ BOTTLE NAME HEADER END __________-->\n'                                    
+
+
+keyWord8_5A =    '<!--__________ BOTTLE NAME FOOTER START __________-->\n'                
+
+keyWord8_5B =    '<!--__________ BOTTLE NAME FOOTER END __________-->\n'                
+
+
+keyWord8_6A =    '<!--__________ BOTTLE PRICE HEADER START __________-->\n'                
+
+keyWord8_6B =    '<!--__________ BOTTLE PRICE HEADER END __________-->\n'                
+
+
+keyWord8_7A =    '<!--__________ BOTTLE PRICE FOOTER START __________-->\n'  
+
+keyWord8_7B =    '<!--__________ BOTTLE PRICE FOOTER END __________-->\n'                
+
+
+keyWord8_8A =    '<!--__________ BOTTLE ORIGIN HEADER START __________-->\n'                
+
+keyWord8_8B =    '<!--__________ BOTTLE ORIGIN HEADER END __________-->\n'                
+
+
+keyWord8_9A =    '<!--__________ BOTTLE ORIGIN FOOTER START __________-->\n'  
+
+keyWord8_9B =    '<!--__________ BOTTLE ORIGIN FOOTER END __________-->\n'                
+
+
+keyWord8_10A =    '<!--__________ BOTTLE GRAPE HEADER START __________-->\n'                
+
+keyWord8_10B =    '<!--__________ BOTTLE GRAPE HEADER END __________-->\n'                
+
+
+keyWord8_11A =    '<!--__________ BOTTLE GRAPE FOOTER START __________-->\n'  
+
+keyWord8_11B =    '<!--__________ BOTTLE GRAPE FOOTER END __________-->\n'                
+
+
+keyWord8_12A =    '<!--__________ BOTTLE DESCRIPTION HEADER START __________-->\n'                
+
+keyWord8_12B =    '<!--__________ BOTTLE DESCRIPTION HEADER END __________-->\n'                
+
+
+keyWord8_13A =    '<!--__________ BOTTLE DESCRIPTION FOOTER START __________-->\n'  
+
+keyWord8_13B =    '<!--__________ BOTTLE DESCRIPTION FOOTER END __________-->\n'                
+
+
+keyWord8_13x5xA =    '<!--__________ BOTTLE CATEGORY FOOTER START __________-->\n'
+
+keyWord8_13x5xB =    '<!--__________ BOTTLE CATEGORY FOOTER END __________-->\n'    
+
+
+keyWord8_14A =    '<!--__________ BOTTLE SECTION FOOTER START __________-->\n'  
+
+keyWord8_14B =    '<!--__________ BOTTLE SECTION FOOTER END __________-->\n'
+
+
+keyWord_ZA =   '<!--__________ HTML FOOTER START __________-->\n'
+
+keyWord_ZB =   '<!--__________ HTML FOOTER END __________-->\n'
+
+
+'''
 
 keyWord1A = '<!--__________ HTML HEADER START __________-->\n'
 
@@ -121,6 +400,8 @@ keyWord3 = 'BY THE BOTTLE HEADER\n'
 
 keyWord4 = 'BY THE BOTTLE PRODUCT\n'
 
+'''
+
 #--------------------------------------------------------------------------------------
 # This function takes in an array and prints it as lines.
 #--------------------------------------------------------------------------------------
@@ -131,18 +412,19 @@ def writeLines (arrayOfLines):
 
     p = 0
 
-    print('array test start')
+    #print('array test start')
     
     # While there are at least two lines left
     while p < totalLines:
         
         resultFile.write(arrayOfLines[p])
         
-        print(arrayOfLines[p])
+        #print(arrayOfLines[p])
         
         p += 1
 
-    print('array test end')
+    resultFile.write('\n')
+    #print('array test end')
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -303,10 +585,12 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
     nonWineDescription = 'blank'
     price = 'blank'
     
+    writeLines(templateB1Start)
     
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(singleLine)
     
+    # print(singleLine)
     
     if split != -1:
         nonWineInfo = split[0]
@@ -329,44 +613,55 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
             nonWineName = split[0]
             nonWineOrigin = split[1]
             
+        # If there is no additional information other than price, that is the name to print    
         else:
             nonWineName = nonWineInfo
+            #print(nonWineName)
             
-'''removed to test JSON writing (arrays)
+
 
     if nonWineName != 'blank':                
-        resultFile.write(GlassProductHTMLStart)
+        #resultFile.write(GlassProductHTMLStart)
         #resultFile.write('Non Wine Name:')
+        writeLines(templateB1aStart)
         resultFile.write(nonWineName)
-        resultFile.write(GlassProductHTMLEnd)
-        resultFile.write('\n')
+        #resultFile.write(GlassProductHTMLEnd)
+        #resultFile.write('\n')
+        writeLines(templateB1aEnd)
                 
     #edit tags
     if nonWineOrigin != 'blank':        
-        resultFile.write(GlassGrapesHTMLStart)
+        #resultFile.write(GlassGrapesHTMLStart)
         #resultFile.write('Grapes:')
+        writeLines(templateB1bStart)
         resultFile.write(nonWineOrigin)
-        resultFile.write(GlassGrapesHTMLEnd)
-        resultFile.write('\n')    
-    
-    
-    #edit tags
-    if nonWineDescription != 'blank':
-        resultFile.write(GlassOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
-        resultFile.write(nonWineDescription)
-        #resultFile.write('\n')
-        resultFile.write(GlassOriginHTMLEnd) 
+        #resultFile.write(GlassGrapesHTMLEnd)
+        #resultFile.write('\n')   
+        writeLines(templateB1bEnd)
     
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write(GlassPriceHTMLStart)
         #resultFile.write('Non Wine Price:')
+        writeLines(templateB1cStart)
         resultFile.write(price)
-        resultFile.write(GlassPriceHTMLEnd)
-        resultFile.write('\n') 
+        #resultFile.write(GlassPriceHTMLEnd)
+        resultFile.write('\n')
+        writeLines(templateB1cEnd)
+    
+    #edit tags
+    if nonWineDescription != 'blank':
+        #resultFile.write(GlassOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        writeLines(templateB1dStart)
+        resultFile.write(nonWineDescription)
+        resultFile.write('\n')
+        writeLines(templateB1dEnd)
+        #resultFile.write(GlassOriginHTMLEnd) 
+    
+     
 
-'''
+
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -385,6 +680,8 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
     wineOrigin = 'blank'
     chilled = 'blank'
     price = 'blank'
+    
+    writeLines(template2C)
     
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(firstLine)
@@ -413,52 +710,67 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
             wineOrigin = secondLine
         
 
-'''removed to test JSON writing (arrays)
                 
     if wineName != 'blank':                
-        resultFile.write(GlassProductHTMLStart)
+        #resultFile.write(GlassProductHTMLStart)
+        writeLines(template2D)
         #resultFile.write('Wine Name:')
         resultFile.write(wineName)
-        resultFile.write(GlassProductHTMLEnd)
+        #resultFile.write(GlassProductHTMLEnd)
+        writeLines(template2E)
         resultFile.write('\n')
                 
+    
     if wineGrapes != 'blank':        
-        resultFile.write(GlassGrapesHTMLStart)
+        #resultFile.write(GlassGrapesHTMLStart)
         #resultFile.write('Grapes:')
+        #writeLines('template2F:')
+        writeLines(template2F)
         resultFile.write(wineGrapes)
-        resultFile.write(GlassGrapesHTMLEnd)
+        writeLines(template2G)
+        #resultFile.write(GlassGrapesHTMLEnd)
         resultFile.write('\n')    
             
     if wineDescription != 'blank':
-        resultFile.write(GlassDescriptionHTMLStart)
+        #resultFile.write(GlassDescriptionHTMLStart)
         #resultFile.write('Wine Description:')
+        #writeLines(template2F)
         resultFile.write(wineDescription)
         resultFile.write('\n')
-        resultFile.write(GlassDescriptionHTMLEnd) 
+        #writeLines(template2F)
+        #resultFile.write(GlassDescriptionHTMLEnd) 
     
-    if wineOrigin != 'blank':
-        resultFile.write(GlassOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
-        resultFile.write(wineOrigin)
-        resultFile.write(GlassOriginHTMLEnd)
-        resultFile.write('\n')
+    
     
     if chilled != 'blank':
-        resultFile.write(GlassChilledHTMLStart)
+        #resultFile.write(GlassChilledHTMLStart)
         #resultFile.write('Wine Price:')
         resultFile.write(chilled)
-        resultFile.write(GlassChilledHTMLEnd)
+        #resultFile.write(GlassChilledHTMLEnd)
         resultFile.write('\n')
     
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write(GlassPriceHTMLStart)
         #resultFile.write('Wine Price:')
+        writeLines(template2H)
         resultFile.write(price)
-        resultFile.write(GlassPriceHTMLEnd)
+        writeLines(template2I)
+        #resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
         
-'''
+    if wineOrigin != 'blank':
+        #resultFile.write(GlassOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        writeLines(template2J)
+        resultFile.write(wineOrigin)
+        writeLines(template2K)
+        #resultFile.write(GlassOriginHTMLEnd)
+        resultFile.write('\n')
+        
+    
+        
+        
 
 #--------------------------------------------------------------------------------------
 
@@ -472,7 +784,7 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
 
 def writeSingleBottleInfo(firstLine, secondLine):
 
-    bottleName = 'blank'
+    bottleInfo = 'blank'
     bottleGrapes = 'blank'
     bottleDescription = 'blank'
     bottleOrigin = 'blank'
@@ -482,9 +794,12 @@ def writeSingleBottleInfo(firstLine, secondLine):
     split = splitBlank(firstLine)
     
     if split != -1:
+
         bottleInfo = split[0]
         priceInfo = split[1]
-    
+        #print('bottleInfo:')
+        #print(bottleInfo)
+        
         priceInfo = priceInfo.lstrip()
         split = splitBlank(priceInfo)
         
@@ -506,46 +821,57 @@ def writeSingleBottleInfo(firstLine, secondLine):
             bottleGrapes = split[0]
             bottleDescription = split[1]
             
-'''removed to test JSON writing (arrays)
-                
-    if bottleName != 'blank':                
-        resultFile.write(BottleProductHTMLStart)
+    
+    #print('bottleName:')
+    #print(bottleInfo)
+    if bottleInfo != 'blank':                
+        #resultFile.write(BottleProductHTMLStart)
         #resultFile.write('Bottle Name:')
-        resultFile.write(bottleName)
-        resultFile.write(BottleProductHTMLEnd)
+        writeLines(templateD3aStart)
+        resultFile.write(bottleInfo)
+        #resultFile.write(BottleProductHTMLEnd)
         resultFile.write('\n')
-                
-    if bottleGrapes != 'blank':        
-        resultFile.write(BottleGrapesHTMLStart)
-        #resultFile.write('Grapes:')
-        resultFile.write(bottleGrapes)
-        resultFile.write(BottleGrapesHTMLEnd)
-        resultFile.write('\n')    
-            
-    if bottleDescription != 'blank':
-        resultFile.write(BottleDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
-        resultFile.write(bottleDescription)
-        resultFile.write('\n')
-        resultFile.write(BottleDescriptionHTMLEnd) 
-    
-    if bottleOrigin != 'blank':
-        resultFile.write(BottleOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
-        resultFile.write(bottleOrigin)
-        resultFile.write('\n')
-        resultFile.write(BottleOriginHTMLEnd) 
-    
+        writeLines(templateD3aEnd)
 
+        
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(BottlePriceHTMLStart)
+        #resultFile.write(BottlePriceHTMLStart)
+        writeLines(templateD3bStart)
         #resultFile.write('Wine Price:')
         resultFile.write(price)
-        resultFile.write(BottlePriceHTMLEnd)
+        #resultFile.write(BottlePriceHTMLEnd)
+        writeLines(templateD3bEnd)
         resultFile.write('\n') 
+        
+    if bottleOrigin != 'blank':
+        #resultFile.write(BottleOriginHTMLStart)
+        #resultFile.write('Wine Origin:')
+        writeLines(templateD3cStart)
+        resultFile.write(bottleOrigin)
+        resultFile.write('\n')
+        writeLines(templateD3cEnd)
+        #resultFile.write(BottleOriginHTMLEnd)
+    
 
-'''
+    if bottleGrapes != 'blank':        
+        #resultFile.write(BottleGrapesHTMLStart)
+        #resultFile.write('Grapes:')
+        writeLines(templateD3dStart)
+        resultFile.write(bottleGrapes)
+        #resultFile.write(BottleGrapesHTMLEnd)
+        resultFile.write('\n')    
+        writeLines(templateD3dEnd)
+
+    if bottleDescription != 'blank':
+        #resultFile.write(BottleDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        writeLines(templateD3eStart)
+        resultFile.write(bottleDescription)
+        resultFile.write('\n')
+        writeLines(templateD3eEnd)
+        #resultFile.write(BottleDescriptionHTMLEnd) 
+    
 
 #--------------------------------------------------------------------------------------
 
@@ -566,6 +892,11 @@ def writeFoodInfo(firstLine, secondLine):
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(firstLine)
     
+    #print('firstLine:')
+    #print(firstLine)
+    #print('secondLine:')
+    #print(secondLine)
+    
     if split != -1:
         foodName = split[0]
         price = split[1]
@@ -574,31 +905,36 @@ def writeFoodInfo(firstLine, secondLine):
         if secondLine != 'blank':
             foodDescription = secondLine
                 
-'''removed to test JSON writing (arrays)
+
+                
     if foodName != 'blank':    
         # Note this should possibly renamed in either the template or a food section should be added
-        resultFile.write(GlassProductHTMLStart)
-        #resultFile.write('Food Name:')
+        writeLines(templateC1bStart)
         resultFile.write(foodName)
-        resultFile.write(GlassProductHTMLEnd)
         resultFile.write('\n')
-                
-    if foodDescription != 'blank':
-        resultFile.write(GlassDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
-        resultFile.write(foodDescription)
-        resultFile.write('\n')
-        resultFile.write(GlassDescriptionHTMLEnd) 
-    
+        writeLines(templateC1bEnd)
+
     if price != 'blank':
         #resultFile.write('Price:')
-        resultFile.write(GlassPriceHTMLStart)
+        #resultFile.write(GlassPriceHTMLStart)
         #resultFile.write('Wine Price:')
+        writeLines(templateC1cStart)
         resultFile.write(price)
-        resultFile.write(GlassPriceHTMLEnd)
+        #resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
+        writeLines(templateC1cEnd)
+    
         
-'''
+    if foodDescription != 'blank':
+        #resultFile.write(GlassDescriptionHTMLStart)
+        #resultFile.write('Wine Description:')
+        writeLines(templateC1dStart)
+        resultFile.write(foodDescription)
+        resultFile.write('\n')
+        writeLines(templateC1dEnd)
+        #resultFile.write(GlassDescriptionHTMLEnd) 
+    
+        
 
 #--------------------------------------------------------------------------------------
 
@@ -611,20 +947,21 @@ def writeFoodInfo(firstLine, secondLine):
 def writeWineByTheGlass(wine):
 
 
+    writeLines(template1B)
+    #writeLines(template2A)
+    
     # While not at the end
 
     wineLine = len(wine)
 
     i = 0
     
-    print('648')
-    writeLines(template1A)
-    print('650')
-
-    
     # While there are at least two lines left
     while (i+1) < wineLine:
+        
+        writeLines(template1AAStart)
 
+        #resultFile.write('631')
         
         # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
@@ -634,8 +971,16 @@ def writeWineByTheGlass(wine):
         # If the line is all uppercase, assign header
         upperCase = wine[i].isupper()
     
+        
+    
         if upperCase == True:
             
+            
+            writeLines(template2A)
+            
+            resultFile.write(wine[i])
+            
+            writeLines(template2B)
             # Write a header
             header = wine[i]
         
@@ -646,10 +991,10 @@ def writeWineByTheGlass(wine):
             
             # ^ the above is replaced by this JSON line
             
-            resultFile.write('new code start')
+            #resultFile.write('new code start')
             #resultFile.writelines(template1A)
             #resultFile.write(json.dumps(template1A))
-            resultFile.write('new code end')
+            #resultFile.write('new code end')
             #resultFile.write(header)
             #resultFile.write(GlassHeaderHTMLEnd)
             #resultFile.write('\n')
@@ -657,14 +1002,20 @@ def writeWineByTheGlass(wine):
         # Else
         else:
      
+    
+            
             # Write a wine
             writeSingleWineByTheGlassInfo(wine[i], wine[i+1])
             
             # Advance to the next line to account for two lines of information
             i += 1
         
+        
+        
         i += 1
         
+        
+        writeLines(template1AAEnd)
 
 
 #--------------------------------------------------------------------------------------
@@ -696,6 +1047,7 @@ def writeNonWineByTheGlass(nonWine):
         if upperCase == True:
             
             
+            
             # Write a header
             header = nonWine[i]
         
@@ -716,7 +1068,7 @@ def writeNonWineByTheGlass(nonWine):
                     
         i += 1
 
-
+        
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and writes it as content for food.
@@ -744,7 +1096,6 @@ def writeFood(food):
         # If the line is all uppercase, assign header
         upperCase = food[i].isupper()
     
-        '''removed to test JSON writing (arrays)
        
         if upperCase == True:
             
@@ -754,9 +1105,11 @@ def writeFood(food):
         
             # Write the header with correspondin HTML tags
     
-            resultFile.write(GlassHeaderHTMLStart)
+            #resultFile.write(GlassHeaderHTMLStart)
+            writeLines(templateC1aStart)
             resultFile.write(header)
-            resultFile.write(GlassHeaderHTMLEnd)
+            writeLines(templateC1aEnd)
+            #resultFile.write(GlassHeaderHTMLEnd)
             resultFile.write('\n')
         
         # Else
@@ -767,7 +1120,7 @@ def writeFood(food):
             
             # Advance to the next line to account for two lines of information
             i += 1
-        '''
+        
         i += 1
 
         
@@ -780,51 +1133,149 @@ def writeFood(food):
 
 def writeBottles(bottle):
     
+    
+    templateD2StartWithCurrentCategory = []
+
     # While not at the end
 
-    bottleLine = len(bottle)
+    bottleLength = len(bottle)
 
     i = 0
 
     # While there are at least two lines left
-    while (i+1) < bottleLine:
+    
+    secondLoop = 0
+    
+    while (i+1) < bottleLength:
 
+        
+        #print(bottle[i])
         # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
+        #print("1155:", bottle[i])
         while bottle[i] == '':
+            #print('value of i:', i)
             i += 1
 
         # If the line is all uppercase, assign header
         upperCase = bottle[i].isupper()
+        #if upperCase == True:
+            #print('bottle upperCase:')
+            #print(bottle[i])
     
        
         if upperCase == True:
             
             # Write a header
-            header = bottle[i]
+            bottleHeader = bottle[i]
         
+            bottleHeaderToFormat = bottleHeader.title()
+            #print(bottleHeaderToFormat)
+            firstFormat = bottleHeaderToFormat.replace("&", "")
+            secondFormat = firstFormat.replace(",", "")
+            thirdFormat = secondFormat.replace(" ", "")
+            variableFormat = thirdFormat
+            #print(variableFormat)
+            
+            # Close out the previous section if there was one
+            if secondLoop != 0:
+                writeLines(templateD2End)
+        
+            secondLoop = 1
             # Write the header with correspondin HTML tags
     
             #resultFile.write(BottleHeaderHTMLStart)
-            #resultFile.write(header)
+            
+            #print(templateD2Start)
+            
+            # Replace id with the corresponding category header
+            bottleCategoryLength = len(templateD2Start)
+            
+            bottleCategoryIndex = 0
+            while bottleCategoryIndex < bottleCategoryLength:
+                ##replace bottleCategory with bottleheader
+                
+                
+                #print('bottleCategoryIndex at 1186:')
+                #print(bottleCategoryIndex)
+                categoryFound = templateD2Start[bottleCategoryIndex].find("Category")
+                
+                if categoryFound != -1:
+                    
+                    #print(variableFormat)
+                    replacement = templateD2Start[bottleCategoryIndex].replace("Category", variableFormat)
+                    #print('replacement:')
+                    #print(replacement)
+
+                    templateD2StartWithCurrentCategory.append(replacement)
+                    
+                    
+                else:
+                    #print('bottleCategoryIndex:')
+                    # print(bottleCategoryIndex)
+                    
+                    templateD2StartWithCurrentCategory.append(templateD2Start[bottleCategoryIndex])
+
+                bottleCategoryIndex += 1
+
+            
+
+            
+            
+            
+            
+            writeLines(templateD2StartWithCurrentCategory)
+            templateD2StartWithCurrentCategory = []
+            writeLines(templateD3Start)
+            resultFile.write(bottleHeader)
             #resultFile.write(BottleHeaderHTMLEnd)
             #resultFile.write('\n')
+            writeLines(templateD3End)
         
-        # Else
+        # Else (if not uppercase)
         else:
-     
-            # Write a wine
+            # Write a wine by the bottle
+            #print("bottle[i]:", bottle[i])
+            #print("bottle[i+1]:", bottle[i+1])
             writeSingleBottleInfo(bottle[i], bottle[i+1])
             
             # Advance to the next line to account for two lines of information
+            #print('1243', i)
             i += 1
         
+        #print('1246:', i)
         i += 1
 
 
+#--------------------------------------------------------------------------------------
+# This function assigns parts of a template to an array
+#
+# WORK IN PROGRESS
+#--------------------------------------------------------------------------------------
 
-        
 
+def getTemplate(keyWordStart, keyWordEnd, templateSection, index):
+
+    templateArray = []
+    
+    # Advance to the next section
+    while index < templateLength and keyWordStart != templateSection[index]:
+    
+        index += 1
+    
+    index += 1
+    
+
+    while index < templateLength and keyWordEnd != templateSection[index]:
+    
+    
+        templateArray.append(templateSection[index])
+        index += 1
+
+    index += 1
+    
+    return templateArray
+#--------------------------------------------------------------------------------------
         
         
 #---------------------------------------------------------------------------------------------------------
@@ -842,275 +1293,120 @@ templateLength = len(templateCode)
 i = 0
 
 
-j = 0
-    
-while i < templateLength and keyWord1A != templateCode[i]:
-    
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
-    i += 1
-    j += 1
-
-i += 1
-
-while i < templateLength and keyWord1B != templateCode[i]:
-        
-    
-    #print(keyWord1B)
-    #print(templateCode[i])
-    template1A.append(templateCode[i])    
-    #resultFile.write(templateCode[i])
-    #resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-while i < templateLength and keyWord2A != templateCode[i]:
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-
-i += 1
-
-
-while i < templateLength and keyWord2B != templateCode[i]:
-        
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-while i < templateLength and keyWord3A != templateCode[i]:
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-
-i += 1
-
-
-while i < templateLength and keyWord3B != templateCode[i]:
-        
-        
-    CodeKeyWord = templateCode[i].rfind(' By The Glass Title ')
-
-    if CodeKeyWord != -1:
-        
-        parsedTemplateCode = templateCode[i].split(' By The Glass Title ') #consider coverting this to a variable
-
-        GlassHeaderHTMLStart = parsedTemplateCode[0]
-        GlassHeaderHTMLEnd = parsedTemplateCode[1]
-    
-    resultFile.write(templateCode[i])
-    resultFile.write('\n')
-    i += 1
-    
-i += 1
-
-
-'''
-# Advance to the next Key Word.
-        
-while i < templateLength and keyWord !=templateCode[i]:
-    
-    i += 1    
-
-    
-#By the glass product    
-    
-i += 1
-
-
-
-CodeKeyWord = templateCode[i].rfind(' By The Glass Header ')
-
-if CodeKeyWord != -1:
-        
-    
-        parsedTemplateCode = templateCode[i].split(' By The Glass Header ') #consider coverting this to a variable
-
-        GlassHeaderHTMLStart = parsedTemplateCode[0]
-        GlassHeaderHTMLEnd = parsedTemplateCode[1]
-        
-
-# Advance to the next Key Word.
-
-
-
-while i < templateLength and keyWord2 !=templateCode[i]:
-    
-    i += 1    
-
-    
-#By the glass product    
-    
-i += 1
-    
-CodeKeyWord = templateCode[i].rfind(' By The Glass Product ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Product ') #consider coverting this to a variable
-
-        GlassProductHTMLStart = parsedTemplateCode[0]
-        GlassProductHTMLEnd = parsedTemplateCode[1]
-
-
-#By the glass grapes   
-    
-i += 1
-    
-CodeKeyWord = templateCode[i].rfind(' By The Glass Grapes ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Grapes ') #consider coverting this to a variable
-
-        GlassGrapesHTMLStart = parsedTemplateCode[0]
-        GlassGrapesHTMLEnd = parsedTemplateCode[1]
-
-        
-        
-#By the glass description
-        
-i += 1
-
-CodeKeyWord = templateCode[i].rfind(' By The Glass Description ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Description ') #consider coverting this to a variable
-
-        GlassDescriptionHTMLStart = parsedTemplateCode[0]
-        GlassDescriptionHTMLEnd = parsedTemplateCode[1]          
-        
-        
-#By the glass "Chilled"
-        
-i += 1
-
-CodeKeyWord = templateCode[i].rfind(' By The Glass Chilled ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Chilled ') #consider coverting this to a variable
-
-        GlassChilledHTMLStart = parsedTemplateCode[0]
-        GlassChilledHTMLEnd = parsedTemplateCode[1]         
-        
-#By the glass price        
-        
-i += 1
-
-CodeKeyWord = templateCode[i].rfind(' By The Glass Price ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Price ') #consider coverting this to a variable
-
-        GlassPriceHTMLStart = parsedTemplateCode[0]
-        GlassPriceHTMLEnd = parsedTemplateCode[1]
-
-        
-#By the glass origin        
-        
-i += 1
-
-CodeKeyWord = templateCode[i].rfind(' By The Glass Origin ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' By The Glass Origin ') #consider coverting this to a variable
-
-        GlassOriginHTMLStart = parsedTemplateCode[0]
-        GlassOriginHTMLEnd = parsedTemplateCode[1]      
-        
-        
-        
-
-# Write each line of the Template to the Result file.
-# --------------- BOTTLES --------------- #
-        
-while i < templateLength and keyWord3 !=templateCode[i]:
-    
+#j = 0
    
-    i += 1         
-        
-# -------- 1 ----------- #
-
-i += 1
-
-CodeKeyWord = templateCode[i].rfind(' Bottle Header ')
-
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Header ') #consider coverting this to a variable
-
-        BottleHeaderHTMLStart = parsedTemplateCode[0]
-        BottleHeaderHTMLEnd = parsedTemplateCode[1]
-        
-# -------- 2 ----------- #
-
-
-while i < templateLength and keyWord4 !=templateCode[i]:
     
+template1A = getTemplate(keyWord1A, keyWord1B, templateCode, i)
 
-    i += 1   
+template1B = getTemplate(keyWord2_1A, keyWord2_1B, templateCode, i)
 
-i += 1
+template1AAStart = getTemplate(keyWord2_1Aa, keyWord2_1Bb, templateCode, i)
 
-CodeKeyWord = templateCode[i].rfind(' Bottle Product ')
+template2A = getTemplate(keyWord2_2A, keyWord2_2B, templateCode, i)
 
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Product ') #consider coverting this to a variable
+template2B = getTemplate(keyWord2_3A, keyWord2_3B, templateCode, i)
 
-        BottleProductHTMLStart = parsedTemplateCode[0]
-        BottleProductHTMLEnd = parsedTemplateCode[1]
-        
-# -------- 3 ----------- #
+template2C = getTemplate(keyWord2_4A, keyWord2_4B, templateCode, i)
 
-i += 1
+template2D = getTemplate(keyWord2_5A, keyWord2_5B, templateCode, i)
 
-CodeKeyWord = templateCode[i].rfind(' Bottle Description ')
+template2E = getTemplate(keyWord2_6A, keyWord2_6B, templateCode, i)
 
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Description ') #consider coverting this to a variable
+template2F = getTemplate(keyWord2_7A, keyWord2_7B, templateCode, i)
 
-        BottleDescriptionHTMLStart = parsedTemplateCode[0]
-        BottleDescriptionHTMLEnd = parsedTemplateCode[1]
+template2G = getTemplate(keyWord2_8A, keyWord2_8B, templateCode, i)
 
-# -------- 4 ----------- #
+template2H = getTemplate(keyWord2_9A, keyWord2_9B, templateCode, i)
 
-i += 1
+template2I = getTemplate(keyWord2_10A, keyWord2_10B, templateCode, i)
 
-CodeKeyWord = templateCode[i].rfind(' Bottle Price ')
+template2J = getTemplate(keyWord2_11A, keyWord2_11B, templateCode, i)
 
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Price ') #consider coverting this to a variable
+template2K = getTemplate(keyWord2_12A, keyWord2_12B, templateCode, i)
 
-        BottlePriceHTMLStart = parsedTemplateCode[0]
-        BottlePriceHTMLEnd = parsedTemplateCode[1]
-        
-# -------- 5 ----------- #
+template1AAEnd = getTemplate(keyWord2_13A, keyWord2_13B, templateCode, i)
 
-i += 1
+template3 = getTemplate(keyWord3_A, keyWord3_B, templateCode, i)
 
-CodeKeyWord = templateCode[i].rfind(' Bottle Grapes ')
+templateBStart = getTemplate(keyWord4_1A, keyWord4_1B, templateCode, i)
 
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Grapes ') #consider coverting this to a variable
+templateB1Start = getTemplate(keyWord4_2A, keyWord4_2B, templateCode, i)
 
-        BottleGrapesHTMLStart = parsedTemplateCode[0]
-        BottleGrapesHTMLEnd = parsedTemplateCode[1]
-        
-# -------- 6 ----------- #
+templateB1aStart = getTemplate(keyWord4_3A, keyWord4_3B, templateCode, i)
 
-i += 1
+templateB1aEnd = getTemplate(keyWord4_4A, keyWord4_4B, templateCode, i)
 
-CodeKeyWord = templateCode[i].rfind(' Bottle Origin ')
+templateB1bStart = getTemplate(keyWord4_5A, keyWord4_5B, templateCode, i)
 
-if CodeKeyWord != -1:
-        parsedTemplateCode = templateCode[i].split(' Bottle Origin ') #consider coverting this to a variable
+templateB1bEnd = getTemplate(keyWord4_6A, keyWord4_6B, templateCode, i)
 
-        BottleOriginHTMLStart = parsedTemplateCode[0]
-        BottleOriginHTMLEnd = parsedTemplateCode[1]
-        
+templateB1cStart = getTemplate(keyWord4_7A, keyWord4_7B, templateCode, i)
+
+templateB1cEnd = getTemplate(keyWord4_8A, keyWord4_8B, templateCode, i)
+
+templateB1dStart = getTemplate(keyWord4_9A, keyWord4_9B, templateCode, i)
+
+templateB1dEnd = getTemplate(keyWord4_10A, keyWord4_10B, templateCode, i)
+
+templateBEnd = getTemplate(keyWord4_11A, keyWord4_11B, templateCode, i)
+
+
+
+
+templateCStart = getTemplate(keyWord6_1A, keyWord6_1B, templateCode, i)
+templateC1aStart = getTemplate(keyWord6_2A, keyWord6_2B, templateCode, i)
+templateC1aEnd = getTemplate(keyWord6_3A, keyWord6_3B, templateCode, i)
+templateC1bStart = getTemplate(keyWord6_4A, keyWord6_4B, templateCode, i)
+templateC1bEnd = getTemplate(keyWord6_5A, keyWord6_5B, templateCode, i)
+templateC1cStart = getTemplate(keyWord6_6A, keyWord6_6B, templateCode, i)
+templateC1cEnd = getTemplate(keyWord6_7A, keyWord6_7B, templateCode, i)
+templateC1dStart = getTemplate(keyWord6_8A, keyWord6_8B, templateCode, i)
+templateC1dEnd = getTemplate(keyWord6_9A, keyWord6_9B, templateCode, i)
+templateCEnd = getTemplate(keyWord6_12A, keyWord6_12B, templateCode, i)
+ 
+
+
+templateDStart = getTemplate(keyWord8_1A, keyWord8_1B, templateCode, i)
+templateD2Start = getTemplate(keyWord8_1x5xA, keyWord8_1x5xB, templateCode, i)
+
+
+templateD3Start = getTemplate(keyWord8_2A, keyWord8_2B, templateCode, i)
+templateD3End = getTemplate(keyWord8_3A, keyWord8_3B, templateCode, i)
+
+templateD3aStart = getTemplate(keyWord8_4A, keyWord8_4B, templateCode, i)
+templateD3aEnd = getTemplate(keyWord8_5A, keyWord8_5B, templateCode, i)
+templateD3bStart = getTemplate(keyWord8_6A, keyWord8_6B, templateCode, i)
+templateD3bEnd = getTemplate(keyWord8_7A, keyWord8_7B, templateCode, i)
+templateD3cStart = getTemplate(keyWord8_8A, keyWord8_8B, templateCode, i)
+templateD3cEnd = getTemplate(keyWord8_9A, keyWord8_9B, templateCode, i)
+templateD3dStart = getTemplate(keyWord8_10A, keyWord8_10B, templateCode, i)
+templateD3dEnd = getTemplate(keyWord8_11A, keyWord8_11B, templateCode, i)
+templateD3eStart = getTemplate(keyWord8_12A, keyWord8_12B, templateCode, i)
+templateD3eEnd = getTemplate(keyWord8_13A, keyWord8_13B, templateCode, i)
+templateD2End = getTemplate(keyWord8_13x5xA, keyWord8_13x5xB, templateCode, i)
+
+
 '''
+templateD1bStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1bEnd = getTemplate(keyword, keyword, templateCode, i)
+templateD1cStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1cEnd = getTemplate(keyword, keyword, templateCode, i)
+templateD1dStart = getTemplate(keyword, keyword, templateCode, i)
+templateD1dEnd = getTemplate(keyword, keyword, templateCode, i)
+'''
+templateDEnd = getTemplate(keyWord8_14A, keyWord8_14B, templateCode, i)
+
+
+templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
+
+
+
+
+
+
+
+
+
 #---------------------------------------------------------------------------------------------------------
 # End Template Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -1124,16 +1420,20 @@ if CodeKeyWord != -1:
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('SCTestShort.txt') as contentFile:
+with open('SCMenuDec9TestA.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
 
 
-foodKeyWord = 'FOOD\n'
-bottleKeyWord = 'SPARKLING WHITE\n'
+foodKeyWord = 'FOOD'
+bottleKeyWord = 'SPARKLING WHITE'
 # this variable does not include the end of line character, bacause it has already been removed.
 nonWineKeyWord = 'BEER, CIDER, VERMOUTH & NON-ALCOHOLIC'
+
+
+# Initiallize array to hold everything by the glass.
+noSpacesMenuContent = []
 
 
 # Initiallize array to hold everything by the glass.
@@ -1152,23 +1452,40 @@ byTheGlassWineContent = []
 byTheGlassNonWineContent = []
 
 
-
+#print('Content Part 1')
 # ---------------------------------------------------------------------
 # Part A
 # ---------------------------------------------------------------------
 
-# Determine where FOOD starts in the document.
-menuIndex = menuContent.index(foodKeyWord)
 
+
+# Remove all extra spaces
+totalMenuContentLength = len(menuContent)
+
+totalMenuIndex = 0
+while totalMenuIndex < totalMenuContentLength:
+    
+    # Remove beginning and end spaces second
+    contentWithoutSpaces = menuContent[totalMenuIndex].strip()
+    noSpacesMenuContent.append(contentWithoutSpaces)
+    totalMenuIndex += 1
+
+# Determine where FOOD starts in the document.
+menuIndex = noSpacesMenuContent.index(foodKeyWord)
+
+
+#print('noSpacesMenuContent:')
+#print(noSpacesMenuContent)
+    
 # Populate the array for by the glass.
 byTheGlassIndex = 0
 while byTheGlassIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[byTheGlassIndex].strip("\n")
-    byTheGlassContent.append(contentWithoutEndOfLine)
+    byTheGlassContent.append(noSpacesMenuContent[byTheGlassIndex])
     byTheGlassIndex += 1
     
-    
+#print('byTheGlassContent:')
+#print(byTheGlassContent)
 # ---------------------------------------------------------------------
 # Part A.1
 # ---------------------------------------------------------------------
@@ -1185,8 +1502,23 @@ while wineByTheGlassIndex < subMenuIndex:
 	wineByTheGlassIndex += 1
     
 
+writeLines(template1A)
+#writeLines(template1B)
+#writeLines(template2A)
+
+# This should be write section header
 writeWineByTheGlass(byTheGlassWineContent)
-    
+
+#resultFile.write('template2B:')
+#writeLines(template2B)
+#writeLines(template2C)
+#writeLines(template2D)
+
+#writeWineByTheGlass(byTheGlassWineContent)
+
+#writeLines(template2E)
+writeLines(template3)
+
 # ---------------------------------------------------------------------
 # Part A.2
 # ---------------------------------------------------------------------
@@ -1203,7 +1535,9 @@ while nonWineByTheGlassIndex < subMenuIndex:
 	byTheGlassNonWineContent.append(byTheGlassContent[nonWineByTheGlassIndex])
 	nonWineByTheGlassIndex += 1
 
+writeLines(templateBStart)    
 writeNonWineByTheGlass(byTheGlassNonWineContent)
+writeLines(templateBEnd)
 
 # ---------------------------------------------------------------------
 # Part B
@@ -1211,7 +1545,7 @@ writeNonWineByTheGlass(byTheGlassNonWineContent)
 
 
 # Determine where bottles start ['SPARKLING WHITE'] in the document.
-menuIndex = menuContent.index(bottleKeyWord)
+menuIndex = noSpacesMenuContent.index(bottleKeyWord)
 
 # Populate the array for by the glass.
 
@@ -1219,13 +1553,15 @@ menuIndex = menuContent.index(bottleKeyWord)
 foodIndex = byTheGlassIndex
 while foodIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[foodIndex].strip("\n")
+    contentWithoutEndOfLine = noSpacesMenuContent[foodIndex].strip("\n")
     foodContent.append(contentWithoutEndOfLine)
     foodIndex += 1
     
+writeLines(templateCStart) 
 writeFood(foodContent)
+writeLines(templateCEnd)
 
-
+#print('Part B')
 # ---------------------------------------------------------------------
 # Part C
 # ---------------------------------------------------------------------    
@@ -1239,14 +1575,24 @@ menuIndex = len(menuContent)
 bottleIndex = foodIndex
 while bottleIndex < menuIndex:
 
-    contentWithoutEndOfLine = menuContent[bottleIndex].strip("\n")
+    contentWithoutEndOfLine = noSpacesMenuContent[bottleIndex].strip("\n")
     bottleContent.append(contentWithoutEndOfLine)
     bottleIndex += 1
-    
-writeBottles(bottleContent)    
+
+#print('bottleContent:')    
+#print(bottleContent)    
+writeLines(templateDStart)
+#print(bottleContent)
+writeBottles(bottleContent)
+#print(templateDEnd)
+#resultFile.write('1725A')
+writeLines(templateDEnd)
+#resultFile.write('1725B')
+#print(templateDEnd)
+writeLines(templateIEnd)
 
 
-
+#print('Part C')
 #---------------------------------------------------------------------------------------------------------
 # End Content Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -1282,7 +1628,7 @@ resultFile.close()
 
 
 #Open and read the file after the appending:
-resultFile = open("Result.html", "r")
+#resultFile = open("Result2.html", "r")
 #print(resultFile.read())
 
 
@@ -1291,8 +1637,3 @@ resultFile = open("Result.html", "r")
     
     
     
-    
-    
-    
-    
-
