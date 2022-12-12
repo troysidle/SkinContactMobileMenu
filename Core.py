@@ -1,6 +1,6 @@
 # This code reads in two documents and creates a third file to combine them.
 #
-# This version separates sections of the menu into 5 distict arrays.
+# This version separates sections of the menu into 5 distinct arrays.
 #
 # CoreArrays.py
 #
