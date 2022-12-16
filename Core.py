@@ -470,6 +470,16 @@ def splitBlank(checkForBlanks):
     else:
         return -1
 
+
+
+#--------------------------------------------------------------------------------------
+# This function adjusts for lines not having a carriage return in the original document.
+#--------------------------------------------------------------------------------------
+
+def parseForNoCarriageReturn(content)
+
+# CURRENTLY WORKING
+
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -1420,7 +1430,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('SCMenuDec9TestA.txt') as contentFile:
+with open('WINE LIST December_14_2022.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
@@ -1432,9 +1442,12 @@ bottleKeyWord = 'SPARKLING WHITE'
 nonWineKeyWord = 'BEER, CIDER, VERMOUTH & NON-ALCOHOLIC'
 
 
-# Initiallize array to hold everything by the glass.
+# Initiallize array to hold everything.
+# Initiallize array to hold everything.
 noSpacesMenuContent = []
 
+# Initiallize array to hold everything without blank lines.
+noBlankLinesMenuContent = []
 
 # Initiallize array to hold everything by the glass.
 byTheGlassContent = []
@@ -1470,10 +1483,16 @@ while totalMenuIndex < totalMenuContentLength:
     noSpacesMenuContent.append(contentWithoutSpaces)
     totalMenuIndex += 1
 
+    
+noBlankLinesMenuContent = list(filter(None, noSpacesMenuContent))
+
+#currently working
+parseForNoCarriageReturn(noBlankLinesMenuContent)
+
 # Determine where FOOD starts in the document.
-menuIndex = noSpacesMenuContent.index(foodKeyWord)
+menuIndex = noBlankLinesMenuContent.index(foodKeyWord)
 
-
+print('menuIndex:', menuIndex)
 #print('noSpacesMenuContent:')
 #print(noSpacesMenuContent)
     
@@ -1481,7 +1500,7 @@ menuIndex = noSpacesMenuContent.index(foodKeyWord)
 byTheGlassIndex = 0
 while byTheGlassIndex < menuIndex:
 
-    byTheGlassContent.append(noSpacesMenuContent[byTheGlassIndex])
+    byTheGlassContent.append(noBlankLinesMenuContent[byTheGlassIndex])
     byTheGlassIndex += 1
     
 #print('byTheGlassContent:')
@@ -1545,7 +1564,7 @@ writeLines(templateBEnd)
 
 
 # Determine where bottles start ['SPARKLING WHITE'] in the document.
-menuIndex = noSpacesMenuContent.index(bottleKeyWord)
+menuIndex = noBlankLinesMenuContent.index(bottleKeyWord)
 
 # Populate the array for by the glass.
 
@@ -1553,7 +1572,8 @@ menuIndex = noSpacesMenuContent.index(bottleKeyWord)
 foodIndex = byTheGlassIndex
 while foodIndex < menuIndex:
 
-    contentWithoutEndOfLine = noSpacesMenuContent[foodIndex].strip("\n")
+    print(foodIndex)
+    contentWithoutEndOfLine = noBlankLinesMenuContent[foodIndex].strip("\n")
     foodContent.append(contentWithoutEndOfLine)
     foodIndex += 1
     
@@ -1567,7 +1587,7 @@ writeLines(templateCEnd)
 # ---------------------------------------------------------------------    
 
 # Determine where the end of the file is.
-menuIndex = len(menuContent)
+menuIndex = len(noBlankLinesMenuContent)
 
 # Populate the array for bottles.
 
@@ -1575,7 +1595,10 @@ menuIndex = len(menuContent)
 bottleIndex = foodIndex
 while bottleIndex < menuIndex:
 
-    contentWithoutEndOfLine = noSpacesMenuContent[bottleIndex].strip("\n")
+    print('bottleIndex:', bottleIndex)
+    print('menuIndex:', menuIndex)
+    print(len(noBlankLinesMenuContent)) #why?
+    contentWithoutEndOfLine = noBlankLinesMenuContent[bottleIndex].strip("\n")
     bottleContent.append(contentWithoutEndOfLine)
     bottleIndex += 1
 
