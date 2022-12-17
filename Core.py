@@ -444,13 +444,13 @@ def splitBlank(checkForBlanks):
     componentLength = len(checkForBlanks)
 
 
-    #split the string where there are more than two spaces
+    #split the string where there are more than three spaces
     while k < componentLength: 
         
             
         if checkForBlanks[k] == " ":
     
-            if checkForBlanks[k+1] == " ":
+            if checkForBlanks[k+1] == " " and checkForBlanks[k+2] == " ":
     
                 beforeBlanks = checkForBlanks[:k]
                 
@@ -471,12 +471,114 @@ def splitBlank(checkForBlanks):
         return -1
 
 
+#ALT
+
+#--------------------------------------------------------------------------------------
+# This function takes in a string and checks for multiple blanks.
+#
+# Returns an array of two strings if there are blanks.
+#
+# Returns -1 if not.
+#
+# Other white space and end of line characters are also removed.
+#--------------------------------------------------------------------------------------
+
+def alternateSplitBlank(checkForBlanks):
+    
+    splitLine = ['blank']
+    k = 0
+    componentLength = len(checkForBlanks)
+
+    print('component length:', componentLength)
+    print('k:', k)
+    #split the string where there are more than two spaces
+    while componentLength > k:
+        #print ('checkForBlanks[componentLength]:', checkForBlanks[componentLength-1])    
+        if checkForBlanks[componentLength-1] == " ":
+    
+            if checkForBlanks[componentLength-1] == " ":
+    
+                beforeBlanks = checkForBlanks[:componentLength-2]
+                
+                afterBlanks = checkForBlanks[componentLength-1:]
+                afterBlanks = afterBlanks.lstrip()
+                afterBlanks = afterBlanks.strip("\n")
+                    
+                splitLine = [beforeBlanks, afterBlanks]
+            
+                componentLenth = k
+                
+        componentLength -= 1
+    
+    if splitLine != ['blank']:
+        return splitLine
+                    
+    else:
+        return -1
+
+
 
 #--------------------------------------------------------------------------------------
 # This function adjusts for lines not having a carriage return in the original document.
 #--------------------------------------------------------------------------------------
 
-def parseForNoCarriageReturn(content)
+def parseForNoCarriageReturn(longContent):
+    
+    
+    #print('longContent:', longContent)
+    
+    individualWords = longContent.split()
+    #print(bottles)
+
+    number = 'blank'
+
+    n = 0
+    yWords = ['initalA', 'initialB']
+
+    for j in individualWords:
+        p = j.isdigit()
+
+        if p == True:
+            
+            priceCheck = longContent.find(j)
+            if longContent[priceCheck-1] == " ":
+                #print("correct price point line:", longContent)
+                #Rename these variables, "number", "j"
+                number = j
+                #print("J:", j)
+                before = individualWords[:n+1]
+                after = individualWords[n+1:]
+                #print(before)
+                #print(after)
+                #print('i is:', i)    
+        
+                n += 1
+        
+        
+        #txt = "De La Soif, 'L'inattendu' - Chardonnay, Assyrtiko, Picpoul, Malvasia                        17                California, USA"
+
+    #print('number is:', number)
+    xWord = longContent.replace(number, number + "||")
+
+    
+    #print('xWord:', xWord)
+    if xWord.find('||') != -1:
+        yWords = xWord.split("||")
+
+    
+    #print("first:", yWords[0])
+    #print("second:", yWords[1])
+
+    #print('yWords[1]:', yWords[1])
+    
+    if yWords[1] != "initialB":
+        return yWords[0], yWords[1]
+    else:
+        return False
+
+#infoA = " ".join(before)
+
+#print(infoA)
 
 # CURRENTLY WORKING
 
@@ -604,18 +706,26 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
     
     if split != -1:
         nonWineInfo = split[0]
+        
         price = split[1]
     
         # Look for a hyphen in the wine info and split into wine name and grapes
         split = splitHyphen(nonWineInfo)
-    
+        #print('price:', price)
+        #This variable 'price' should be renamed to something like priceInfo since it is not yet definitely the price
+        #print('price before strip:', price)
         price = price.lstrip()
+        #print('price after strip:', price)
     
         #rename this function to splitPrice?
         descriptionCheck = splitBlank(price)
     
+        #print('descriptionCheck:', descriptionCheck)
         if descriptionCheck != -1:
+            
+            #print('nonWineDescription:', nonWineDescription)
             nonWineDescription = descriptionCheck[0]
+            #print('price:', price)
             price = descriptionCheck[1]
             
     
@@ -799,6 +909,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
     bottleDescription = 'blank'
     bottleOrigin = 'blank'
     price = 'blank'
+    additionalInfo = 'blank'
     
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(firstLine)
@@ -811,12 +922,24 @@ def writeSingleBottleInfo(firstLine, secondLine):
         #print(bottleInfo)
         
         priceInfo = priceInfo.lstrip()
+        print(priceInfo)
         split = splitBlank(priceInfo)
         
         if split != -1:
             bottleOrigin = split[0]
             price = split[1]
             
+            #Check for the rare instance of extra info about the wine ie. "(500ml)"
+            secondSplit = splitBlank(price)
+            
+            if secondSplit != -1:
+                print('secondSplit[0]', secondSplit[0])
+                print('secondSplit[1]', secondSplit[1])
+                #What seemed to be bottleOrigin is actually additional info (rework this logic / variable names)
+                additionalInfo = bottleOrigin
+                bottleOrigin = secondSplit[0]
+                price = secondSplit[1]
+                
         else:
             price = priceInfo
                     
@@ -832,13 +955,18 @@ def writeSingleBottleInfo(firstLine, secondLine):
             bottleDescription = split[1]
             
     
-    #print('bottleName:')
+    #print('bottleName:') #should bottleInfo here be bottleName?
     #print(bottleInfo)
     if bottleInfo != 'blank':                
         #resultFile.write(BottleProductHTMLStart)
         #resultFile.write('Bottle Name:')
         writeLines(templateD3aStart)
         resultFile.write(bottleInfo)
+        
+        if additionalInfo != 'blank':
+            resultFile.write(" ")
+            resultFile.write(additionalInfo)
+                            
         #resultFile.write(BottleProductHTMLEnd)
         resultFile.write('\n')
         writeLines(templateD3aEnd)
@@ -1430,9 +1558,10 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST December_14_2022.txt') as contentFile:
+with open('WINE LIST December 17 2022.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
+
 
 
 
@@ -1470,7 +1599,7 @@ byTheGlassNonWineContent = []
 # Part A
 # ---------------------------------------------------------------------
 
-
+tempvar = 110
 
 # Remove all extra spaces
 totalMenuContentLength = len(menuContent)
@@ -1478,21 +1607,44 @@ totalMenuContentLength = len(menuContent)
 totalMenuIndex = 0
 while totalMenuIndex < totalMenuContentLength:
     
-    # Remove beginning and end spaces second
-    contentWithoutSpaces = menuContent[totalMenuIndex].strip()
-    noSpacesMenuContent.append(contentWithoutSpaces)
+    #Remove beginning and end spaces second
+    
+    #Check for lack of carriage return between lines
+    if len(menuContent[totalMenuIndex]) > tempvar:
+            #print('length is:', len(menuContent[totalMenuIndex]))
+            #print(menuContent[totalMenuIndex])
+            currentResult = parseForNoCarriageReturn(menuContent[totalMenuIndex])
+            
+            if currentResult != False:
+                #print('Current Result A is:', currentResult[0])
+                #print('Current Result B is:', currentResult[1])
+                contentWithoutSpaces = currentResult[0].strip()
+                noSpacesMenuContent.append(contentWithoutSpaces)
+                contentWithoutSpaces = currentResult[1].strip()
+                noSpacesMenuContent.append(contentWithoutSpaces)
+    
+            else:
+                contentWithoutSpaces = menuContent[totalMenuIndex].strip()
+                noSpacesMenuContent.append(contentWithoutSpaces)
+    else:   
+        #Check for a special case for LARGE FORMAT notice
+        largeFormatLine = menuContent[totalMenuIndex].find("LARGE FORMAT")
+        if largeFormatLine != -1:
+            menuContent[totalMenuIndex] = "LARGE FORMAT"
+            
+        contentWithoutSpaces = menuContent[totalMenuIndex].strip()
+        noSpacesMenuContent.append(contentWithoutSpaces)
+    
     totalMenuIndex += 1
 
     
 noBlankLinesMenuContent = list(filter(None, noSpacesMenuContent))
 
-#currently working
-parseForNoCarriageReturn(noBlankLinesMenuContent)
 
 # Determine where FOOD starts in the document.
 menuIndex = noBlankLinesMenuContent.index(foodKeyWord)
 
-print('menuIndex:', menuIndex)
+#print('menuIndex:', menuIndex)
 #print('noSpacesMenuContent:')
 #print(noSpacesMenuContent)
     
@@ -1572,7 +1724,7 @@ menuIndex = noBlankLinesMenuContent.index(bottleKeyWord)
 foodIndex = byTheGlassIndex
 while foodIndex < menuIndex:
 
-    print(foodIndex)
+    #print(foodIndex)
     contentWithoutEndOfLine = noBlankLinesMenuContent[foodIndex].strip("\n")
     foodContent.append(contentWithoutEndOfLine)
     foodIndex += 1
@@ -1595,9 +1747,9 @@ menuIndex = len(noBlankLinesMenuContent)
 bottleIndex = foodIndex
 while bottleIndex < menuIndex:
 
-    print('bottleIndex:', bottleIndex)
-    print('menuIndex:', menuIndex)
-    print(len(noBlankLinesMenuContent)) #why?
+    #print('bottleIndex:', bottleIndex)
+    #print('menuIndex:', menuIndex)
+    #print(len(noBlankLinesMenuContent)) #why?
     contentWithoutEndOfLine = noBlankLinesMenuContent[bottleIndex].strip("\n")
     bottleContent.append(contentWithoutEndOfLine)
     bottleIndex += 1
