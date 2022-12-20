@@ -54,6 +54,7 @@ templateB1dEnd = []
 templateBEnd = []
 
 
+
 templateCStart = []
 templateC1Start = []
 templateC1aStart = []
@@ -70,6 +71,7 @@ templateDStart = []
 templateD1Start = []
 templateD3Start = []
 templateD3End = []
+templateD3Endb = []
 templateD3aStart = []
 templateD3aEnd = []
 templateD1bStart = []
@@ -312,6 +314,9 @@ keyWord8_3A =    '<!--__________ BOTTLE TITLE FOOTER START __________-->\n'
 
 keyWord8_3B =    '<!--__________ BOTTLE TITLE FOOTER END __________-->\n'
 
+keyWord8_3Ba =  '<!--__________ LARGE BOTTLE NOTICE START __________-->'
+
+keyWord8_3Bb =  '<!--__________ LARGE BOTTLE NOTICE END __________-->'
 
 keyWord8_4A =    '<!--__________ BOTTLE NAME HEADER START __________-->\n' 
 
@@ -489,8 +494,8 @@ def alternateSplitBlank(checkForBlanks):
     k = 0
     componentLength = len(checkForBlanks)
 
-    print('component length:', componentLength)
-    print('k:', k)
+    #print('component length:', componentLength)
+    #print('k:', k)
     #split the string where there are more than two spaces
     while componentLength > k:
         #print ('checkForBlanks[componentLength]:', checkForBlanks[componentLength-1])    
@@ -922,7 +927,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
         #print(bottleInfo)
         
         priceInfo = priceInfo.lstrip()
-        print(priceInfo)
+        #print(priceInfo)
         split = splitBlank(priceInfo)
         
         if split != -1:
@@ -1187,15 +1192,7 @@ def writeNonWineByTheGlass(nonWine):
             
             
             # Write a header
-            header = nonWine[i]
-        
-            # Write the header with correspondin HTML tags
-            '''removed to test JSON writing (arrays)    
-            resultFile.write(GlassHeaderHTMLStart)
-            resultFile.write(header)
-            resultFile.write(GlassHeaderHTMLEnd)
-            resultFile.write('\n')
-            '''            
+            header = nonWine[i]          
         
         # Else
         else:
@@ -1365,10 +1362,17 @@ def writeBottles(bottle):
             writeLines(templateD2StartWithCurrentCategory)
             templateD2StartWithCurrentCategory = []
             writeLines(templateD3Start)
-            resultFile.write(bottleHeader)
-            #resultFile.write(BottleHeaderHTMLEnd)
-            #resultFile.write('\n')
-            writeLines(templateD3End)
+            if bottleHeader == 'LARGE FORMAT':
+                print('LARGE FORMAT SECTION')
+                resultFile.write(bottleHeader)
+                print('templateD3Endb:', templateD3Endb)
+                writeLines(templateD3Endb)
+            else:
+                resultFile.write(bottleHeader)
+                
+                #resultFile.write(BottleHeaderHTMLEnd)
+                #resultFile.write('\n')
+                writeLines(templateD3End)
         
         # Else (if not uppercase)
         else:
@@ -1510,6 +1514,9 @@ templateD2Start = getTemplate(keyWord8_1x5xA, keyWord8_1x5xB, templateCode, i)
 
 templateD3Start = getTemplate(keyWord8_2A, keyWord8_2B, templateCode, i)
 templateD3End = getTemplate(keyWord8_3A, keyWord8_3B, templateCode, i)
+print('keyWord8_3Ba:', keyWord8_3Ba)
+print('keyWord8_3b:', keyWord8_3Bb)
+templateD3Endb = getTemplate(keyWord8_3Ba, keyWord8_3Bb, templateCode, i)
 
 templateD3aStart = getTemplate(keyWord8_4A, keyWord8_4B, templateCode, i)
 templateD3aEnd = getTemplate(keyWord8_5A, keyWord8_5B, templateCode, i)
@@ -1558,7 +1565,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST December 17 2022.txt') as contentFile:
+with open('WINE LIST December 19 2022.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
