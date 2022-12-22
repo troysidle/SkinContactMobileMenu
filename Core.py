@@ -1365,8 +1365,11 @@ def writeBottles(bottle):
             if bottleHeader == 'LARGE FORMAT':
                 print('LARGE FORMAT SECTION')
                 resultFile.write(bottleHeader)
+                resultFile.write('</u></b></b><i><u> (all wines are 1.5 Liter unless otherwise notated)</i></u>')
+                #This is to account for the alternate code not being used
+                resultFile.write('<u><b>')
                 print('templateD3Endb:', templateD3Endb)
-                writeLines(templateD3Endb)
+                writeLines(templateD3End)
             else:
                 resultFile.write(bottleHeader)
                 
@@ -1606,7 +1609,7 @@ byTheGlassNonWineContent = []
 # Part A
 # ---------------------------------------------------------------------
 
-tempvar = 110
+LineLengthTippingPoint = 110
 
 # Remove all extra spaces
 totalMenuContentLength = len(menuContent)
@@ -1617,7 +1620,7 @@ while totalMenuIndex < totalMenuContentLength:
     #Remove beginning and end spaces second
     
     #Check for lack of carriage return between lines
-    if len(menuContent[totalMenuIndex]) > tempvar:
+    if len(menuContent[totalMenuIndex]) > LineLengthTippingPoint:
             #print('length is:', len(menuContent[totalMenuIndex]))
             #print(menuContent[totalMenuIndex])
             currentResult = parseForNoCarriageReturn(menuContent[totalMenuIndex])
