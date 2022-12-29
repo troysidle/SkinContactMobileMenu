@@ -1,3 +1,5 @@
+# TODO - clarify this description
+# 
 # This code reads in two documents and creates a third file to combine them.
 #
 # This version separates sections of the menu into 5 distinct arrays.
@@ -13,15 +15,25 @@
 with open('indexOutline.html') as templateFile:
     templateCode = templateFile.readlines()
 
+#This can likely be deleted
 import json
             
+from os.path import exists
 
+resultFileName = "Result1229b2022.html"
+
+fileExists = exists(resultFileName)
+    
+    
 import os
-# Remove the old result file
-os.remove("Result2.html")
+
+if fileExists == True:
+    # Remove the old result file
+    os.remove(resultFileName)
+    
     
 # Create the new Result HTML file   
-resultFile = open("Result2.html", "a") 
+resultFile = open(resultFileName, "a") 
 
 # Define Arrays (2D?) for Template
 template1A = []
@@ -1568,7 +1580,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST December 19 2022.txt') as contentFile:
+with open('WINE LIST December 27 2022.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
