@@ -190,7 +190,6 @@ keyWord3_A =    '<!--__________ BY THE GLASS SECTION FOOTER START __________-->\
 keyWord3_B =    '<!--__________ BY THE GLASS SECTION FOOTER END __________-->\n'
 
 
-
 keyWord4_1A =    '<!--__________ BEER SECTION HEADER START __________-->\n'
 
 keyWord4_1B =    '<!--__________ BEER SECTION HEADER END __________-->\n'    
@@ -244,10 +243,6 @@ keyWord4_10B =    '<!--__________ BEER DESCRIPTION FOOTER END __________-->\n'
 keyWord4_11A =    '<!--__________ BEER SECTION FOOTER START __________-->\n'  
 
 keyWord4_11B =    '<!--__________ BEER SECTION FOOTER END __________-->\n' 
-
-
-
-
 
 
 
@@ -428,20 +423,16 @@ def writeLines (arrayOfLines):
     totalLines = len(arrayOfLines)
 
     p = 0
-
-    #print('array test start')
     
     # While there are at least two lines left
     while p < totalLines:
         
         resultFile.write(arrayOfLines[p])
         
-        #print(arrayOfLines[p])
-        
         p += 1
 
     resultFile.write('\n')
-    #print('array test end')
+    
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------
@@ -506,11 +497,11 @@ def alternateSplitBlank(checkForBlanks):
     k = 0
     componentLength = len(checkForBlanks)
 
-    #print('component length:', componentLength)
-    #print('k:', k)
+
     #split the string where there are more than two spaces
     while componentLength > k:
-        #print ('checkForBlanks[componentLength]:', checkForBlanks[componentLength-1])    
+        
+        
         if checkForBlanks[componentLength-1] == " ":
     
             if checkForBlanks[componentLength-1] == " ":
@@ -542,10 +533,10 @@ def alternateSplitBlank(checkForBlanks):
 def parseForNoCarriageReturn(longContent):
     
     
-    #print('longContent:', longContent)
+
     
     individualWords = longContent.split()
-    #print(bottles)
+
 
     number = 'blank'
 
@@ -559,34 +550,31 @@ def parseForNoCarriageReturn(longContent):
             
             priceCheck = longContent.find(j)
             if longContent[priceCheck-1] == " ":
-                #print("correct price point line:", longContent)
+                
                 #Rename these variables, "number", "j"
                 number = j
-                #print("J:", j)
+               
                 before = individualWords[:n+1]
                 after = individualWords[n+1:]
-                #print(before)
-                #print(after)
-                #print('i is:', i)    
         
                 n += 1
         
         
         #txt = "De La Soif, 'L'inattendu' - Chardonnay, Assyrtiko, Picpoul, Malvasia                        17                California, USA"
 
-    #print('number is:', number)
+    
+    
     xWord = longContent.replace(number, number + "||")
 
     
-    #print('xWord:', xWord)
+ 
+
     if xWord.find('||') != -1:
         yWords = xWord.split("||")
 
     
-    #print("first:", yWords[0])
-    #print("second:", yWords[1])
 
-    #print('yWords[1]:', yWords[1])
+    
     
     if yWords[1] != "initialB":
         return yWords[0], yWords[1]
@@ -595,7 +583,7 @@ def parseForNoCarriageReturn(longContent):
 
 #infoA = " ".join(before)
 
-#print(infoA)
+
 
 # CURRENTLY WORKING
 
@@ -719,8 +707,7 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(singleLine)
     
-    # print(singleLine)
-    
+        
     if split != -1:
         nonWineInfo = split[0]
         
@@ -728,21 +715,22 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
     
         # Look for a hyphen in the wine info and split into wine name and grapes
         split = splitHyphen(nonWineInfo)
-        #print('price:', price)
+        
         #This variable 'price' should be renamed to something like priceInfo since it is not yet definitely the price
-        #print('price before strip:', price)
+        
         price = price.lstrip()
-        #print('price after strip:', price)
+        
+        
     
         #rename this function to splitPrice?
         descriptionCheck = splitBlank(price)
     
-        #print('descriptionCheck:', descriptionCheck)
+    
         if descriptionCheck != -1:
             
-            #print('nonWineDescription:', nonWineDescription)
+       
             nonWineDescription = descriptionCheck[0]
-            #print('price:', price)
+     
             price = descriptionCheck[1]
             
     
@@ -753,27 +741,24 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         # If there is no additional information other than price, that is the name to print    
         else:
             nonWineName = nonWineInfo
-            #print(nonWineName)
+        
             
 
 
     if nonWineName != 'blank':                
-        #resultFile.write(GlassProductHTMLStart)
-        #resultFile.write('Non Wine Name:')
+        
+        
         writeLines(templateB1aStart)
         resultFile.write(nonWineName)
-        #resultFile.write(GlassProductHTMLEnd)
-        #resultFile.write('\n')
+        
         writeLines(templateB1aEnd)
                 
     #edit tags
     if nonWineOrigin != 'blank':        
-        #resultFile.write(GlassGrapesHTMLStart)
-        #resultFile.write('Grapes:')
+        
         writeLines(templateB1bStart)
         resultFile.write(nonWineOrigin)
-        #resultFile.write(GlassGrapesHTMLEnd)
-        #resultFile.write('\n')   
+  
         writeLines(templateB1bEnd)
     
     if price != 'blank':
@@ -935,11 +920,10 @@ def writeSingleBottleInfo(firstLine, secondLine):
 
         bottleInfo = split[0]
         priceInfo = split[1]
-        #print('bottleInfo:')
-        #print(bottleInfo)
+      
         
         priceInfo = priceInfo.lstrip()
-        #print(priceInfo)
+   
         split = splitBlank(priceInfo)
         
         if split != -1:
@@ -950,8 +934,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
             secondSplit = splitBlank(price)
             
             if secondSplit != -1:
-                print('secondSplit[0]', secondSplit[0])
-                print('secondSplit[1]', secondSplit[1])
+            
                 #What seemed to be bottleOrigin is actually additional info (rework this logic / variable names)
                 additionalInfo = bottleOrigin
                 bottleOrigin = secondSplit[0]
@@ -972,8 +955,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
             bottleDescription = split[1]
             
     
-    #print('bottleName:') #should bottleInfo here be bottleName?
-    #print(bottleInfo)
+
     if bottleInfo != 'blank':                
         #resultFile.write(BottleProductHTMLStart)
         #resultFile.write('Bottle Name:')
@@ -1047,10 +1029,6 @@ def writeFoodInfo(firstLine, secondLine):
     # If the line is separated by multiple blanks, assign wine info and price
     split = splitBlank(firstLine)
     
-    #print('firstLine:')
-    #print(firstLine)
-    #print('secondLine:')
-    #print(secondLine)
     
     if split != -1:
         foodName = split[0]
@@ -1296,19 +1274,17 @@ def writeBottles(bottle):
     while (i+1) < bottleLength:
 
         
-        #print(bottle[i])
+        
         # Because end of line has already been removed, check for a blank.
         # Advance index if the line is blank
-        #print("1155:", bottle[i])
+        
         while bottle[i] == '':
-            #print('value of i:', i)
+            
             i += 1
 
         # If the line is all uppercase, assign header
         upperCase = bottle[i].isupper()
         #if upperCase == True:
-            #print('bottle upperCase:')
-            #print(bottle[i])
     
        
         if upperCase == True:
@@ -1317,12 +1293,12 @@ def writeBottles(bottle):
             bottleHeader = bottle[i]
         
             bottleHeaderToFormat = bottleHeader.title()
-            #print(bottleHeaderToFormat)
+
             firstFormat = bottleHeaderToFormat.replace("&", "")
             secondFormat = firstFormat.replace(",", "")
             thirdFormat = secondFormat.replace(" ", "")
             variableFormat = thirdFormat
-            #print(variableFormat)
+            
             
             # Close out the previous section if there was one
             if secondLoop != 0:
@@ -1331,9 +1307,8 @@ def writeBottles(bottle):
             secondLoop = 1
             # Write the header with correspondin HTML tags
     
-            #resultFile.write(BottleHeaderHTMLStart)
             
-            #print(templateD2Start)
+        
             
             # Replace id with the corresponding category header
             bottleCategoryLength = len(templateD2Start)
@@ -1342,24 +1317,19 @@ def writeBottles(bottle):
             while bottleCategoryIndex < bottleCategoryLength:
                 ##replace bottleCategory with bottleheader
                 
-                
-                #print('bottleCategoryIndex at 1186:')
-                #print(bottleCategoryIndex)
                 categoryFound = templateD2Start[bottleCategoryIndex].find("Category")
                 
                 if categoryFound != -1:
                     
-                    #print(variableFormat)
+                    
                     replacement = templateD2Start[bottleCategoryIndex].replace("Category", variableFormat)
-                    #print('replacement:')
-                    #print(replacement)
 
                     templateD2StartWithCurrentCategory.append(replacement)
                     
                     
                 else:
-                    #print('bottleCategoryIndex:')
-                    # print(bottleCategoryIndex)
+                    
+                    
                     
                     templateD2StartWithCurrentCategory.append(templateD2Start[bottleCategoryIndex])
 
@@ -1375,12 +1345,12 @@ def writeBottles(bottle):
             templateD2StartWithCurrentCategory = []
             writeLines(templateD3Start)
             if bottleHeader == 'LARGE FORMAT':
-                print('LARGE FORMAT SECTION')
+                
                 resultFile.write(bottleHeader)
                 resultFile.write('</u></b></b><i><u> (all wines are 1.5 Liter unless otherwise notated)</i></u>')
                 #This is to account for the alternate code not being used
                 resultFile.write('<u><b>')
-                print('templateD3Endb:', templateD3Endb)
+            
                 writeLines(templateD3End)
             else:
                 resultFile.write(bottleHeader)
@@ -1392,15 +1362,15 @@ def writeBottles(bottle):
         # Else (if not uppercase)
         else:
             # Write a wine by the bottle
-            #print("bottle[i]:", bottle[i])
-            #print("bottle[i+1]:", bottle[i+1])
+        
             writeSingleBottleInfo(bottle[i], bottle[i+1])
             
             # Advance to the next line to account for two lines of information
-            #print('1243', i)
+            
+            
             i += 1
         
-        #print('1246:', i)
+        
         i += 1
 
 
@@ -1529,8 +1499,8 @@ templateD2Start = getTemplate(keyWord8_1x5xA, keyWord8_1x5xB, templateCode, i)
 
 templateD3Start = getTemplate(keyWord8_2A, keyWord8_2B, templateCode, i)
 templateD3End = getTemplate(keyWord8_3A, keyWord8_3B, templateCode, i)
-print('keyWord8_3Ba:', keyWord8_3Ba)
-print('keyWord8_3b:', keyWord8_3Bb)
+
+
 templateD3Endb = getTemplate(keyWord8_3Ba, keyWord8_3Bb, templateCode, i)
 
 templateD3aStart = getTemplate(keyWord8_4A, keyWord8_4B, templateCode, i)
@@ -1546,14 +1516,7 @@ templateD3eEnd = getTemplate(keyWord8_13A, keyWord8_13B, templateCode, i)
 templateD2End = getTemplate(keyWord8_13x5xA, keyWord8_13x5xB, templateCode, i)
 
 
-'''
-templateD1bStart = getTemplate(keyword, keyword, templateCode, i)
-templateD1bEnd = getTemplate(keyword, keyword, templateCode, i)
-templateD1cStart = getTemplate(keyword, keyword, templateCode, i)
-templateD1cEnd = getTemplate(keyword, keyword, templateCode, i)
-templateD1dStart = getTemplate(keyword, keyword, templateCode, i)
-templateD1dEnd = getTemplate(keyword, keyword, templateCode, i)
-'''
+
 templateDEnd = getTemplate(keyWord8_14A, keyWord8_14B, templateCode, i)
 
 
@@ -1594,7 +1557,6 @@ nonWineKeyWord = 'BEER, CIDER, VERMOUTH & NON-ALCOHOLIC'
 
 
 # Initiallize array to hold everything.
-# Initiallize array to hold everything.
 noSpacesMenuContent = []
 
 # Initiallize array to hold everything without blank lines.
@@ -1616,7 +1578,7 @@ byTheGlassWineContent = []
 byTheGlassNonWineContent = []
 
 
-#print('Content Part 1')
+
 # ---------------------------------------------------------------------
 # Part A
 # ---------------------------------------------------------------------
@@ -1633,13 +1595,11 @@ while totalMenuIndex < totalMenuContentLength:
     
     #Check for lack of carriage return between lines
     if len(menuContent[totalMenuIndex]) > LineLengthTippingPoint:
-            #print('length is:', len(menuContent[totalMenuIndex]))
-            #print(menuContent[totalMenuIndex])
+
             currentResult = parseForNoCarriageReturn(menuContent[totalMenuIndex])
             
             if currentResult != False:
-                #print('Current Result A is:', currentResult[0])
-                #print('Current Result B is:', currentResult[1])
+
                 contentWithoutSpaces = currentResult[0].strip()
                 noSpacesMenuContent.append(contentWithoutSpaces)
                 contentWithoutSpaces = currentResult[1].strip()
@@ -1666,9 +1626,6 @@ noBlankLinesMenuContent = list(filter(None, noSpacesMenuContent))
 # Determine where FOOD starts in the document.
 menuIndex = noBlankLinesMenuContent.index(foodKeyWord)
 
-#print('menuIndex:', menuIndex)
-#print('noSpacesMenuContent:')
-#print(noSpacesMenuContent)
     
 # Populate the array for by the glass.
 byTheGlassIndex = 0
@@ -1677,8 +1634,7 @@ while byTheGlassIndex < menuIndex:
     byTheGlassContent.append(noBlankLinesMenuContent[byTheGlassIndex])
     byTheGlassIndex += 1
     
-#print('byTheGlassContent:')
-#print(byTheGlassContent)
+
 # ---------------------------------------------------------------------
 # Part A.1
 # ---------------------------------------------------------------------
@@ -1696,16 +1652,11 @@ while wineByTheGlassIndex < subMenuIndex:
     
 
 writeLines(template1A)
-#writeLines(template1B)
-#writeLines(template2A)
+
 
 # This should be write section header
 writeWineByTheGlass(byTheGlassWineContent)
 
-#resultFile.write('template2B:')
-#writeLines(template2B)
-#writeLines(template2C)
-#writeLines(template2D)
 
 #writeWineByTheGlass(byTheGlassWineContent)
 
@@ -1746,7 +1697,7 @@ menuIndex = noBlankLinesMenuContent.index(bottleKeyWord)
 foodIndex = byTheGlassIndex
 while foodIndex < menuIndex:
 
-    #print(foodIndex)
+
     contentWithoutEndOfLine = noBlankLinesMenuContent[foodIndex].strip("\n")
     foodContent.append(contentWithoutEndOfLine)
     foodIndex += 1
@@ -1755,7 +1706,7 @@ writeLines(templateCStart)
 writeFood(foodContent)
 writeLines(templateCEnd)
 
-#print('Part B')
+
 # ---------------------------------------------------------------------
 # Part C
 # ---------------------------------------------------------------------    
@@ -1769,27 +1720,21 @@ menuIndex = len(noBlankLinesMenuContent)
 bottleIndex = foodIndex
 while bottleIndex < menuIndex:
 
-    #print('bottleIndex:', bottleIndex)
-    #print('menuIndex:', menuIndex)
-    #print(len(noBlankLinesMenuContent)) #why?
+
     contentWithoutEndOfLine = noBlankLinesMenuContent[bottleIndex].strip("\n")
     bottleContent.append(contentWithoutEndOfLine)
     bottleIndex += 1
 
-#print('bottleContent:')    
-#print(bottleContent)    
+
+    
 writeLines(templateDStart)
-#print(bottleContent)
+
 writeBottles(bottleContent)
-#print(templateDEnd)
-#resultFile.write('1725A')
+
 writeLines(templateDEnd)
-#resultFile.write('1725B')
-#print(templateDEnd)
 writeLines(templateIEnd)
 
 
-#print('Part C')
 #---------------------------------------------------------------------------------------------------------
 # End Content Part 1
 #---------------------------------------------------------------------------------------------------------
@@ -1804,11 +1749,11 @@ writeLines(templateIEnd)
 #Don't include the Key Word
 i = i+1
 
-#Print all the elements of the Template array.
+
 #Amend those elements to the Results array.
 while i < templateLength: # and keyWord !=templateCode[i]:
     #matched_indexes.append(i)
-    #print(templateCode[i])
+
     #resultFile.write(templateCode[i])
     #resultFile.write('\n')
     i += 1 
@@ -1821,16 +1766,5 @@ while i < templateLength: # and keyWord !=templateCode[i]:
 
 #Close the Result File
 resultFile.close()
-
-
-
-#Open and read the file after the appending:
-#resultFile = open("Result2.html", "r")
-#print(resultFile.read())
-
-
-    
-    
-    
     
     
