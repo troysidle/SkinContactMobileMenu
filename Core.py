@@ -572,10 +572,6 @@ def parseForNoCarriageReturn(longContent):
     if xWord.find('||') != -1:
         yWords = xWord.split("||")
 
-    
-
-    
-    
     if yWords[1] != "initialB":
         return yWords[0], yWords[1]
     else:
@@ -844,50 +840,42 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
                 
     
     if wineGrapes != 'blank':        
-        #resultFile.write(GlassGrapesHTMLStart)
-        #resultFile.write('Grapes:')
-        #writeLines('template2F:')
+       
         writeLines(template2F)
         resultFile.write(wineGrapes)
         writeLines(template2G)
-        #resultFile.write(GlassGrapesHTMLEnd)
+
         resultFile.write('\n')    
             
     if wineDescription != 'blank':
-        #resultFile.write(GlassDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
-        #writeLines(template2F)
+        
+
         resultFile.write(wineDescription)
         resultFile.write('\n')
-        #writeLines(template2F)
-        #resultFile.write(GlassDescriptionHTMLEnd) 
+
     
     
     
     if chilled != 'blank':
-        #resultFile.write(GlassChilledHTMLStart)
-        #resultFile.write('Wine Price:')
+  
         resultFile.write(chilled)
         #resultFile.write(GlassChilledHTMLEnd)
         resultFile.write('\n')
     
     if price != 'blank':
-        #resultFile.write('Price:')
-        #resultFile.write(GlassPriceHTMLStart)
-        #resultFile.write('Wine Price:')
+
+        
         writeLines(template2H)
         resultFile.write(price)
         writeLines(template2I)
-        #resultFile.write(GlassPriceHTMLEnd)
         resultFile.write('\n') 
         
     if wineOrigin != 'blank':
-        #resultFile.write(GlassOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
+
         writeLines(template2J)
         resultFile.write(wineOrigin)
         writeLines(template2K)
-        #resultFile.write(GlassOriginHTMLEnd)
+
         resultFile.write('\n')
         
     
@@ -972,37 +960,33 @@ def writeSingleBottleInfo(firstLine, secondLine):
 
         
     if price != 'blank':
-        #resultFile.write('Price:')
-        #resultFile.write(BottlePriceHTMLStart)
+
         writeLines(templateD3bStart)
-        #resultFile.write('Wine Price:')
+
         resultFile.write(price)
-        #resultFile.write(BottlePriceHTMLEnd)
+
         writeLines(templateD3bEnd)
         resultFile.write('\n') 
         
     if bottleOrigin != 'blank':
-        #resultFile.write(BottleOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
+
         writeLines(templateD3cStart)
         resultFile.write(bottleOrigin)
         resultFile.write('\n')
         writeLines(templateD3cEnd)
-        #resultFile.write(BottleOriginHTMLEnd)
+
     
 
     if bottleGrapes != 'blank':        
-        #resultFile.write(BottleGrapesHTMLStart)
-        #resultFile.write('Grapes:')
+
         writeLines(templateD3dStart)
         resultFile.write(bottleGrapes)
-        #resultFile.write(BottleGrapesHTMLEnd)
+
         resultFile.write('\n')    
         writeLines(templateD3dEnd)
 
     if bottleDescription != 'blank':
-        #resultFile.write(BottleDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
+
         writeLines(templateD3eStart)
         resultFile.write(bottleDescription)
         resultFile.write('\n')
