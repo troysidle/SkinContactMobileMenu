@@ -20,7 +20,7 @@ import json
             
 from os.path import exists
 
-resultFileName = "Result1229b2022.html"
+resultFileName = "Result01032023.html"
 
 fileExists = exists(resultFileName)
     
@@ -758,24 +758,20 @@ def writeSingleNonWineByTheGlassInfo(singleLine):
         writeLines(templateB1bEnd)
     
     if price != 'blank':
-        #resultFile.write('Price:')
-        #resultFile.write(GlassPriceHTMLStart)
-        #resultFile.write('Non Wine Price:')
+
+
         writeLines(templateB1cStart)
         resultFile.write(price)
-        #resultFile.write(GlassPriceHTMLEnd)
+
         resultFile.write('\n')
         writeLines(templateB1cEnd)
     
     #edit tags
     if nonWineDescription != 'blank':
-        #resultFile.write(GlassOriginHTMLStart)
-        #resultFile.write('Wine Origin:')
         writeLines(templateB1dStart)
         resultFile.write(nonWineDescription)
         resultFile.write('\n')
         writeLines(templateB1dEnd)
-        #resultFile.write(GlassOriginHTMLEnd) 
     
      
 
@@ -1527,7 +1523,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST December 27 2022.txt') as contentFile:
+with open('WINE LIST January 3 2023.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
