@@ -390,29 +390,6 @@ keyWord_ZA =   '<!--__________ HTML FOOTER START __________-->\n'
 keyWord_ZB =   '<!--__________ HTML FOOTER END __________-->\n'
 
 
-'''
-
-keyWord1A = '<!--__________ HTML HEADER START __________-->\n'
-
-keyWord1B = '<!--__________ HTML HEADER END __________-->\n'
-
-keyWord2A = '<!--__________ BY THE GLASS SECTION HEADER START __________-->\n'
-
-keyWord2B = '<!--__________ BY THE GLASS SECTION HEADER END __________-->\n'
-
-keyWord3A = '<!--__________ BY THE GLASS TITLE START __________-->\n'
-            
-keyWord3B = '<!--__________ BY THE GLASS TITLE END __________-->\n'
-
-keyWord = 'BY THE GLASS HEADER\n'
-
-keyWord2 = 'BY THE GLASS PRODUCT\n'
-
-keyWord3 = 'BY THE BOTTLE HEADER\n'
-
-keyWord4 = 'BY THE BOTTLE PRODUCT\n'
-
-'''
 
 #--------------------------------------------------------------------------------------
 # This function takes in an array and prints it as lines.
@@ -826,11 +803,9 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
 
                 
     if wineName != 'blank':                
-        #resultFile.write(GlassProductHTMLStart)
+
         writeLines(template2D)
-        #resultFile.write('Wine Name:')
         resultFile.write(wineName)
-        #resultFile.write(GlassProductHTMLEnd)
         writeLines(template2E)
         resultFile.write('\n')
                 
@@ -855,7 +830,7 @@ def writeSingleWineByTheGlassInfo(firstLine, secondLine):
     if chilled != 'blank':
   
         resultFile.write(chilled)
-        #resultFile.write(GlassChilledHTMLEnd)
+
         resultFile.write('\n')
     
     if price != 'blank':
@@ -941,8 +916,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
     
 
     if bottleInfo != 'blank':                
-        #resultFile.write(BottleProductHTMLStart)
-        #resultFile.write('Bottle Name:')
+        
         writeLines(templateD3aStart)
         resultFile.write(bottleInfo)
         
@@ -950,7 +924,7 @@ def writeSingleBottleInfo(firstLine, secondLine):
             resultFile.write(" ")
             resultFile.write(additionalInfo)
                             
-        #resultFile.write(BottleProductHTMLEnd)
+
         resultFile.write('\n')
         writeLines(templateD3aEnd)
 
@@ -987,7 +961,8 @@ def writeSingleBottleInfo(firstLine, secondLine):
         resultFile.write(bottleDescription)
         resultFile.write('\n')
         writeLines(templateD3eEnd)
-        #resultFile.write(BottleDescriptionHTMLEnd) 
+
+        
     
 
 #--------------------------------------------------------------------------------------
@@ -1028,25 +1003,21 @@ def writeFoodInfo(firstLine, secondLine):
         writeLines(templateC1bEnd)
 
     if price != 'blank':
-        #resultFile.write('Price:')
-        #resultFile.write(GlassPriceHTMLStart)
-        #resultFile.write('Wine Price:')
+
         writeLines(templateC1cStart)
         resultFile.write(price)
-        #resultFile.write(GlassPriceHTMLEnd)
+        
         resultFile.write('\n') 
         writeLines(templateC1cEnd)
     
         
     if foodDescription != 'blank':
-        #resultFile.write(GlassDescriptionHTMLStart)
-        #resultFile.write('Wine Description:')
+        
         writeLines(templateC1dStart)
         resultFile.write(foodDescription)
         resultFile.write('\n')
         writeLines(templateC1dEnd)
-        #resultFile.write(GlassDescriptionHTMLEnd) 
-    
+
         
 
 #--------------------------------------------------------------------------------------
@@ -1097,20 +1068,8 @@ def writeWineByTheGlass(wine):
             # Write a header
             header = wine[i]
         
-            # Write the header with correspondin HTML tags
-    
-            # resultFile.write(GlassHeaderHTMLStart)
-            # resultFile.write(template1A)
+          
             
-            # ^ the above is replaced by this JSON line
-            
-            #resultFile.write('new code start')
-            #resultFile.writelines(template1A)
-            #resultFile.write(json.dumps(template1A))
-            #resultFile.write('new code end')
-            #resultFile.write(header)
-            #resultFile.write(GlassHeaderHTMLEnd)
-            #resultFile.write('\n')
         
         # Else
         else:
@@ -1210,11 +1169,11 @@ def writeFood(food):
         
             # Write the header with correspondin HTML tags
     
-            #resultFile.write(GlassHeaderHTMLStart)
+        
             writeLines(templateC1aStart)
             resultFile.write(header)
             writeLines(templateC1aEnd)
-            #resultFile.write(GlassHeaderHTMLEnd)
+        
             resultFile.write('\n')
         
         # Else
