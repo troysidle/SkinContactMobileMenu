@@ -20,7 +20,7 @@ import json
             
 from os.path import exists
 
-resultFileName = "Result01032023.html"
+resultFileName = "Result01052023.html"
 
 fileExists = exists(resultFileName)
     
@@ -64,8 +64,6 @@ templateB1cEnd = []
 templateB1dStart = []
 templateB1dEnd = []
 templateBEnd = []
-
-
 
 templateCStart = []
 templateC1Start = []
@@ -639,10 +637,10 @@ def splitChilled(checkForChilled):
 
 def splitHyphen(checkForHyphen):
     
-    x = checkForHyphen.rfind(" - ")
+    x = checkForHyphen.rfind("- ")
                 
     if x != -1:
-        splitLine = checkForHyphen.split(' - ')
+        splitLine = checkForHyphen.split('- ')
     
         beforeHyphen = splitLine[0]
                 
@@ -1482,7 +1480,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST January 3 2023.txt') as contentFile:
+with open('WINE LIST January 5 2023.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
@@ -1667,9 +1665,7 @@ while bottleIndex < menuIndex:
 
     
 writeLines(templateDStart)
-
 writeBottles(bottleContent)
-
 writeLines(templateDEnd)
 writeLines(templateIEnd)
 
