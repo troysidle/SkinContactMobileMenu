@@ -20,7 +20,7 @@ import json
             
 from os.path import exists
 
-resultFileName = "Result01112023.html"
+resultFileName = "Result01142023.html"
 
 fileExists = exists(resultFileName)
     
@@ -1480,7 +1480,7 @@ templateIEnd = getTemplate(keyWord_ZA, keyWord_ZB, templateCode, i)
 #---------------------------------------------------------------------------------------------------------
 
 #Add Content elements to the results array.    
-with open('WINE LIST January 11 2023.txt') as contentFile:
+with open('WINE LIST January 14 2023.txt') as contentFile:
     #rename menuContent to something like contentLine
     menuContent = contentFile.readlines()  
 
