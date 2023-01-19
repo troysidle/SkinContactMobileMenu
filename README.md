@@ -1,4 +1,4 @@
-# PythonProject
+# Skin Contact Menu
 
 This project has become a new business tool for my current employer Skin Contact Wine Bar.
 
