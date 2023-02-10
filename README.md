@@ -4,5 +4,5 @@ This project has become a new business tool for my current employer Skin Contact
 
 The python code uses a Bootstrap template file plus the most up to date Skin Contact wine and food menu (created in a Google Doc) downloaded as a text file, and outputs an HTML file incorporating the two.
 
-Currently, I am learning how to post custom code on their WordPress site using the WordPress API.
+Currently, I am learning how to post custom code onto the Skin Contact WordPress site using the WordPress API.
 
